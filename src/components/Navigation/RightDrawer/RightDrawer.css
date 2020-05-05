@@ -1,0 +1,45 @@
+.RightDrawer {
+    background-color: white;
+    z-index: 50;
+    position: fixed;
+    height: 100%;
+    right: 0;
+    max-width: 100%;;
+    top: 0;
+    min-width: 30%;
+    width: 30%;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-out;
+}
+
+.Initiate {
+    animation-name: Default; 
+    animation-duration: 2s;
+}
+
+@media (max-width: 499px){
+    .RightDrawer {
+        min-width: 80%;
+        width: 80%;
+    }
+}
+@media (min-width: 500px) and (max-width: 999px){
+    .RightDrawer {
+        min-width: 50%;
+        width: 50%;
+    }
+}
+
+.Open {
+    transform: translateX(0%);
+}
+
+.Closed {
+    transform: translateX(100%);
+}
+
+@keyframes Default {
+    0% { transform: translateX(100%); }
+    50% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+}

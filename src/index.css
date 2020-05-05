@@ -1,0 +1,78 @@
+/*
+-----------------
+colors
+-----------------
+blue: #0087ff
+blue-hover: #39a2ff
+green: #00a458
+grey: #a6abbd
+danger: #f34672
+black: #424656
+off-white: f4f9ff
+warning: #ffb300
+warning:hover: #ffbf2a
+*/
+html {
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 3rem;
+  background-color: #f4f9ff;
+  font-family: "Lato", sans-serif;
+  color: #424656;
+  height: 100%;
+  box-sizing: border-box;
+}
+h1 {
+  font-family: Arvo;
+  margin: 2rem;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-family: Arvo;
+}
+
+input[type="text"], input[type="password"], input[type="email"],
+textarea, input[type="number"], input[type="date"] {
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+  resize: none;
+  border: solid 1px #a6abbd;
+}
+
+textarea::placeholder {
+  font-family: "Lato", sans-serif;
+}
+
+input[type="submit"] {
+  background-color: #00a458;
+  padding: 0.5rem;
+  color: white;
+  border: none;
+  margin-bottom: 1rem;
+}
+input[type="submit"]:hover, input[type="submit"]:active,  input[type="submit"]:focus {
+  background-color: #11c672;;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: white;
+  outline: none;
+  border: none;
+}
+
+
+
+input::-moz-focus-inner {
+  border: 0;
+}
+
+*:-moz-focus-inner {
+  border: 0;
+}

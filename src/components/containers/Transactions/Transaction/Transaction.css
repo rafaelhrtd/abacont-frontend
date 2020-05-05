@@ -1,0 +1,14 @@
+.Transaction {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+.Transaction h1 {
+    margin: 2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}

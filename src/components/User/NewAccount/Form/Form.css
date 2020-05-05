@@ -1,0 +1,31 @@
+.Form input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.Form label {
+    margin-right: 1rem;
+}
+
+.Form button {
+    margin-right: 1rem;
+}
+
+.checkbox {
+    margin-bottom: 1rem;
+}
+
+input.error {
+    border-color: #f34672;
+    color: #68323f;
+}
+
+.errors ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    color: #f34672;
+    margin-bottom: 1rem;
+}

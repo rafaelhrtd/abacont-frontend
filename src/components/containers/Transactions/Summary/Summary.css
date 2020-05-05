@@ -1,0 +1,53 @@
+.Summary {
+    margin: 2rem;
+    margin-bottom: 1rem;
+    flex-basis: 60%;
+    box-sizing: border-box;
+}
+
+.Element {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.Key, .Value {
+    width: 50%;
+    padding: 0.5rem;
+}
+
+.Value {
+    text-align: right;
+    background-color: white;
+}
+
+.Key {
+    background-color: white;
+    text-align: left;
+    color: white;
+    text-emphasis: 
+}
+
+@media (max-width: 499px) {
+    .Summary {
+        min-width: 90%;
+    }
+}
+@media (min-width: 500px) {
+    .Summary {
+        min-width: 400px;
+    }
+}
+
+.greenbg {
+    color: #00a458;
+}
+.bluebg {
+    color: #0087ff;
+}
+.yellowbg {
+    color: #ffb300;
+}
+.redbg {
+    color: #f34672;
+}

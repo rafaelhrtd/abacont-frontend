@@ -1,0 +1,22 @@
+.innerForm {
+    padding: 1rem;
+    text-align: left;
+    border: solid 1px #a6abbd;
+    margin-bottom: 1rem;
+}
+
+.innerForm h3 {
+    text-align: left;
+}
+
+.NewTransaction h2 {
+    margin-bottom: 0rem;
+}
+
+.NewTransaction h1 {
+    margin-bottom: 0rem;
+}
+
+.FormDiv {
+    margin-top: 2rem;
+}

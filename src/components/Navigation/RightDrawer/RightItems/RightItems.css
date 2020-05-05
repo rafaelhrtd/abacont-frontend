@@ -1,0 +1,43 @@
+.RightItems {
+    width: 100%;
+}
+.RightItems ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.RightItems li {
+    display: block;
+    color: #424656;
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+}
+
+.RightItems a {
+    text-decoration: none;
+    margin: 0;
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+.RightItems li:hover, .RightItems li:active, .RightItems li:focus {
+    background-color: #ebf6ff;
+    cursor: pointer;
+    color: black;
+}
+
+.RightItems p {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    box-sizing: border-box;
+}

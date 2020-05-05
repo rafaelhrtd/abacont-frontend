@@ -1,0 +1,9 @@
+.HR {
+    width: 100%;
+    height: 2px;
+    background-color: #a6abbd;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    background-clip: content-box;
+    margin-bottom: 0;
+}

@@ -1,0 +1,34 @@
+.TransactionBox {
+    margin: 1rem;
+    flex-grow: 1;
+    border-bottom: none;
+    min-width: 400px;
+    max-width: 600px;
+}
+
+.TransactionBox button {
+    margin: 0 0.5rem;
+}
+
+.TransactionBox h2 {
+    padding: 0.25rem 0;
+    color: white;
+}
+
+.greenbg {
+    background-color: #00a458;
+}
+.yellowbg {
+    background-color: #ffb300;
+}
+
+.TransactionBox button {
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+@media (max-width: 499px) {
+    .TransactionBox {
+        width: 100%;
+    }
+}

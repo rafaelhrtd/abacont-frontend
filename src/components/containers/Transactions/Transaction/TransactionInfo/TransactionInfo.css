@@ -1,0 +1,21 @@
+.InfoBox{
+    margin: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.InfoBox h2 {
+    padding: 0.25rem 0;
+    background-color: #0087ff;
+    color: white;
+}
+.TransactionInfo{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.TransactionInfo .buttons button {
+    margin: 0 0.5rem;
+}

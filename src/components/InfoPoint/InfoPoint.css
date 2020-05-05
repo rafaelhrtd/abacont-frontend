@@ -1,0 +1,10 @@
+.infoPoint {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoPoint a {
+    text-decoration: none;
+    color: #0087ff;
+}

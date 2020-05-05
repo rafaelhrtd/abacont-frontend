@@ -1,0 +1,81 @@
+button {
+  background-color: #0087ff;
+  border: none;
+  padding: 0.5rem;
+  color: white;
+  margin: 0;
+  height: 100%;
+  flex-grow: 1;
+}
+
+button:hover,
+button:focus,
+button:active {
+  background-color: #39a2ff;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin: 0;
+  height: 100%;
+}
+
+.warning {
+  background-color: #ffb300;
+}
+.warning:hover,
+.warning:focus,
+.warning:active {
+  background-color: #ffbf2a;
+}
+
+.success {
+  background-color: #00a458;
+}
+.success:hover,
+.success:focus,
+.success:active {
+  background-color: #11c672;;
+}
+
+.danger {
+    background-color: #f34672;
+    padding: 0.5rem;
+    color: white;
+    border: none;
+    width: auto;
+  }
+  
+.danger:hover, .danger:active,  .danger:focus {
+    background-color: #ff779a;;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: white;
+    outline: none;
+    border: none;
+  }
+
+  .primary {
+    background-color: #0087ff;
+    padding: 0.5rem;
+    color: white;
+    height: 100%;
+    border: none;
+    width: auto;
+  }
+  .FormInline {
+    background-color: #0087ff;
+    border: solid 1px #0087ff;
+    padding: 0.5rem;
+    color: white;
+    margin: 0 !important;
+    height: 100%;
+    flex-grow: 1;
+  }
+  .FormInline:hover, .FormInline:active, .FormInline:focus {
+    background-color: #39a2ff;
+    border: solid 1px #39a2ff;
+    padding: 0.5rem;
+    color: white;
+    cursor: pointer;
+    margin: 0 !important;
+    height: 100%;
+  }

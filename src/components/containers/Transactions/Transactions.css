@@ -1,0 +1,23 @@
+.Transactions h1 {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.Transactions {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.Transactions .MonthSelector {
+    width: 100%;
+}
+
+.Summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 0;
+}

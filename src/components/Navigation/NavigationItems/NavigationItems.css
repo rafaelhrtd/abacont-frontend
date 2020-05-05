@@ -1,0 +1,19 @@
+.NavigationItems ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.NavigationItems li {
+    display: inline-block;
+    color: #424656;
+    padding: 0 1rem;
+}
+
+.NavigationItems a {
+    text-decoration: none;
+    color: #424656;
+    box-sizing: border-box;
+}

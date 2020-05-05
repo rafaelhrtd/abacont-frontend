@@ -1,0 +1,53 @@
+.Search {
+    display: flex;
+    flex-wrap: none;
+}
+.SearchBar {
+    flex-grow: 5;
+    width: auto;
+    margin-bottom: 1rem;
+}
+.SearchBar input {
+    margin: 0;
+}
+.SearchBar input:disabled {
+    border: solid 1px #00a458;
+    color: #00a458;
+    background-color: #e5fff3;
+    margin: 0;
+}
+.Container {
+    position: relative;
+}
+.Results {
+    background-color: white;
+    position: absolute;
+    left:0;
+    right: 0;
+    top:0;
+    height: auto;
+}
+.Result {
+    width: 100%;
+    padding: 0.5rem;
+    color: #424656;
+    border: solid 1px #a6abbd;
+    border-top: 0;
+    box-sizing: border-box;
+    z-index: 100;
+    border: solid 1px #a6abbd;
+    border-top: 0;
+    text-align: left;
+}
+.Result:hover, .Result:active, .Result:focus {
+    background-color: #ebf6ff;
+    cursor: pointer;
+}
+
+.Incorrect {
+    border-color: #f34672 !important;
+}
+.Correct {
+    border-color: #00a458 !important;
+    color: black !important;
+}

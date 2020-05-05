@@ -1,0 +1,34 @@
+.LoggedIn {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 0 1rem;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+
+.logout {
+    background-color: #f34672;
+    padding: 0.5rem;
+    color: white;
+    border: none;
+  }
+  .logout:hover, .logout:active,  .logout:focus {
+    background-color: #ff779a;;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: white;
+    outline: none;
+    border: none;
+  }

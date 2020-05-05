@@ -1,0 +1,26 @@
+.MonthSelector {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: center;
+}
+
+.Selector {
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+
+.changer,
+.MonthYear {
+    cursor: pointer;
+    background-color: #0087ff;
+    color: white;
+    padding: 0.5rem;
+}
+
+.changer:hover,
+.changer:active,
+.changer:focus {
+    background-color: #39a2ff;
+}

@@ -1,0 +1,10 @@
+.MainContainer{
+    padding: 0 1rem;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
