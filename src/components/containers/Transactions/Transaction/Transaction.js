@@ -45,7 +45,7 @@ class Transaction extends Getter {
     }
     render() {
         console.log("rendering")
-        const url = "http://localhost:3000/transactions/" + this.state.id
+        const url = process.env.REACT_APP_API_ADDRESS + "transactions/" + this.state.id
         this.getServerInfo(url, null, this.errorHandler, this.successHandler)
         const children = this.state.children
         let title = ""

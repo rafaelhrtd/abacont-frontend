@@ -66,7 +66,7 @@ class Search extends Getter {
         
     }
     render(){
-        const url = 'http://localhost:3000/' + this.props.url   
+        const url = process.env.REACT_APP_API_ADDRESS + this.props.url   
         if (this.state.objects.length === 0){
             this.getServerInfo(url, this.props.data, this.errorHandler, this.successHandler)
         }

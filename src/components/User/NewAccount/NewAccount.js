@@ -40,7 +40,7 @@ class NewAccount extends Component {
             company_attributes: { name: this.state["company.name"] }
           }
         }
-        axios.post("http://localhost:3000/signup", data)
+        axios.post(process.env.REACT_APP_API_ADDRESS + "signup", data)
           .then(response => {
               if (response.status === 200){
                   if (response.data.errors === undefined){

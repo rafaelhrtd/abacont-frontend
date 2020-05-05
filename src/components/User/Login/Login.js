@@ -45,7 +45,7 @@ class Login extends Component {
             rememberMe: true
           }
         }
-        axios.post("http://localhost:3000/login", data)
+        axios.post(process.env.REACT_APP_API_ADDRESS + "login", data)
           .then(response => {
             if (response.status === 200){
                 this.context.login(response, this.state.rememberMe)

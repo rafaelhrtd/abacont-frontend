@@ -34,7 +34,7 @@ class NewTransaction extends FormHolder {
     createTransactionHandler = (event, edit = false) => {
         event.preventDefault()
         let data = this.setUpData(this.state.form_data)
-        let url = "http://localhost:3000/transactions"
+        let url = process.env.REACT_APP_API_ADDRESS + "transactions"
         url += edit === true ? "/" + this.props.transaction.id : ""
         this.submitHandler(event, 
                             url, 

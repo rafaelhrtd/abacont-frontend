@@ -18,7 +18,7 @@ class NewContact extends FormHolder {
     createContactHandler = (event, edit=false) => {
         event.preventDefault()
         let data = this.setUpData(this.state.form_data)
-        let url = "http://localhost:3000/contacts"
+        let url = process.env.REACT_APP_API_ADDRESS + "contacts"
         url += edit === true ? "/" + this.props.contact.id : ""
         this.submitHandler(event, 
                             url, 
@@ -83,7 +83,7 @@ class NewContact extends FormHolder {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
-        const url="http://localhost:3000/contacts"
+        const url=process.env.REACT_APP_API_ADDRESS + "contacts"
         const saveTitle = this.props.contact !== undefined ? "Guardar" : "Crear"
         const titleStart = this.props.contact !== undefined ? "Editar " : "Nuevo "
         return(

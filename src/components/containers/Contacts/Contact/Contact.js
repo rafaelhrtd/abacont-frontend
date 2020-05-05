@@ -31,7 +31,7 @@ class Contact extends Getter {
     }
 
     render() {
-        const url = "http://localhost:3000/contacts/" + this.state.id
+        const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
         this.getServerInfo(url, null, this.errorHandler, this.successHandler)
         let redirect_path = ""
         if (this.state.contact !== null){

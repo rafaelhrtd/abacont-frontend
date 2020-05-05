@@ -1,7 +1,7 @@
 import React from 'react';
 
 const urlContext = React.createContext({
-    url: "http://localhost:3000/",
+    url: process.env.REACT_APP_API_ADDRESS,
 })
 
 export default urlContext;

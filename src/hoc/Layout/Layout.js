@@ -75,7 +75,7 @@ class Layout extends Component {
 
         )
         return (
-            <urlContext.Provider value={{url: "http://localhost:3000/"}}>
+            <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
                 <AuthContext.Provider value={{
                     authenticated: this.state.authenticated,
                     user: this.state.user,
