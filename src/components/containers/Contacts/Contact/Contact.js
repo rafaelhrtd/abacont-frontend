@@ -23,7 +23,8 @@ class Contact extends Getter {
     }
 
     shouldComponentUpdate = (nextProps, nextState) =>{
-        return JSON.stringify(this.state) !== JSON.stringify(nextState)
+        return JSON.stringify(this.state) !== JSON.stringify(nextState) || 
+            JSON.stringify(this.props) !== JSON.stringify(nextProps)
     }
 
     componentWillUnmount = () => {

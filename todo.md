@@ -1,0 +1,8 @@
+- saldo banco (updateable, probably)
+- payment types and cheque number
+    - efectivo
+    - cheque
+    - transferencia
+    - crédito
+    - débito
+- fix transaction error when paying more (rounding error)
