@@ -19,7 +19,7 @@ class Contacts extends Component {
                     <Route path={this.props.match.url + "/agregar"} exact render={() => (
                         <NewContact category={this.state.category} />
                     )} />
-                    <Route path={this.props.match.url + "/:id"} exact render={() => (
+                    <Route path={this.props.match.url + "/:id"} render={() => (
                         <Contact />
                     )} />
                 </Switch>

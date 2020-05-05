@@ -10,7 +10,6 @@ class App extends Component {
     password: null
   }
   render() {
-    console.log(process.env.REACT_APP_API_ADDRESS)
     return (
       <div className={classes.App}>
         <Route path="/" exact render={() => (

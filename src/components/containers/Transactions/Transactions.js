@@ -121,7 +121,7 @@ class Transactions extends Getter {
                     <Route path={this.props.match.url + "/agregar"} exact render={() => (
                         <NewTransaction category={this.props.category} />
                     )} />
-                    <Route path={this.props.match.url + "/:id"} exact render={() => (
+                    <Route path={this.props.match.url + "/:id"} render={() => (
                         <Transaction category={this.props.category} />
                     )} />
                 </Switch>
