@@ -33,7 +33,6 @@ class Transaction extends Getter {
     }
 
     successHandler = (data) => {
-        console.log(data)
         this.setState({
             transaction: data.transaction,
             children: data.children

@@ -33,7 +33,7 @@ class Search extends Component {
     generateMatches = (text) => {
         const matches = []
         this.state.objects.map( object => {
-            if (object.name.toLowerCase().startsWith(text)
+            if (object.name.toLowerCase().startsWith(text.toLowerCase())
                 && text.length > 0 && matches.length <= 4){
                 matches.push(object)
             }

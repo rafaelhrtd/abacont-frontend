@@ -41,7 +41,7 @@ class Search extends Getter {
     generateMatches = (text) => {
         const matches = []
         this.state.objects.map( object => {
-            if (object.name.toLowerCase().startsWith(text)
+            if (object.name.toLowerCase().startsWith(text.toLowerCase())
                 && text.length > 0 && matches.length <= 4){
                 matches.push(object)
             }
@@ -59,10 +59,6 @@ class Search extends Getter {
         const data = {name: this.props.name, value: object.id}
         this.props.changed(null, data)
     }
-    shouldComponentUpdate = (nextProps, nextState) => {
-        return (this.props.className != nextProps.className ||
-                this.state.input != nextState.input)
-    }
     selectedOptionHandler = (object) => {
         
     }
@@ -78,9 +74,7 @@ class Search extends Getter {
                         type="text" 
                         placeholder={this.props.placeholder}
                         className={[classes[this.state.inputStyle], this.props.className].join(" ")}
-                        value = { this.props.givenID !== undefined ? (
-                            this.props.placeholder + ": " + this.state.input
-                        ) : this.state.input}
+                        value = {this.state.input}
                         // only disabled if the ID is given AND edit is not set
                         disabled={this.props.givenID !== undefined && this.props.edit === false}
                         onChange={(event) => {this.inputChangeHandler(event)}} />
