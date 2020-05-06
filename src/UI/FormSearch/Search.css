@@ -1,7 +1,7 @@
 .Search {
     display: flex;
     flex-wrap: none;
-    flex-basis: 300px;
+    margin-bottom: 1rem;
 }
 .SearchBar {
     flex-grow: 5;
@@ -39,12 +39,6 @@
     border-top: 0;
     text-align: left;
 }
-
-.Results a {
-    text-decoration: none;
-    color: #424656;
-}
-
 .Result:hover, .Result:active, .Result:focus {
     background-color: #ebf6ff;
     cursor: pointer;
@@ -56,13 +50,4 @@
 .Correct {
     border-color: #00a458 !important;
     color: black !important;
-}
-
-.AddButton {
-    display: flex;
-    flex-basis: 2rem;
-}
-
-a.AddButton {
-    text-decoration: none;
 }

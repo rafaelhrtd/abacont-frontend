@@ -1,33 +1,26 @@
-import React from 'react';
-import Getter from '../../helpers/Getter';
+import React, {Component} from 'react';
+import classes from './Search.css';
+import { Link } from 'react-router-dom';
 import Button from '../Buttons/Button/Button';
-import classes from './Search.css'
 
-class Search extends Getter {
+
+// expected props:
+// placeholder: self explanatory
+// objects: objects for search to look through
+// link: starts the link to take the user there on click
+class Search extends Component {
     state = {
-        kind: this.props.kind,
-        data: this.props.data,
+        input: "",
         objects: [],
-        input: this.props.givenName,
-        matches: [],
-        inputStyle: null,
-        id: this.props.givenID
-    }
-    errorHandler = (errors) => {
-        console.log(errors);
-    }
-    successHandler = (data) => {
-        let objects = Object.keys(data.objects).map(obKey => (
-            data.objects[obKey]
-        ));
-        objects.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
-        this.setState({objects: objects})
+        matches: []
     }
     shouldComponentUpdate = (nextProps, nextState) => {
-        return ((this.state.objects === [] && nextState.objects !== []) ||
-            this.state.input !== nextState.input || this.state.id !== nextState.id ||
-            JSON.stringify(this.state.matches) !== JSON.stringify(nextState.matches))
+        return (
+            JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
+                 JSON.stringify(nextState) != JSON.stringify(this.state)
+        )
     }
+
     inputChangeHandler = (event) => {
         this.setState({
             input: event.target.value,
@@ -48,67 +41,55 @@ class Search extends Getter {
         })
         return matches
     }
-    clickedSuggestionHandler = (event, object) => {
+
+    getLatestObjects = () => {
         this.setState({
-            input: object.name,
-            id: object.id, 
-            matches: [],
-            inputStyle: "Correct"
-        });
-        const data = {name: this.props.name, value: object.id}
-        this.props.changed(null, data)
+            objects: this.props.objects
+        })
     }
-    shouldComponentUpdate = (nextProps, nextState) => {
-        return (this.props.className != nextProps.className ||
-                this.state.input != nextState.input)
+
+    componentDidMount = () => {
+        this.getLatestObjects()
     }
-    selectedOptionHandler = (object) => {
-        
+
+    componentDidUpdate = () => {
+        this.getLatestObjects()
     }
+
+    clickedSuggestionHandler = (event, object) => {
+    }
+
     render(){
-        const url = process.env.REACT_APP_API_ADDRESS + this.props.url   
-        if (this.state.objects.length === 0){
-            this.getServerInfo(url, this.props.data, this.errorHandler, this.successHandler)
-        }
         return(
             <div className={classes.Search}>
                 <div className={classes.SearchBar}>
+                    {/* handles the text input and calls input change handler */}
                     <input 
                         type="text" 
                         placeholder={this.props.placeholder}
-                        className={[classes[this.state.inputStyle], this.props.className].join(" ")}
                         value = { this.props.givenID !== undefined ? (
                             this.props.placeholder + ": " + this.state.input
                         ) : this.state.input}
                         // only disabled if the ID is given AND edit is not set
                         disabled={this.props.givenID !== undefined && this.props.edit === false}
                         onChange={(event) => {this.inputChangeHandler(event)}} />
-                    <input 
-                        type="hidden" 
-                        name={this.props.name} 
-                        value={this.state.id}
-                        />
+                    {/* presents the results from input handler */}
                     <div className={classes.Container}>
                         <div className={classes.Results}>
-                            {this.state.matches.map(object => (   
-                                <div key={object.id}
-                                    className={classes.Result}
-                                    onClick={(event) => {
-                                        this.clickedSuggestionHandler(event, object)
-                                    }}>
-                                    {object.name}
-                                </div>
+                            {this.state.matches.map(object => (
+                                <Link to={this.props.link + object.id}>
+                                    <div key={object.id}
+                                        className={classes.Result}>
+                                        {object.name}
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
                 </div>
-                {
-                    this.props.givenID === undefined ? (
-                        <Button 
-                            className="FormInline" 
-                            onClick={() => this.props.clickedAdd(this.props.current_input)}>+</Button>
-                    ) : null
-                }
+                <Link to={this.props.link + "agregar"} className={classes.AddButton}>
+                    <Button>+</Button>
+                </Link>
             </div>
         )
     }

@@ -72,7 +72,8 @@ class Contact extends Getter {
                     <Route path={this.props.match.url + "/editar"} exact render={() => (
                         <NewContact 
                             category={this.state.category}
-                            contact={this.state.contact} />
+                            contact={this.state.contact}
+                            redirect_url={redirect_path} />
                     )} />
                 </Switch>
             )

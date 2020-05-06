@@ -3,6 +3,7 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import Aux from '../../../hoc/Aux/Aux'
 import NewContact from './NewContact/NewContact'
 import Contact from './Contact/Contact';
+import ContactIndex from './ContactIndex/ContactIndex'
 
 class Contacts extends Component {
     state = {
@@ -14,7 +15,7 @@ class Contacts extends Component {
             <Aux>
                 <Switch>
                     <Route path={this.props.match.url + "/"} exact render={() => (
-                        <h1>{title}</h1>
+                        <ContactIndex category={this.state.category} />
                     )} />
                     <Route path={this.props.match.url + "/agregar"} exact render={() => (
                         <NewContact category={this.state.category} />

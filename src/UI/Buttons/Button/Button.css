@@ -67,15 +67,14 @@ button:active {
     padding: 0.5rem;
     color: white;
     margin: 0 !important;
-    height: 100%;
+    height: auto;
+    align-self: stretch;
     flex-grow: 1;
   }
   .FormInline:hover, .FormInline:active, .FormInline:focus {
     background-color: #39a2ff;
-    border: solid 1px #39a2ff;
     padding: 0.5rem;
     color: white;
     cursor: pointer;
     margin: 0 !important;
-    height: 100%;
   }

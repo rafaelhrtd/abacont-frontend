@@ -30,9 +30,9 @@ class NewContact extends FormHolder {
     }
 
     successResponse = (data, url = null) => {
-        let passed_state = this.state.passed_state
-        if (passed_state !== undefined && passed_state.redirect_path !== undefined) {
-            this.setState({redirect: passed_state.redirect_path})
+        let redirect_url = this.props.redirect_url
+        if (redirect_url !== undefined) {
+            this.setState({redirect: redirect_url})
         } else {
             const category = this.state.category === "client" ? "/clientes/" : "/proveedores/"
             const redirectUrl = url === null ? category + data.contact.id : url 

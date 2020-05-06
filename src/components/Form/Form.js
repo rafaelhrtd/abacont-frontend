@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Form.css'
 import ErrorMessages from '../../UI/ErrorMessages/ErrorMessages'
 import Aux from '../../hoc/Aux/Aux'
-import Search from '../../UI/Search/Search'
+import Search from '../../UI/FormSearch/Search'
 import ConditionalFormTag from './ConditionalFormTag'
 // needs changed, submit, inputs, and errors props
 

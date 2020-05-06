@@ -1,6 +1,5 @@
 .InfoBox{
-    margin: 1rem;
-    flex-grow: 1;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -13,7 +12,9 @@
 .ContactInfo{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 0;
+    flex-basis: 400px;
+    margin: 1rem;
 }
 
 .ContactInfo .buttons button {

@@ -1,0 +1,47 @@
+.ContactIndex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ContactIndex h1 {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.Search {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.latestClients {
+    flex-basis: 300px;;
+}
+
+.title {
+    padding: 0.25rem;
+    background-color: #0087ff;
+    color: white;
+}
+
+.Item {
+    padding: 0.55rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+.Item a {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #424656;
+}
+
+.Item:hover,
+.Item:active,
+.Item:focus {
+    padding: 0.55rem;
+    background-color: #ebf6ff;
+}
