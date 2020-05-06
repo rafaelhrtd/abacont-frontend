@@ -60,16 +60,16 @@ class ContactIndex extends Getter {
                 </div>
                 {
                     contacts.map(contact => (
-                        <div className={classes.Item}>
-                            <Link to={searchLink + contact.id}>
-                                <div className={classes.name}>
-                                    {contact.name}
-                                </div>
-                                <div className={classes.name}>
-                                    ${contact.balance.toFixed(2)}
-                                </div>
-                            </Link>
-                        </div>
+                        <Link to={searchLink + contact.id}>
+                            <div className={classes.Item}>
+                                    <div className={classes.name}>
+                                        {contact.name}
+                                    </div>
+                                    <div className={classes.name}>
+                                        ${contact.balance.toFixed(2)}
+                                    </div>
+                            </div>
+                        </Link>
 
                     ))
                 }

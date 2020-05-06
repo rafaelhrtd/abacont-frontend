@@ -16,6 +16,7 @@ class Contact extends Getter {
         console.log(errors);
     }
     successHandler = (data) => {
+        console.log(data)
         this.setState({
             contact: data.contact,
             transactions: data.transactions

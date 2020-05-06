@@ -19,18 +19,22 @@ class Transactions extends Getter {
         month: (new Date).getMonth(),
         year: (new Date).getFullYear(),
     }
+
     changedTimeHandler = (month, year) => {
         this.setState({month: month, year: year})
     }
+
     successHandler = (data) => {
         this.setState({
             transactions: data.transactions,
             summary: data.summary
         })
     }
+
     errorHandler = (data) => {
         console.log(data)
     }
+    
     changedYearlyHandle = () => {
         this.setState(prevState => {
             return ({yearly: !prevState.yearly})
