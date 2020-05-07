@@ -1,14 +1,8 @@
 Main functions to implement:
-    - Client / provider screen
-        - Latest contacts
-        - Search contact (with or without)
-    - Proyects
-        - index / search
-        - show project
-        - create project (basically ready)
-    - Transactions
-        - Index
+    - Transaction index
     - Security measures
+        - show warning
+    - "back" buttons
     
 
 - saldo banco (updateable, probably)

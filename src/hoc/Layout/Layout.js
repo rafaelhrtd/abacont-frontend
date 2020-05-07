@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthContext from '../../context/auth-context'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import RightDrawer from '../../components/Navigation/RightDrawer/RightDrawer'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Redirect } from 'react-router-dom'
 import App from '../../App'
 import Axios from 'axios'
 import MainContainer from './MainContainer/MainContainer'
@@ -20,7 +20,8 @@ class Layout extends Component {
         companies: (localStorage.getItem('companies') !== null ?
                 JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('companies'))),
         company: (localStorage.getItem('company') !== null ?
-                JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('company')))
+                JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('company'))),
+        redirect: null
     }
     
     loginHandler = (response, remember_me = false) => {
@@ -69,11 +70,17 @@ class Layout extends Component {
                 const {status} = error.response;
                 if (status === 401){
                     this.logoutHandler();
+                } else if (status === 403) {
+                    // put what to do here
+                    // should show a warning
+                    window.location.href = '/transacciones/'
+                    
                 }
                 return Promise.reject(error);
             }
 
         )
+        
         return (
             <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
                 <AuthContext.Provider value={{
