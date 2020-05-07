@@ -1,7 +1,7 @@
 .InfoBox{
-    margin: 1rem;
     flex-grow: 1;
     display: flex;
+    margin-bottom: 1rem;
     flex-direction: column;
     background-color: white;
 }
@@ -11,9 +11,11 @@
     color: white;
 }
 .TransactionInfo{
+    margin: 1rem;
+
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-basis: 400px;
 }
 
 .TransactionInfo .buttons button {

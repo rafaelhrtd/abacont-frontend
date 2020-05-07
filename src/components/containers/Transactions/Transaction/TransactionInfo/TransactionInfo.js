@@ -14,6 +14,7 @@ const transactionInfo = (props) => {
         let contactUrl = transaction.category === "receivable" ? "/clientes/" : "/proveedores/"
         let transactionUrl = transaction.category === "receivable" ? "/cuentas-por-cobrar/" : "/cuentas-por-pagar/"
         contactUrl += transaction.contact_id
+        let projectURL = transaction.project_id !== null ? "/proyectos/" + transaction.project_id : null
 
         let editURL = transactionUrl + transaction.id + "/editar"
         
@@ -41,6 +42,12 @@ const transactionInfo = (props) => {
                     <InfoPoint 
                         title={"Fecha:"}
                         value={date}
+                        />
+
+                    <InfoPoint 
+                        title={"Proyecto:"}
+                        value={transaction.project_name}
+                        link={projectURL}
                         />
 
                     <InfoPoint 

@@ -105,6 +105,8 @@ class TransactionBoxItem extends Component {
                 paymentUrl += "agregar"
                 paymentState["contact_id"] = this.state.transaction.contact_id
                 paymentState["contact_name"] = this.state.transaction.contact_name
+                paymentState["project_id"] = this.state.transaction.project_id
+                paymentState["project_name"] = this.state.transaction.project_name
                 paymentState["parent_id"] = this.state.transaction.id
                 paymentState["redirect_path"] = this.props.stateToPass.redirect_path
                 paymentState["balance"] = this.state.transaction.balance

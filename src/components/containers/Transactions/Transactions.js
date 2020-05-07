@@ -42,7 +42,6 @@ class Transactions extends Getter {
     }
 
     shouldComponentUpdate = (nextProps, nextState) => {
-        console.log(JSON.stringify(this.state) !== JSON.stringify(nextState))
         return (
             JSON.stringify(this.state) !== JSON.stringify(nextState) || 
             JSON.stringify(this.props) !== JSON.stringify(nextProps) || 
@@ -65,11 +64,9 @@ class Transactions extends Getter {
     }
 
     componentDidMount = () => {
-        console.log(this.getUrl)
         this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
     }
     componentDidUpdate = () => {
-        console.log("updated")
         this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
     }
     

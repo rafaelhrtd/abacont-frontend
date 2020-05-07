@@ -14,6 +14,7 @@ class NewTransaction extends FormHolder {
         form_data: { "transaction.category" : this.props.category},
         passed_state: this.props.location.state,
         errors: {},
+        old_data: {},
         transaction: this.props.transaction
     }
     static contextType = AuthContext;
@@ -46,15 +47,6 @@ class NewTransaction extends FormHolder {
     }
     hiddenDataHandler = (input) => {
         this.setState({[input.name]: input.value})
-    }
-
-    clickedAddHandler = (suffix, input) => {
-        let name = suffix + input.name
-        this.setState(prevState => {
-            let data = {...prevState}
-            data.form_data[name] = input.value
-            return({form_data: data.form_data})
-        })
     }
 
     
@@ -230,7 +222,8 @@ class NewTransaction extends FormHolder {
                         clicked={this.clickedAddHandler}
                         submitText={saveTitle}
                         previousValues={this.state.form_data}
-                        edit={this.props.transaction !== undefined} />
+                        edit={this.props.transaction !== undefined}
+                        old_data={this.state.old_data} />
                 </div>
             </div>
         )

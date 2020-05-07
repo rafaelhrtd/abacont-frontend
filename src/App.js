@@ -4,6 +4,7 @@ import Aux from './hoc/Aux/Aux'
 import Contacts from './components/containers/Contacts/Contacts';
 import Transactions from './components/containers/Transactions/Transactions'
 import classes from './App.css'
+import Projects from './components/containers/Projects/Projects'
 class App extends Component {
   state = {
     email: null,
@@ -37,7 +38,7 @@ class App extends Component {
           <Transactions category="revenue" />
         )} />
         <Route path="/proyectos" render={() => (
-          <h1>Proyectos</h1>
+          <Projects />
         )} />
       </div>
     );

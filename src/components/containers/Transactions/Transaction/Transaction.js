@@ -33,6 +33,7 @@ class Transaction extends Getter {
     }
 
     successHandler = (data) => {
+        console.log(data)
         this.setState({
             transaction: data.transaction,
             children: data.children
@@ -43,8 +44,8 @@ class Transaction extends Getter {
         return JSON.stringify(this.state) !== JSON.stringify(nextState) || 
             JSON.stringify(this.props) !== JSON.stringify(nextProps)
     }
+    
     render() {
-        console.log("rendering")
         const url = process.env.REACT_APP_API_ADDRESS + "transactions/" + this.state.id
         this.getServerInfo(url, null, this.errorHandler, this.successHandler)
         const children = this.state.children
@@ -90,8 +91,11 @@ class Transaction extends Getter {
                                 stateToPass={{
                                     contact_id: this.state.transaction.contact_id,
                                     contact_name: this.state.transaction.contact_name,
+                                    project_id: this.state.transaction.project_id,
+                                    project_name: this.state.transaction.project_name,
                                     redirect_path: this.props.location.pathname,
-                                    parent_id: this.state.transaction.id
+                                    parent_id: this.state.transaction.id,
+                                    balance: this.state.transaction.balance
                                 }} />
                         </div>
                     )} />

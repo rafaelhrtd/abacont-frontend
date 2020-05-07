@@ -10,6 +10,7 @@ class NewContact extends FormHolder {
         category: (this.props.category),
         errors: {},
         form_data: { "contact.category" : this.props.category},
+        old_data: {},
         contact: this.props.contact
     }
 
@@ -98,7 +99,8 @@ class NewContact extends FormHolder {
                         suffix="contact."
                         submitText={saveTitle}
                         previousValues={this.state.form_data}
-                        edit={this.props.contact !== undefined} />
+                        edit={this.props.contact !== undefined}
+                        old_data={this.state.old_data} />
                 </div>
             </div>
         )

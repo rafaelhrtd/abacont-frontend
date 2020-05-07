@@ -33,9 +33,8 @@ class Form extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
-            JSON.stringify(this.state.innerForms) !== JSON.stringify(nextState.innerForms) || 
-            JSON.stringify(this.props.errors) !== JSON.stringify(nextProps.errors) ||
-            JSON.stringify(this.props.previousValues) !== JSON.stringify(nextProps.previousValues)
+            JSON.stringify(this.props) !== JSON.stringify(nextProps) || 
+            JSON.stringify(this.state) !== JSON.stringify(nextState)
         )
     }
 
@@ -94,6 +93,7 @@ class Form extends Component {
                                                 edit={input.edit}
                                                 givenName={input.givenName}
                                                 changed={this.props.changed}
+                                                old_data={this.props.old_data}
                                                 placeholder={input.placeholder} />
                                         ):(
                                                 <div className={classes.innerForm}>
@@ -126,7 +126,7 @@ class Form extends Component {
                                                 placeholder={input.placeholder}
                                                 className={classes[dynamicClasses[this.props.suffix + input.name]]}
                                                 value={this.props.previousValues[name]}
-                                                onChange={(event) => this.props.changed(event, null, input)} />
+                                                onChange={(event) => this.props.changed(event, null, input, this.props.old_data)} />
                                         )
                                     } else {
                                         return (
@@ -137,7 +137,7 @@ class Form extends Component {
                                             placeholder={input.placeholder}
                                             className={classes[dynamicClasses[this.props.suffix + input.name]]}
                                             value={this.props.previousValues[name]}
-                                            onChange={(event) => this.props.changed(event, null, input)}></input>
+                                            onChange={(event) => this.props.changed(event, null, input, this.props.old_data)}></input>
                                         )
                                     }
                                 }

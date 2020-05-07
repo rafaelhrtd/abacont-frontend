@@ -8,16 +8,15 @@ class Search extends Getter {
         kind: this.props.kind,
         data: this.props.data,
         objects: [],
-        input: this.props.givenName,
+        input: "",
         matches: [],
         inputStyle: null,
-        id: this.props.givenID
+        id: 0
     }
     errorHandler = (errors) => {
         console.log(errors);
     }
     successHandler = (data) => {
-        console.log(data)
         let objects = Object.keys(data.objects).map(obKey => (
             data.objects[obKey]
         ));
@@ -27,7 +26,8 @@ class Search extends Getter {
     shouldComponentUpdate = (nextProps, nextState) => {
         return ((this.state.objects === [] && nextState.objects !== []) ||
             this.state.input !== nextState.input || this.state.id !== nextState.id ||
-            JSON.stringify(this.state.matches) !== JSON.stringify(nextState.matches))
+            JSON.stringify(this.state.matches) !== JSON.stringify(nextState.matches)) ||
+            JSON.stringify(this.props) !== JSON.stringify(nextProps)
     }
     inputChangeHandler = (event) => {
         this.setState({
@@ -36,6 +36,11 @@ class Search extends Getter {
             matches: this.generateMatches(event.target.value),
             inputStyle: event.target.value.length === 0 ? "" : "Incorrect"
         })
+        
+        const data = {name: this.props.name, value: ''}
+        
+        this.props.changed(null, data, null, this.props.old_data)
+
         this.setState({matches: this.generateMatches(event.target.value)})
     }
     generateMatches = (text) => {
@@ -62,6 +67,21 @@ class Search extends Getter {
     selectedOptionHandler = (object) => {
         
     }
+    componentDidMount = () => {
+        this.setState({
+            input: this.props.givenName,
+            id: this.props.givenID
+        })
+    }
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.givenID !== this.props.givenID){
+            this.setState({
+                input: this.props.givenName,
+                id: this.props.givenID
+            })
+        }
+    }
+
     render(){
         const url = process.env.REACT_APP_API_ADDRESS + this.props.url   
         if (this.state.objects.length === 0){
@@ -98,7 +118,7 @@ class Search extends Getter {
                     </div>
                 </div>
                 {
-                    this.props.givenID === undefined ? (
+                    !(this.props.givenID !== undefined && this.props.edit === false) ? (
                         <Button 
                             className="FormInline" 
                             onClick={() => this.props.clickedAdd(this.props.current_input)}>+</Button>

@@ -1,0 +1,56 @@
+.ProjectIndex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+a.ProjectIndex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ProjectIndex h1 {
+    box-sizing: content-box;
+    
+    margin-bottom: 2rem;
+}
+
+.Search {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.latestProjects {
+    flex-basis: 300px;;
+}
+
+.title {
+    padding: 0.25rem;
+    background-color: #0087ff;
+    color: white;
+}
+
+.Item {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: white;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.ProjectIndex a {
+    width: 100%;
+    text-decoration: none;
+    color: #424656;
+}
+
+.Item:hover,
+.Item:active,
+.Item:focus {
+    background-color: #ebf6ff;
+}

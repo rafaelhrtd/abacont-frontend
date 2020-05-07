@@ -5,21 +5,23 @@ import AuthContext from '../context/auth-context';
 class FormHolder extends Component {
     static contextType = AuthContext;
 
-    changeHandler = (event, data=null, input) => {
+    changeHandler = (event, data=null, input, old_data) => {
         let target_name = ""
         let form_data = {...this.state.form_data}
         if (event !== null) {
             event.persist()
             target_name = event.target.name
             form_data[event.target.name] = event.target.value
-            if (event.target.value.length === 0 && input.blank === true){
+            if (event.target.value.length === 0 && input.blank === true &&
+                [undefined, null].includes(old_data[event.target.name])){
                 this.removeChildId(event.target.name)
                 return
             }
         } else {
             form_data[data.name] = data.value
             target_name = data.name
-            if (data.value.length === 0 && input.blank === true){
+            if (data.value.length === 0 &&
+                [undefined, null].includes(old_data[data.name])){
                 this.removeChildId(data.name);
                 return
             }
@@ -36,6 +38,15 @@ class FormHolder extends Component {
         })
     }
 
+    clickedAddHandler = (suffix, input) => {
+        let name = suffix + input.name
+        this.setState(prevState => {
+            let data = {...prevState}
+            data.form_data[name] = input.value
+            return({form_data: data.form_data})
+        })
+    }
+
 
 
     getPreviousValues(object, suffix){
@@ -49,7 +60,7 @@ class FormHolder extends Component {
                 form_data[key] = form_data[key].toFixed(2);
             }
         })
-        this.setState({form_data: form_data})
+        this.setState({form_data: form_data, old_data: form_data})
     }
     
     removeChildId = (child) => {
