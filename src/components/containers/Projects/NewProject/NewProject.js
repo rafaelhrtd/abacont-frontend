@@ -7,13 +7,14 @@ import { Redirect, withRouter } from 'react-router-dom'
 
 class NewProject extends FormHolder {
     state = {
-        form_data: {},
+        form_data: {
+            "project.name" : ""
+        },
         errors: {},
         old_data: {},
         project: {}
     }
-
-
+    
     createProjectHandler = (event, edit = false) => {
         event.preventDefault()
         let data = this.setUpData(this.state.form_data)
@@ -30,6 +31,10 @@ class NewProject extends FormHolder {
 
     hiddenDataHandler = (input) => {
         this.setState({[input.name]: input.value})
+    }
+    
+    errorResponse = (errors) => {
+        this.setState({errors: errors})
     }
 
 

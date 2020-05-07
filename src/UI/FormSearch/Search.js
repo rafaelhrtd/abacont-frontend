@@ -11,7 +11,8 @@ class Search extends Getter {
         input: "",
         matches: [],
         inputStyle: null,
-        id: 0
+        id: 0,
+        errors: {}
     }
     errorHandler = (errors) => {
         console.log(errors);
@@ -36,10 +37,11 @@ class Search extends Getter {
             matches: this.generateMatches(event.target.value),
             inputStyle: event.target.value.length === 0 ? "" : "Incorrect"
         })
+        let data = null
         if (event.target.value.length === 0){
-            const data = {name: this.props.name, value: ''}
+            data = {name: this.props.name, value: ''}
         } else {
-            const data = {name: this.props.name, value: 0}
+            data = {name: this.props.name, value: 0}
         }
     
         this.props.changed(null, data, null, this.props.old_data)
