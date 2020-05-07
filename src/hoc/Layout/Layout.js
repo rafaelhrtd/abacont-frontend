@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthContext from '../../context/auth-context'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import RightDrawer from '../../components/Navigation/RightDrawer/RightDrawer'
-import { BrowserRouter, Redirect } from 'react-router-dom'
+import { Route, BrowserRouter, Redirect } from 'react-router-dom'
 import App from '../../App'
 import Axios from 'axios'
 import MainContainer from './MainContainer/MainContainer'
@@ -73,7 +73,7 @@ class Layout extends Component {
                 } else if (status === 403) {
                     // put what to do here
                     // should show a warning
-                    window.location.href = '/transacciones/'
+                    this.setState({redirect: "/transacciones/"})
                     
                 }
                 return Promise.reject(error);

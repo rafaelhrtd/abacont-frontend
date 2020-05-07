@@ -2,8 +2,10 @@ Main functions to implement:
     - Transaction index
     - Security measures
         - show warning
+        - integrate swal
     - "back" buttons
     
+
 
 - saldo banco (updateable, probably)
 - payment types and cheque number

@@ -10,7 +10,7 @@ class NewProject extends FormHolder {
         form_data: {},
         errors: {},
         old_data: {},
-        project: null
+        project: {}
     }
 
 
@@ -35,6 +35,7 @@ class NewProject extends FormHolder {
 
     successResponse = (data, url = null) => {
         let passed_state = this.state.passed_state
+        console.log(data)
         if (passed_state !== undefined && passed_state.redirect_path !== undefined) {
             this.setState({redirect: passed_state.redirect_path})
         } else {
@@ -58,8 +59,8 @@ class NewProject extends FormHolder {
         )
     }
 
-    componentDidUpdate(prevProps){
-        if (prevProps.project.id === undefined){
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.project.id === {}){
             this.setState({project: this.props.project})
             this.getPreviousValues(this.props.project, "project.");
         }
@@ -139,7 +140,8 @@ class NewProject extends FormHolder {
                         submitText={saveTitle}
                         previousValues={this.state.form_data}
                         existingValues={this.state.old_data}
-                        edit={this.props.project !== {}}
+                        edit={this.props.project !== {} && 
+                              this.props.project !== undefined}
                         old_data={this.state.old_data} />
                 </div>
             </div>

@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Aux from './hoc/Aux/Aux'
 import Contacts from './components/containers/Contacts/Contacts';
 import Transactions from './components/containers/Transactions/Transactions'
 import classes from './App.css'
 import Projects from './components/containers/Projects/Projects'
+import Axios from 'axios'
 class App extends Component {
   state = {
     email: null,
-    password: null
+    password: null,
+    redirect: null
   }
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+
+
+    Axios.interceptors.response.use(
+      response => response,
+      error => {
+          const {status} = error.response;
+          if (status === 403) {
+            // put what to do here
+            // should show a warning
+            this.setState({redirect: "/transacciones/"})
+          }
+          return Promise.reject(error);
+      }
+
+  )
     return (
       <div className={classes.App}>
         <Route path="/" exact render={() => (
