@@ -36,9 +36,12 @@ class Search extends Getter {
             matches: this.generateMatches(event.target.value),
             inputStyle: event.target.value.length === 0 ? "" : "Incorrect"
         })
-        
-        const data = {name: this.props.name, value: ''}
-        
+        if (event.target.value.length === 0){
+            const data = {name: this.props.name, value: ''}
+        } else {
+            const data = {name: this.props.name, value: 0}
+        }
+    
         this.props.changed(null, data, null, this.props.old_data)
 
         this.setState({matches: this.generateMatches(event.target.value)})
