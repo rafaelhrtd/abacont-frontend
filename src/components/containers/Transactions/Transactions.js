@@ -111,7 +111,7 @@ class Transactions extends Getter {
                         category={obKey}
                         redirect_path={redirect_path}
                         stateToPass={{
-                            redirect_path: redirect_path
+                            path: redirect_path
                         }}
                         seeMoreState={{
                             yearly: this.state.yearly,

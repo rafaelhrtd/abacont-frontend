@@ -106,7 +106,7 @@ class TransactionBoxItem extends Component {
                 paymentState["contact_id"] = this.state.transaction.contact_id
                 paymentState["contact_name"] = this.state.transaction.contact_name
                 paymentState["parent_id"] = this.state.transaction.id
-                paymentState["redirect_path"] = this.props.stateToPass.redirect_path
+                paymentState["redirect_path"] = this.props.stateToPass.path
                 paymentState["balance"] = this.state.transaction.balance
             }
             // transaction info and edit

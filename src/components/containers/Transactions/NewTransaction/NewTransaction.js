@@ -21,8 +21,8 @@ class NewTransaction extends FormHolder {
 
     successResponse = (data, url = null) => {
         let passed_state = this.state.passed_state
-        if (passed_state !== undefined && passed_state.redirect_path !== undefined) {
-            this.setState({redirect: passed_state.redirect_path})
+        if (passed_state !== undefined && passed_state.path !== undefined) {
+            this.setState({redirect: passed_state.path})
         } else {
             const redirectUrl = url !== null ? url : Transaction.getUrl(data.transaction.category) + data.transaction.id + "/"
             this.setState({redirect: redirectUrl})

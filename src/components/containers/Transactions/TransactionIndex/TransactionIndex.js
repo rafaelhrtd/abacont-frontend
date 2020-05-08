@@ -116,7 +116,6 @@ class TransactionIndex extends Getter {
                 <TransactionBox
                     transactions={this.state.transactions}
                     stateToPass={{
-                        redirect_path: this.props.location.pathname,
                         path: this.props.location.pathname,
                         query: this.props.location.search
                     }}

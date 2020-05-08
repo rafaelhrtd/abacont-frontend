@@ -25,7 +25,15 @@ class TransactionBoxItem extends Component {
             JSON.stringify(this.props) !== JSON.stringify(nextProps)
         )
     }
-
+    componentDidMount = () => {
+        let redirect_url = this.props.stateToPass.path
+        if (this.props.stateToPass.query !== undefined){
+            redirect_url += this.props.stateToPass.query
+        }
+        this.setState({
+            redirect_url: redirect_url
+        })
+    }
     render(){
         const transaction = this.state.transaction
         const category = this.state.category
@@ -135,7 +143,7 @@ class TransactionBoxItem extends Component {
                     <Link to={{
                         pathname: editURL,
                         state: {
-                            redirect_path: this.props.stateToPass.path + this.props.stateToPass.query
+                            path: this.state.redirect_url
                         }
                     }}>   
                         <Button className="warning">

@@ -87,13 +87,12 @@ class Transaction extends Getter {
                                 transactions={children}
                                 title={childrenTitle}
                                 category={childCategory}
-                                redirect_path={this.props.location.pathname}
                                 stateToPass={{
                                     contact_id: this.state.transaction.contact_id,
                                     contact_name: this.state.transaction.contact_name,
                                     project_id: this.state.transaction.project_id,
                                     project_name: this.state.transaction.project_name,
-                                    redirect_path: this.props.location.pathname,
+                                    path: this.props.location.pathname,
                                     parent_id: this.state.transaction.id,
                                     balance: this.state.transaction.balance
                                 }}

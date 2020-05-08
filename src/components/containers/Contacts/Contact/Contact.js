@@ -70,7 +70,7 @@ class Contact extends Getter {
                                     stateToPass={{
                                         contact_id: this.state.contact.id,
                                         contact_name: this.state.contact.name,
-                                        redirect_path: redirect_path
+                                        path: redirect_path
                                     }}
                                     seeMoreState={{
                                         contact_id: this.state.id
