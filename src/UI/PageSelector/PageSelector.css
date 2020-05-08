@@ -1,0 +1,38 @@
+.PageSelector {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.Page {
+    display: flex;
+    align-items: baseline;
+    margin: 0 0.5rem;
+}
+
+.changer {
+    font-size: 1.5rem;
+    height: 100%;
+    color: #0087ff;
+}
+.changer:focus,
+.changer:active,
+.changer:hover {
+    cursor: pointer;
+    color: #39a2ff;
+}
+
+.Page input {
+    width: 2.5rem;
+    text-align: center;
+    margin: 0;
+    margin-right: 0.5rem;
+}
+
+.changer.disabled {
+    color: #bbdfff;
+    cursor: default;
+}

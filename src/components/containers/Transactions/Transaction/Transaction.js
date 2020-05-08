@@ -96,6 +96,9 @@ class Transaction extends Getter {
                                     redirect_path: this.props.location.pathname,
                                     parent_id: this.state.transaction.id,
                                     balance: this.state.transaction.balance
+                                }}
+                                seeMoreState={{
+                                    parent_id: this.state.id
                                 }} />
                         </div>
                     )} />

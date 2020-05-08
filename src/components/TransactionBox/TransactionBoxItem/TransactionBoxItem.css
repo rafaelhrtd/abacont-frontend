@@ -33,6 +33,7 @@
 }
 .itemInfo p {
     display: inline-block;
+    margin-bottom: 0
 }
 .itemInfo.hidden {
     max-height: 0;
@@ -46,14 +47,8 @@
     max-height: 250px;
 }
 
-
-.Buttons button {
-    margin: 0 0.5rem;
-    margin-bottom: 1rem;
-}
-
 .contact {
-    padding-bottom: 1rem;
+    padding-top: 1rem;
 }
 .contact a {
     text-decoration: none;
@@ -63,7 +58,7 @@
     margin-right: 0.5rem;
 }
 .initialAmount {
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 .initialAmount strong {
     margin-right: 0.5rem;

@@ -76,6 +76,9 @@ class Project extends Getter {
                             project_id: project.id,
                             project_name: project.name,
                             redirect_path: redirect_path
+                        }}
+                        seeMoreState={{
+                            project_id: this.state.project.id
                         }} />
                 )
             })

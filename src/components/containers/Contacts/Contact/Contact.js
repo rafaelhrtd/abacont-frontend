@@ -31,9 +31,16 @@ class Contact extends Getter {
         console.log("Unmounting")
     }
 
-    render() {
+    componentDidMount = () => {
         const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
         this.getServerInfo(url, null, this.errorHandler, this.successHandler)
+    }
+    componentDidUpdate = () => {
+        const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
+        this.getServerInfo(url, null, this.errorHandler, this.successHandler)
+    }
+
+    render() {
         let redirect_path = ""
         if (this.state.contact !== null){
             redirect_path = this.state.contact.category === "client" ? "/clientes/" : "/proveedores/"
@@ -64,6 +71,9 @@ class Contact extends Getter {
                                         contact_id: this.state.contact.id,
                                         contact_name: this.state.contact.name,
                                         redirect_path: redirect_path
+                                    }}
+                                    seeMoreState={{
+                                        contact_id: this.state.id
                                     }} />
                             ))}
     

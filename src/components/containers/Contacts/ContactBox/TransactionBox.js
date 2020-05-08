@@ -37,7 +37,7 @@ class TransactionBox extends Component {
             category: this.props.category,
             contactCategory: this.props.contactCategory
         })
-        this.setState({title: this.getTitle(this.props.category)})
+        this.setState({title: TransactionBox.getTitle(this.props.category)})
     }
     shouldComponentUpdate(nextProps, nextState){
         return (
@@ -68,13 +68,13 @@ class TransactionBox extends Component {
             let transactionsURL = ""
             const category = this.state.category 
             if (category === "payable"){
-                transactionsURL = "/cuentas-por-pagar/"
+                transactionsURL = "/cuentas-por-pagar"
             } else if (category === "receivable") {
-                transactionsURL = "/cuentas-por-cobrar/"
+                transactionsURL = "/cuentas-por-cobrar"
             } else if (category === "expense") {
-                transactionsURL = "/egresos/"                
+                transactionsURL = "/egresos"                
             } else if (category === "revenue") {
-                transactionsURL = "/ingresos/"
+                transactionsURL = "/ingresos"
             }
 
             // url to create new transaction

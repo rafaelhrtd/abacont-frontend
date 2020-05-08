@@ -70,10 +70,28 @@ class MonthSelector extends Component {
     }
 
     state = {
-        month: (new Date).getMonth(),
-        year: (new Date).getFullYear(),
+        month: null,
+        year: null,
         months: MonthSelector.months(),
         yearly: false
+    }
+
+    setTime = () => {
+        this.setState({
+            month: this.props.month === undefined ? (new Date).getMonth() : this.props.month,
+            year: this.props.year === undefined ? (new Date).getFullYear() : this.props.year,
+            yearly: this.props.yearly === undefined ? false : this.props.yearly
+        })
+    }
+
+    componentDidMount = () => {
+        this.setTime();
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (JSON.stringify(prevProps) !== JSON.stringify(this.props)){
+            this.setTime();
+        }
     }
 
     render(){

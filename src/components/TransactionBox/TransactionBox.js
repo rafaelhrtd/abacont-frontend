@@ -3,10 +3,11 @@ import classes from './TransactionBox.css'
 import TransactionBoxItem from './TransactionBoxItem/TransactionBoxItem';
 import Button from '../../UI/Buttons/Button/Button'
 import { Link } from 'react-router-dom'
+
 // props
 // stateToPass : passes a state to the addTransaction button
 class TransactionBox extends Component {
-    getTitle = (category) => {
+    static getTitle = (category) => {
 
         if (category === undefined) {
             return null
@@ -37,7 +38,7 @@ class TransactionBox extends Component {
             category: this.props.category,
             contactCategory: this.props.contactCategory
         })
-        this.setState({title: this.getTitle(this.props.category)})
+        this.setState({title: TransactionBox.getTitle(this.props.category)})
     }
     shouldComponentUpdate(nextProps, nextState){
         return (
@@ -49,7 +50,8 @@ class TransactionBox extends Component {
         this.setState({
             transactions: this.props.transactions,
             category: this.props.category,
-            contactCategory: this.props.contactCategory
+            contactCategory: this.props.contactCategory,
+            title: TransactionBox.getTitle(this.props.category)
         })
     }
 
@@ -80,15 +82,19 @@ class TransactionBox extends Component {
             // url to create new transaction
             let newTransactionURL = transactionsURL + "agregar"
 
-            let seeMoreButton = this.state.transactions.length !== 0 ? (
-                <Link to={transactionsURL}>
+            let seeMoreButton = !this.props.noSeeMore && this.state.transactions.length !== 0 ? (
+                <Link to={{
+                        pathname: transactionsURL,
+                        state: this.props.seeMoreState}}>
                     <Button className="primary">Ver más</Button>
                 </Link>
             ) : null
             
             return (
                 <div className={classes.TransactionBox}>
-                    <h2 className={classes[dynamicClasses]}>{this.state.title}</h2>
+                    {this.props.noTitle ? null : (
+                        <h2 className={classes[dynamicClasses]}>{this.state.title}</h2>
+                    )}
                     {Object.keys(this.state.transactions).map(key => (
                         <TransactionBoxItem 
                             transaction={this.state.transactions[key]}

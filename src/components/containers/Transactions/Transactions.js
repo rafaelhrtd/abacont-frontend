@@ -9,6 +9,7 @@ import classes from './Transactions.css'
 import UrlContext from '../../../context/url-context'
 import TransactionBox from '../../TransactionBox/TransactionBox'
 import Summary from './Summary/Summary'
+import TransactionIndex from './TransactionIndex/TransactionIndex'
 
 class Transactions extends Getter {
     state = {
@@ -18,6 +19,20 @@ class Transactions extends Getter {
         summary: null,
         month: (new Date).getMonth(),
         year: (new Date).getFullYear(),
+    }
+
+
+    pushQuery = () => {
+        let query = ""
+        Object.keys(this.state.query).map(key => {
+            if (![undefined, null].includes(this.state.query[key])){
+                query += ("?"+key+"="+this.state.query[key])
+            }
+        })
+        this.props.history.push({
+            pathname: "/transacciones",
+            search: query
+        })
     }
 
     changedTimeHandler = (month, year) => {
@@ -64,10 +79,18 @@ class Transactions extends Getter {
     }
 
     componentDidMount = () => {
-        this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        if (this.state.category === undefined){            
+            this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        }
     }
-    componentDidUpdate = () => {
-        this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+    componentDidUpdate = (prevProps, prevState) => {
+        if (this.state.category === undefined){
+            this
+            .getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        }
+        if(JSON.stringify(prevState) !== JSON.stringify(this.state)){
+            this.updateQuery();
+        }
     }
     
     static contextType = UrlContext;
@@ -89,6 +112,11 @@ class Transactions extends Getter {
                         redirect_path={redirect_path}
                         stateToPass={{
                             redirect_path: redirect_path
+                        }}
+                        seeMoreState={{
+                            yearly: this.state.yearly,
+                            year: this.state.year,
+                            month: this.state.month
                         }} />
                 ))
             )
@@ -98,27 +126,31 @@ class Transactions extends Getter {
             )
         }
 
+        const index = this.props.category === undefined ? (
+            <div className={classes.Transactions}>
+                <h1>{title}</h1>
+                <div className={classes.MonthSelector}>
+                    <MonthSelector
+                        switchedYearly={this.changedYearlyHandle}
+                        changeTime={this.changedTimeHandler} />
+                </div>
+                {summary !== null ? (
+                    <div className={classes.Summary}>
+                        <Summary   
+                            summary={summary} />
+                    </div>
+                ) : null}
+                {tranBoxes}
+                
+            </div>
+        ) : (<TransactionIndex category={this.props.category} />)
+
         return(
             <Aux>
                 <Switch>
-                    <Route path={this.props.match.url + "/"} exact render={() => (
-                        <div className={classes.Transactions}>
-                            <h1>{title}</h1>
-                            <div className={classes.MonthSelector}>
-                                <MonthSelector
-                                    switchedYearly={this.changedYearlyHandle}
-                                    changeTime={this.changedTimeHandler} />
-                            </div>
-                            {summary !== null ? (
-                                <div className={classes.Summary}>
-                                    <Summary   
-                                        summary={summary} />
-                                </div>
-                            ) : null}
-                            {tranBoxes}
-                            
-                        </div>
-                    )} />
+                    <Route path={this.props.match.url + "/"} exact>
+                        {index}
+                    </Route>
                     <Route path={this.props.match.url + "/agregar"} exact render={() => (
                         <NewTransaction category={this.props.category} />
                     )} />

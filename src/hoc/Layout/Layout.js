@@ -69,7 +69,9 @@ class Layout extends Component {
             error => {
                 const {status} = error.response;
                 if (status === 401){
+                    console.log("KLOL")
                     this.logoutHandler();
+                    this.setState({redirect: "/"})
                 } else if (status === 403) {
                     // put what to do here
                     // should show a warning
@@ -80,6 +82,11 @@ class Layout extends Component {
             }
 
         )
+
+        if (this.state.redirect != null){
+            console.log("woohoo")
+            window.location.href = this.state.redirect
+        }
         
         return (
             <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>

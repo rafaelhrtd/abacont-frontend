@@ -1,10 +1,11 @@
 Main functions to implement:
     - Transaction index
-    - make ID 0 for client when not empty
     - Security measures
         - show warning
         - integrate swal
+            - use this for deletions too
     - "back" buttons
+    - remove leading spaces from everything that can have them (and trailing too)
     
 
 

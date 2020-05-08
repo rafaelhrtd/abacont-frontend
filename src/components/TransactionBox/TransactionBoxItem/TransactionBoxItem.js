@@ -135,7 +135,7 @@ class TransactionBoxItem extends Component {
                     <Link to={{
                         pathname: editURL,
                         state: {
-                            redirect_path: this.props.redirect_path
+                            redirect_path: this.props.stateToPass.path + this.props.stateToPass.query
                         }
                     }}>   
                         <Button className="warning">
