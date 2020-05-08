@@ -40,7 +40,7 @@ class TransactionBoxItem extends Component {
         const properAmount = ["payable", "receivable"].includes(this.state.category) ? "balance" : "amount"
         
         let date = transaction.date.split("-")
-        date = date[1] + "-" +  date[2]
+        date = date[2] + "-" +  date[1]
         // declare the things outside of if statement
         let description = null;
         let initialAmount = null;
