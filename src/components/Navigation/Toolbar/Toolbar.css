@@ -10,3 +10,25 @@
     z-index: 25;
     justify-content: space-between;
 }
+
+.Menu {
+    margin-left: 1rem;
+    display: none;
+    align-items: center;
+    color: #0087ff;
+    cursor: pointer;
+}
+.Menu:active,
+.Menu:hover,
+.Menu:focus {
+    color: #39a2ff;
+}
+
+@media (max-width: 800px){
+    .Menu {
+        display: flex;
+    }
+    .NavigationItems {
+        display: none;
+    }
+}

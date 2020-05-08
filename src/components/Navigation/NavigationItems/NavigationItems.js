@@ -3,8 +3,9 @@ import NavigationItem from './NavigationItem/NavigationItem'
 import classes from './NavigationItems.css'
 
 const NavigationItems = (props) => {
+    const passedClass = props.className === undefined ? classes.NavigationItems : props.className
     return (
-        <div className={classes.NavigationItems}>
+        <div className={passedClass}>
         <ul>
             <li>
                 <NavigationItem link="/" text="Página Principal" /> 

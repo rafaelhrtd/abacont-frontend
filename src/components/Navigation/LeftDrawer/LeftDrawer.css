@@ -1,0 +1,83 @@
+.LeftDrawer {
+    background-color: white;
+    z-index: 50;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    max-width: 100%;;
+    top: 0;
+    min-width: 30%;
+    width: 30%;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-out;
+}
+
+
+@media (max-width: 499px){
+    .LeftDrawer {
+        min-width: 80%;
+        width: 80%;
+    }
+}
+@media (min-width: 500px) and (max-width: 999px){
+    .LeftDrawer {
+        min-width: 50%;
+        width: 50%;
+    }
+}
+
+.Open {
+    transform: translateX(0%);
+}
+
+.Closed {
+    transform: translateX(-100%);
+}
+
+@keyframes Default {
+    0% { transform: translateX(100%); }
+    50% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+}
+
+.LeftDrawer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.LeftDrawer h2 {
+    padding: 0.5rem 0;
+    color: #424656;
+}
+
+.LeftDrawer li {
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+.LeftDrawer ul li a {
+    color: #424656;
+    display: block;
+    text-decoration: none;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+}
+.LeftDrawer ul li a.active {
+    background-color: #ebf6ff;
+    color: black;
+}
+
+.LeftDrawer ul li a:hover,
+.LeftDrawer ul li a:focus,
+.LeftDrawer ul li a:active,
+.LeftDrawer ul li :global(.active) {
+    background-color: #ebf6ff;
+    color: black;
+}

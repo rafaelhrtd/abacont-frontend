@@ -22,9 +22,9 @@ class TransactionIndex extends Getter {
     componentDidMount = () => {
         const passedState = this.props.location.state
         const query = {...this.parseQuery()}
-        const passedMonth = passedState === undefined ? undefined : passedState.month
-        const passedYear = passedState === undefined ? undefined : passedState.year
-        const passedYearly = passedState === undefined ? undefined : passedState.yearly
+        const passedMonth = passedState === undefined || passedState === null  ? undefined : passedState.month
+        const passedYear = passedState === undefined || passedState === null ? undefined : passedState.year
+        const passedYearly = passedState === undefined || passedState === null ? undefined : passedState.yearly
         console.log(query)
         this.setState({
             passedState: passedState,
@@ -32,9 +32,9 @@ class TransactionIndex extends Getter {
             title: TransactionBox.getTitle(this.props.category),
             ...this.parseQuery(),
             query: query,
-            contact_id: passedState === undefined ? query.contact_id : passedState.contact_id,
-            parent_id: passedState === undefined ? query.parent_id : passedState.parent_id,
-            project_id: passedState === undefined ? query.project_id : passedState.project_id,
+            contact_id: passedState === undefined || passedState === null ? query.contact_id : passedState.contact_id,
+            parent_id: passedState === undefined || passedState === null ? query.parent_id : passedState.parent_id,
+            project_id: passedState === undefined || passedState === null ? query.project_id : passedState.project_id,
             month: passedMonth === undefined ? (new Date).getMonth() : passedMonth,
             year: passedYear === undefined ? (new Date).getFullYear() : passedYear,
             yearly: passedYearly === undefined ? false : passedYearly

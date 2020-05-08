@@ -1,3 +1,14 @@
 .SessionItems {
     margin: 1rem;
 }
+.Feather {
+    display: flex;
+    align-items: center;
+    color: #0087ff;
+    cursor: pointer;
+}
+.Feather:focus,
+.Feather:hover,
+.Feather:active {
+    color: #39a2ff;
+}

@@ -7,8 +7,9 @@ import App from '../../App'
 import Axios from 'axios'
 import MainContainer from './MainContainer/MainContainer'
 import urlContext from '../../context/url-context'
-
+import LeftDrawer from '../../components/Navigation/LeftDrawer/LeftDrawer'
 class Layout extends Component {
+
     state = {
         initiateRightDrawer: (localStorage.getItem('jwtToken') === null &&
                                 sessionStorage.getItem('jwtToken') === null),
@@ -21,6 +22,7 @@ class Layout extends Component {
                 JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('companies'))),
         company: (localStorage.getItem('company') !== null ?
                 JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('company'))),
+        showLeftDrawer: false,
         redirect: null
     }
     
@@ -59,9 +61,16 @@ class Layout extends Component {
             return {showRightDrawer: !prevState.showRightDrawer}
         })
     }
+    leftDrawerHandler = () => {
+        console.log("fuck")
+        this.setState((prevState) => {
+            return {showLeftDrawer: !prevState.showLeftDrawer}
+        })
+    }
     backDropHandler = () => {
         this.setState({showRightDrawer: false,
-            initiateRightDrawer: false})
+            initiateRightDrawer: false,
+            showLeftDrawer: false})
     }
     render (){
         Axios.interceptors.response.use(
@@ -97,13 +106,17 @@ class Layout extends Component {
                     login: this.loginHandler,
                     logout: this.logoutHandler}}>
                     <BrowserRouter>
+                        <LeftDrawer 
+                            backDropHandler={this.backDropHandler}
+                            open={this.state.showLeftDrawer} />
                         <RightDrawer
                             open={this.state.showRightDrawer}
                             closed={this.rightDrawerHandler}
                             init={this.state.initiateRightDrawer}
                             backDropHandler={this.backDropHandler} />
                         <Toolbar
-                            rightDrawer={this.rightDrawerHandler} />
+                            rightDrawer={this.rightDrawerHandler}
+                            leftDrawer={this.leftDrawerHandler} />
                             <MainContainer>                        
                                 <App />
                             </MainContainer>

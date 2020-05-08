@@ -1,5 +1,6 @@
 Main functions to implement:
     - Transaction index
+        - In-page filters
     - Security measures
         - show warning
         - integrate swal

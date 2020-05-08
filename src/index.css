@@ -68,7 +68,6 @@ input[type="submit"]:hover, input[type="submit"]:active,  input[type="submit"]:f
 }
 
 
-
 input::-moz-focus-inner {
   border: 0;
 }

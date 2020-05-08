@@ -29,6 +29,6 @@
 
 @media (max-width: 499px) {
     .TransactionBox {
-        width: 100%;
+        max-width: 100%;
     }
 }
