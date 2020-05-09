@@ -12,6 +12,10 @@ off-white: f4f9ff
 warning: #ffb300
 warning:hover: #ffbf2a
 */
+* {
+  -webkit-appearance: none;
+}
+
 html {
   height: 100%;
   min-height: 100%;
