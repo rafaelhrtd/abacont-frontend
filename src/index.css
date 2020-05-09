@@ -12,6 +12,7 @@ off-white: f4f9ff
 warning: #ffb300
 warning:hover: #ffbf2a
 */
+
 * {
   -webkit-appearance: none;
 }
@@ -40,6 +41,10 @@ h2 {
   font-family: Arvo;
 }
 
+button {
+  border-radius: 0;
+}
+
 input[type="text"], input[type="password"], input[type="email"],
 textarea, input[type="number"], input[type="date"] {
   margin-bottom: 1rem;
@@ -59,6 +64,7 @@ input[type="submit"] {
   background-color: #00a458;
   padding: 0.5rem;
   color: white;
+  border-radius: 0;
   border: none;
   margin-bottom: 1rem;
 }
@@ -66,6 +72,7 @@ input[type="submit"]:hover, input[type="submit"]:active,  input[type="submit"]:f
   background-color: #11c672;;
   cursor: pointer;
   padding: 0.5rem;
+  border-radius: 0;
   color: white;
   outline: none;
   border: none;

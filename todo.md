@@ -7,7 +7,8 @@ Main functions to implement:
             - use this for deletions too
     - "back" buttons
     - remove leading spaces from everything that can have them (and trailing too)
-    
+
+- phone formatting
 
 
 - saldo banco (updateable, probably)

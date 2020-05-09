@@ -128,6 +128,18 @@ class Form extends Component {
                                                 value={this.props.previousValues[name]}
                                                 onChange={(event) => this.props.changed(event, null, input, this.props.old_data)} />
                                         )
+                                    } else if (input.inputType === "date"){
+                                        return(
+                                            <input 
+                                                key={inputKey}
+                                                type="text"
+                                                onFocus="(this.type='date')" 
+                                                name={name}
+                                                placeholder={input.placeholder}
+                                                className={classes[dynamicClasses[this.props.suffix + input.name]]}
+                                                value={this.props.previousValues[name]}
+                                                onChange={(event) => this.props.changed(event, null, input, this.props.old_data)}></input>
+                                        )
                                     } else {
                                         return (
                                             <input 
