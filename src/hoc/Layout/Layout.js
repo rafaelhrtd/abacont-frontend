@@ -27,6 +27,7 @@ class Layout extends Component {
     }
     
     loginHandler = (response, remember_me = false) => {
+        console.log(remember_me)
         if (remember_me) {
             localStorage.setItem('jwtToken', response.headers.authorization)
             localStorage.setItem('user', JSON.stringify(response.data.user))

@@ -6,7 +6,12 @@ import registerServiceWorker from './registerServiceWorker';
 import Axios from 'axios';
 
 Axios.interceptors.request.use(function(config) {
-    const token = sessionStorage.getItem('jwtToken')
+    let token = ""
+    if (sessionStorage.getItem('jwtToken') !== null){
+        token = sessionStorage.getItem('jwtToken')
+    } else if (localStorage.getItem('jwtToken') !== null) {
+        token = localStorage.getItem('jwtToken')
+    }
     if ( token != null ) {
         config.headers.Authorization = token;
     } else {

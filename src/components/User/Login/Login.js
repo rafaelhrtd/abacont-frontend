@@ -41,8 +41,7 @@ class Login extends Component {
         let data = {
           user: {
             email: this.state.email,
-            password: this.state.password,
-            rememberMe: true
+            password: this.state.password
           }
         }
         axios.post(process.env.REACT_APP_API_ADDRESS + "login", data)
