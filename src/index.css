@@ -53,6 +53,7 @@ textarea, input[type="number"], input[type="date"] {
   font-family: "Lato", sans-serif;
   box-sizing: border-box;
   resize: none;
+  border-radius: 0;
   border: solid 1px #a6abbd;
 }
 
@@ -85,4 +86,14 @@ input::-moz-focus-inner {
 
 *:-moz-focus-inner {
   border: 0;
+}
+
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  margin-right: 0.5em;
+}
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
 }

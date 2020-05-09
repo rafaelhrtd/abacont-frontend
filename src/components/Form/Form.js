@@ -18,7 +18,8 @@ class Form extends Component {
     }
 
     state = {
-        innerForms: this.innerStateSetup()
+        innerForms: this.innerStateSetup(),
+        dateType: "text"
     }
 
     showInnerForm = (state) => {
@@ -54,6 +55,14 @@ class Form extends Component {
                 this.props.clicked((this.props.suffix + input.suffix), form_elements[key])
             }
         })
+    }
+
+    dateFocus = () => {
+        this.setState({dateType: "date"})
+    }
+
+    dateBlur = () => {
+        this.setState({dateType: "text"})
     }
 
 
@@ -132,10 +141,10 @@ class Form extends Component {
                                         return(
                                             <input 
                                                 key={inputKey}
-                                                type="text"
-                                                onFocus="(this.type='date')" 
+                                                type={this.state.dateType}
                                                 name={name}
                                                 placeholder={input.placeholder}
+                                                onFocus={this.dateFocus}
                                                 className={classes[dynamicClasses[this.props.suffix + input.name]]}
                                                 value={this.props.previousValues[name]}
                                                 onChange={(event) => this.props.changed(event, null, input, this.props.old_data)}></input>
