@@ -50,6 +50,8 @@ class TransactionBoxItem extends Component {
         let contactName = null;
         let project = null;
         let paymentUrl = null;
+        let paymentMethod = null;
+        let chequeNumber = null; 
         let editURL = null;
         let paymentState = {};
 
@@ -169,6 +171,24 @@ class TransactionBoxItem extends Component {
             } else {
                 project = null
             }
+
+            // payment info
+            if (transaction.payment_type !== null) {
+                paymentMethod = (
+                    <div className={classes.contact}>
+                        <strong>{"Método de pago"}:</strong>
+                        <p>{transaction.payment_type}</p>
+                    </div>
+                )
+            }
+            if (transaction.payment_type === "Cheque" && transaction.check_number !== null) {
+                chequeNumber = (
+                    <div className={classes.contact}>
+                        <strong>{"Número de cheque"}:</strong>
+                        <p>{transaction.cheque_number}</p>
+                    </div>
+                )
+            }
         }
         // shown class
         const show = this.state.show ? "show" : "hidden"
@@ -183,6 +203,8 @@ class TransactionBoxItem extends Component {
                     </div>
                     <div className={[classes.itemInfo, classes[show]].join(" ")}>
                         {description}
+                        {paymentMethod}
+                        {chequeNumber}
                         {project}
                         {contact}
                         {initialAmount}

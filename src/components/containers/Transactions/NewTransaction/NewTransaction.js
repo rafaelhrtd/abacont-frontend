@@ -64,6 +64,26 @@ class NewTransaction extends FormHolder {
                 name: "description",
                 placeholder: "Descripción"
             },
+            payment_type: {
+                inputType: "select",
+                placeholder: "Método de pago",
+                options: [
+                    "Efectivo",
+                    "Crédito",
+                    "Débito",
+                    "Cheque",
+                    "Transferencia"
+                ],
+                name: "payment_type",
+                blank: true,
+                input: {
+                    onOption: 3,
+                    inputType: "text",
+                    name: "cheque_number",
+                    placeholder: "Número de cheque",
+                    blank: true
+                }
+            },
             date: {
                 inputType: "date",
                 name: "date",

@@ -79,6 +79,27 @@ input[type="submit"]:hover, input[type="submit"]:active,  input[type="submit"]:f
   border: none;
 }
 
+select {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.25rem;
+  box-shadow: none;
+  border-radius: 0;
+  border: solid 1px #a6abbd;
+  background-color: white;
+  color: #424656;
+}
+
+select option {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-shadow: none;
+  border-radius: 0;
+  background-color: white;
+  color: #424656;
+}
+
 
 input::-moz-focus-inner {
   border: 0;

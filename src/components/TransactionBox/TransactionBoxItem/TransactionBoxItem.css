@@ -51,6 +51,9 @@
 .contact {
     padding-top: 1rem;
 }
+.contact p {
+    margin: 0;
+}
 .contact a {
     text-decoration: none;
     color: #0087ff;

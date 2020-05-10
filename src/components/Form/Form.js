@@ -18,7 +18,16 @@ class Form extends Component {
     }
 
     state = {
-        innerForms: this.innerStateSetup()
+        innerForms: this.innerStateSetup(),
+        selectObjects: {}
+    }
+
+    selectHandler = (event, input) => {
+        this.setState(prevState => {
+            let selectObjects = {...prevState.selectObjects}
+            selectObjects[event.target.name] = event.target.value
+            return({selectObjects: selectObjects})
+        })
     }
 
     showInnerForm = (state) => {
@@ -127,6 +136,46 @@ class Form extends Component {
                                                 className={classes[dynamicClasses[this.props.suffix + input.name]]}
                                                 value={this.props.previousValues[name]}
                                                 onChange={(event) => this.props.changed(event, null, input, this.props.old_data)} />
+                                        )
+                                    } else if (input.inputType === "select") {
+                                        const innerName = this.props.suffix + input.input.name
+                                        const innerInput = (input.options[input.input.onOption] === this.state.selectObjects[name] ||
+                                            input.options[input.input.onOption] === this.props.previousValues[name] ) ? (
+                                            <input
+                                                name={innerName}
+                                                onChange={(event) => this.props.changed(event, null, input.input, this.props.old_data)}
+                                                className={classes[dynamicClasses[innerName]]}
+                                                placeholder={input.input.placeholder}
+                                                value={this.props.previousValues[innerName]}
+                                                type={input.input.inputType}
+                                            />
+                                        ) : null
+                                        return (
+                                            <Aux 
+                                                key={inputKey}>
+                                                <select
+                                                    name={name}
+                                                    value={this.props.previousValues[name]}
+                                                    onChange={
+                                                        (event) => {
+                                                            this.props.changed(event, null, input, this.props.old_data)
+                                                            this.selectHandler(event, input)}}>
+
+                                                    <option value={""}>{input.placeholder}</option>
+                                                    {
+                                                        input.options.map(option => {
+                                                            return (
+                                                                <option
+                                                                    key={option}
+                                                                    value={option}>
+                                                                        {option}
+                                                                    </option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                                {innerInput}
+                                            </Aux>
                                         )
                                     } else {
                                         return (
