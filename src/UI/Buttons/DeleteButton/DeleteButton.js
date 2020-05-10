@@ -97,7 +97,9 @@ class DeleteButton extends Component {
     render(){
         const inputClass = this.state.error === null ? null : classes.danger
         if (this.state.redirectPath !== null){
-            return <Redirect to={this.state.redirectPath} />
+            return <Redirect to={{
+                path: this.state.redirectPath,
+                state: {deleted: true}}} />
         }
         let deleteMessage = ""
         let password = (
