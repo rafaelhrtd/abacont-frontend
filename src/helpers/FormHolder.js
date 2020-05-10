@@ -30,7 +30,7 @@ class FormHolder extends Component {
         if (input !== null && input.input !== undefined && input.input !== null){
             const innerName = event.target.name.split(".")[0] + "." + input.input.name
             if (input.options[input.input.onOption] !== event.target.value){
-                delete form_data[innerName]
+                form_data[innerName] = ""
             }
         }
         this.setState((prevState) => {

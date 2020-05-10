@@ -181,7 +181,7 @@ class TransactionBoxItem extends Component {
                     </div>
                 )
             }
-            if (transaction.payment_type === "Cheque" && transaction.check_number !== null) {
+            if (transaction.payment_type === "Cheque" && transaction.cheque_number !== null) {
                 chequeNumber = (
                     <div className={classes.contact}>
                         <strong>{"Número de cheque"}:</strong>
