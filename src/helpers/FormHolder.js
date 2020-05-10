@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from '../context/auth-context';
 
@@ -137,35 +137,42 @@ class FormHolder extends Component {
 
     submitHandler  = (event, url, data, successResponse, errorResponse, successUrl = null, edit = false) => {
         event.preventDefault();
+    
         if (edit === false) {
+            this.context.toggleLoader("Creando");
             axios.post(url, data)
-              .then(response => {
-                  if (response.status === 200){
-                      if (response.data.errors === undefined){
-                          successResponse(response.data, successUrl)
-                      } else {
-                          errorResponse(this.setUpErrors(response.data))
-                          console.log(response.data)
-                      }
-                  }
+                .then(response => {
+                    this.context.toggleLoader("");
+                    if (response.status === 200){
+                        if (response.data.errors === undefined){
+                            successResponse(response.data, successUrl)
+                        } else {
+                            errorResponse(this.setUpErrors(response.data))
+                            console.log(response.data)
+                        }
+                    }
                 }, error => {
                     console.log(error)
             })
         } else {
+            this.context.toggleLoader("Guardando cambios");
             axios.patch(url, data)
-              .then(response => {
-                  if (response.status === 200){
-                      if (response.data.errors === undefined){
-                          successResponse(response.data, successUrl)
-                      } else {
-                          errorResponse(this.setUpErrors(response.data))
-                          console.log(response.data)
-                      }
-                  }
+                .then(response => {
+                    this.context.toggleLoader("");
+                    if (response.status === 200){
+                        if (response.data.errors === undefined){
+                            successResponse(response.data, successUrl)
+                        } else {
+                            errorResponse(this.setUpErrors(response.data))
+                            console.log(response.data)
+                        }
+                    }
                 }, error => {
                     console.log(error)
             })
         }
+
+    
     }
 
     errorsHandler = (errors) => {

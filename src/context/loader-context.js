@@ -1,7 +1,7 @@
 import React from 'react';
 
-const loaderContext = React.createContext({
+const AuthContext = React.createContext({
     showLoader: false,
 })
 
-export default loaderContext;
+export default AuthContext;

@@ -9,7 +9,12 @@ const Loader = (props) => {
     }
     return (
         <div className={loaderClasses.join(" ")}>
-            <ReactLoading type='spinningBubbles' color="#0087ff" height={100} width={100} />
+            <div className={classes.holder}>
+                {props.title !== undefined && props.title !== null ? (
+                    <h2>{props.title}</h2>
+                ) : null}
+                <ReactLoading type='spinningBubbles' color="#0087ff" height={100} width={100} />
+            </div>
         </div>
     )
 }

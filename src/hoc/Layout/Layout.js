@@ -7,8 +7,7 @@ import App from '../../App'
 import Axios from 'axios'
 import MainContainer from './MainContainer/MainContainer'
 import urlContext from '../../context/url-context'
-import LeftDrawer from '../../components/Navigation/LeftDrawer/LeftDrawer'
-import LoaderContext from '../../context/loader-context';
+import LeftDrawer from '../../components/Navigation/LeftDrawer/LeftDrawer';
 import Loader from '../../UI/Loader/Loader';
 
 class Layout extends Component {
@@ -30,8 +29,10 @@ class Layout extends Component {
         showLoader: false
     }
 
-    toggleLoader = () => {
-        this.setState(prevState => {return {showLoader: !prevState.showLoader}})
+    toggleLoader = (title) => {
+        this.setState(prevState => {return {
+            showLoader: !prevState.showLoader,
+            loaderTitle: title}})
     }
     
     loginHandler = (response, remember_me = false) => {
@@ -107,34 +108,35 @@ class Layout extends Component {
         }
         
         return (
-            <LoaderContext.Provider value={{toggleLoader: this.toggleLoader}}>
-                <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
-                    <AuthContext.Provider value={{
-                        authenticated: this.state.authenticated,
-                        user: this.state.user,
-                        company: this.state.company,
-                        login: this.loginHandler,
-                        logout: this.logoutHandler}}>
-                        <BrowserRouter>
-                            <LeftDrawer 
-                                backDropHandler={this.backDropHandler}
-                                open={this.state.showLeftDrawer} />
-                            <RightDrawer
-                                open={this.state.showRightDrawer}
-                                closed={this.rightDrawerHandler}
-                                init={this.state.initiateRightDrawer}
-                                backDropHandler={this.backDropHandler} />
-                            <Toolbar
-                                rightDrawer={this.rightDrawerHandler}
-                                leftDrawer={this.leftDrawerHandler} />
-                                <MainContainer>                        
-                                    <App />
-                                </MainContainer>
-                            <Loader show={this.state.showLoader} />
-                        </BrowserRouter>
-                    </AuthContext.Provider>
-                </urlContext.Provider>
-            </LoaderContext.Provider>
+            <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
+                <AuthContext.Provider value={{
+                    authenticated: this.state.authenticated,
+                    user: this.state.user,
+                    company: this.state.company,
+                    toggleLoader: this.toggleLoader,
+                    login: this.loginHandler,
+                    logout: this.logoutHandler}}>
+                    <BrowserRouter>
+                        <LeftDrawer 
+                            backDropHandler={this.backDropHandler}
+                            open={this.state.showLeftDrawer} />
+                        <RightDrawer
+                            open={this.state.showRightDrawer}
+                            closed={this.rightDrawerHandler}
+                            init={this.state.initiateRightDrawer}
+                            backDropHandler={this.backDropHandler} />
+                        <Toolbar
+                            rightDrawer={this.rightDrawerHandler}
+                            leftDrawer={this.leftDrawerHandler} />
+                            <MainContainer>                        
+                                <App />
+                            </MainContainer>
+                        <Loader 
+                            show={this.state.showLoader}
+                            title={this.state.loaderTitle} />
+                    </BrowserRouter>
+                </AuthContext.Provider>
+            </urlContext.Provider>
 
         )
     }

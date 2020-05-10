@@ -8,9 +8,22 @@
     display: none;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     z-index: 300;
 }
 
+.holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.Backdrop h2 {
+    width: 100%;
+    margin-bottom: 2rem;
+    color: white;
+    z-index: 400;
+}
 .Show {
     display: flex;
 }

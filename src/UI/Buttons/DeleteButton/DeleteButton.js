@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import Aux from '../../../hoc/Aux/Aux';
 import Modal from '../../Modal/Modal';
 import Axios from 'axios';
-import loaderContext from '../../../context/loader-context'
+import AuthContext from '../../../context/auth-context'
 import { Redirect } from 'react-router-dom';
 
 class DeleteButton extends Component {
@@ -18,7 +18,7 @@ class DeleteButton extends Component {
         error: null
     }
 
-    static contextType = loaderContext;
+    static contextType = AuthContext;
 
     showHandler = () => {
         this.setState(prevState => {
@@ -50,7 +50,7 @@ class DeleteButton extends Component {
     }
 
     successHandler = (data) => {
-        this.context.toggleLoader();
+        this.context.toggleLoader("Eliminando");
         this.setState({redirectPath: this.props.redirectPath})
     }
 
