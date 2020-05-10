@@ -66,8 +66,6 @@ class DeleteButton extends Component {
             password: this.state.password,
             destroy_children: this.state.destroy_children
         }
-        console.log(this.state.password);
-        console.log(this.state.url)
         
         Axios.delete(this.state.url, {params: {...data}})
         .then(response => {
@@ -98,8 +96,8 @@ class DeleteButton extends Component {
         const inputClass = this.state.error === null ? null : classes.danger
         if (this.state.redirectPath !== null){
             return <Redirect to={{
-                path: this.state.redirectPath,
-                state: {deleted: true}}} />
+                pathname: this.state.redirectPath,
+                state: {deleted: Math.random()}}} />
         }
         let deleteMessage = ""
         let password = (

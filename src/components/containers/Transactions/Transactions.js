@@ -85,8 +85,7 @@ class Transactions extends Getter {
     }
     componentDidUpdate = (prevProps, prevState) => {
         if (this.state.category === undefined){
-            this
-            .getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+            this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
         }
         if(JSON.stringify(prevState) !== JSON.stringify(this.state)){
             this.updateQuery();

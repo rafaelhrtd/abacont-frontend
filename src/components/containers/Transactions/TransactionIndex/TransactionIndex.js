@@ -58,6 +58,10 @@ class TransactionIndex extends Getter {
         if(JSON.stringify(prevState) !== JSON.stringify(this.state)){
             this.updateQuery();
         }
+
+        if(JSON.stringify(prevProps.location.state) !== JSON.stringify(this.props.location.state)){
+            this.updateQuery();
+        }
     }
 
     pushQuery = () => {

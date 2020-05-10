@@ -153,7 +153,7 @@ class TransactionBoxItem extends Component {
                     </Link>
                     <DeleteButton 
                         object={{transaction: transaction}}
-                        redirectPath={this.state.redirect_url} />
+                        redirectPath={this.props.stateToPass.path} />
                 </div>
             )
 

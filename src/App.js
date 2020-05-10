@@ -37,28 +37,28 @@ class App extends Component {
         <Route path="/" exact render={() => (
           <h1>Home</h1>
         )} />
-        <Route path="/clientes" render={() => (
+        <Route path="/clientes" exact render={() => (
           <Contacts clients={true} providers={false} />
         )} />
-        <Route path="/proveedores" render={() => (
+        <Route path="/proveedores" exact render={() => (
           <Contacts providers={true} clients={false} />
         )} />
         <Route path="/transacciones" exact render={() => (
           <Transactions />
         )} />
-        <Route path="/cuentas-por-cobrar" render={() => (
+        <Route path="/cuentas-por-cobrar" exact render={() => (
           <Transactions category="receivable" />
         )} />
-        <Route path="/cuentas-por-pagar" render={() => (
+        <Route path="/cuentas-por-pagar" exact render={() => (
           <Transactions category="payable" />
         )} />
-        <Route path="/egresos" render={() => (
+        <Route path="/egresos" exact render={() => (
           <Transactions category="expense" />
         )} />
-        <Route path="/ingresos" render={() => (
+        <Route path="/ingresos" exact render={() => (
           <Transactions category="revenue" />
         )} />
-        <Route path="/proyectos" render={() => (
+        <Route path="/proyectos" exact render={() => (
           <Projects />
         )} />
       </div>
