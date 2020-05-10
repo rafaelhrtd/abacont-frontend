@@ -2,9 +2,9 @@ import React from 'react';
 import classes from './Transaction.css';
 import Getter from '../../../../helpers/Getter'
 import { Route, withRouter, Switch } from 'react-router-dom';
-import TransactionInfo from './TransactionInfo/TransactionInfo'
-import TransactionBox from '../../../TransactionBox/TransactionBox'
-import NewTransaction from '../NewTransaction/NewTransaction'
+import TransactionInfo from './TransactionInfo/TransactionInfo';
+import TransactionBox from '../../../TransactionBox/TransactionBox';
+import NewTransaction from '../NewTransaction/NewTransaction';
 
 
 class Transaction extends Getter {

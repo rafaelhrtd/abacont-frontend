@@ -3,6 +3,7 @@ import classes from './TransactionInfo.css'
 import { Link } from 'react-router-dom'
 import Button from '../../../../../UI/Buttons/Button/Button'
 import InfoPoint from '../../../../InfoPoint/InfoPoint'
+import DeleteButton from '../../../../../UI/Buttons/DeleteButton/DeleteButton'
 
 const transactionInfo = (props) => {
     if (props.transaction === null) {
@@ -28,9 +29,9 @@ const transactionInfo = (props) => {
                         Editar
                     </Button>
                 </Link>
-                <Button className="danger">
-                    Eliminar
-                </Button>
+                <DeleteButton 
+                    object={{transaction: props.transaction}}
+                    redirectPath={transactionUrl} />
             </div>
         )
         

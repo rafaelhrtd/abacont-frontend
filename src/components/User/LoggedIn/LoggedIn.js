@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import '../../../index.css'
 import classes from "./LoggedIn.css";
 import AuthContext from '../../../context/auth-context';
 import Button from '../../../UI/Buttons/Button/Button'

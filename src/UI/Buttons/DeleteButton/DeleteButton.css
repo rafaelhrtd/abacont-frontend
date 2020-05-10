@@ -1,0 +1,19 @@
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.buttons button {
+    min-width: 6rem;
+    flex-grow: 0;
+    margin-bottom: 1rem !important;
+}
+
+.errors {
+    color: #f34672;
+    margin-top: 1rem;
+}
+.danger {
+    border-color: #f34672 !important;
+    color: #f34672
+}

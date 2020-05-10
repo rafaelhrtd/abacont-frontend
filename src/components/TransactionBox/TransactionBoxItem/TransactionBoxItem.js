@@ -5,6 +5,7 @@ import urlContext from '../../../context/url-context'
 import Button from '../../../UI/Buttons/Button/Button'
 import { Link } from 'react-router-dom'
 import transactionInfo from '../../containers/Transactions/Transaction/TransactionInfo/TransactionInfo';
+import DeleteButton from '../../../UI/Buttons/DeleteButton/DeleteButton';
 
 class TransactionBoxItem extends Component {
     state = {
@@ -116,7 +117,7 @@ class TransactionBoxItem extends Component {
                 paymentState["project_id"] = this.state.transaction.project_id
                 paymentState["project_name"] = this.state.transaction.project_name
                 paymentState["parent_id"] = this.state.transaction.id
-                paymentState["redirect_path"] = this.props.stateToPass.redirect_path
+                paymentState["path"] = this.props.stateToPass.path
                 paymentState["balance"] = this.state.transaction.balance
             }
             // transaction info and edit
@@ -150,10 +151,9 @@ class TransactionBoxItem extends Component {
                             Editar
                         </Button>
                     </Link>
-                        
-                    <Button className="danger">
-                        Eliminar
-                    </Button>
+                    <DeleteButton 
+                        object={{transaction: transaction}}
+                        redirectPath={this.state.redirect_url} />
                 </div>
             )
 

@@ -4,7 +4,8 @@ import Getter from '../../../../helpers/Getter'
 import { Route, withRouter, Switch, Link } from 'react-router-dom';
 import TransactionBox from '../../../TransactionBox/TransactionBox';
 import Button from '../../../../UI/Buttons/Button/Button';
-import NewProject from '../NewProject/NewProject'
+import NewProject from '../NewProject/NewProject';
+import DeleteButton from '../../../../UI/Buttons/DeleteButton/DeleteButton';
 
 class Project extends Getter {
     state = {
@@ -126,9 +127,9 @@ class Project extends Getter {
                             Editar
                         </Button>
                     </Link>
-                    <Button className="danger">
-                        Eliminar
-                    </Button>
+                    <DeleteButton 
+                        object={{project: project}}
+                        redirectPath="/proyectos/" />
                 </div>
             </div>
         ) : null

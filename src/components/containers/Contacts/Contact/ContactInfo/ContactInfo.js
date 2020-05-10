@@ -4,6 +4,7 @@ import InfoPoint from '../../../../InfoPoint/InfoPoint'
 import Aux from '../../../../../hoc/Aux/Aux'
 import { Link } from 'react-router-dom'
 import Button from '../../../../../UI/Buttons/Button/Button'
+import DeleteButton from '../../../../../UI/Buttons/DeleteButton/DeleteButton'
 
 const contactInfo = (props) => {
     if (props.contact === null) {
@@ -12,6 +13,9 @@ const contactInfo = (props) => {
         let editURL = props.contact.category === "client" ? (
             '/clientes/' + props.contact.id + "/editar"
         ) : ( '/proveedores/' + props.contact.id + "/editar")
+        let redirectPath = props.contact.category === "client" ? (
+            '/clientes/'
+        ) : ( '/proveedores/')
         
         let buttons = (
             <div className={classes.buttons}>
@@ -23,9 +27,9 @@ const contactInfo = (props) => {
                         Editar
                     </Button>
                 </Link>
-                <Button className="danger">
-                    Eliminar
-                </Button>
+                <DeleteButton 
+                    object={{contact: props.contact}}
+                    redirectPath={redirectPath} />
             </div>
         )
         return(

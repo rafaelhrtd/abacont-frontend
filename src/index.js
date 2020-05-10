@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.global.css';
 import Layout from './hoc/Layout/Layout';
 import registerServiceWorker from './registerServiceWorker';
 import Axios from 'axios';

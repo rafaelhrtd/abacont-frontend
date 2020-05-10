@@ -8,6 +8,9 @@ import Axios from 'axios'
 import MainContainer from './MainContainer/MainContainer'
 import urlContext from '../../context/url-context'
 import LeftDrawer from '../../components/Navigation/LeftDrawer/LeftDrawer'
+import LoaderContext from '../../context/loader-context';
+import Loader from '../../UI/Loader/Loader';
+
 class Layout extends Component {
 
     state = {
@@ -23,7 +26,12 @@ class Layout extends Component {
         company: (localStorage.getItem('company') !== null ?
                 JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('company'))),
         showLeftDrawer: false,
-        redirect: null
+        redirect: null,
+        showLoader: false
+    }
+
+    toggleLoader = () => {
+        this.setState(prevState => {return {showLoader: !prevState.showLoader}})
     }
     
     loginHandler = (response, remember_me = false) => {
@@ -99,31 +107,34 @@ class Layout extends Component {
         }
         
         return (
-            <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
-                <AuthContext.Provider value={{
-                    authenticated: this.state.authenticated,
-                    user: this.state.user,
-                    company: this.state.company,
-                    login: this.loginHandler,
-                    logout: this.logoutHandler}}>
-                    <BrowserRouter>
-                        <LeftDrawer 
-                            backDropHandler={this.backDropHandler}
-                            open={this.state.showLeftDrawer} />
-                        <RightDrawer
-                            open={this.state.showRightDrawer}
-                            closed={this.rightDrawerHandler}
-                            init={this.state.initiateRightDrawer}
-                            backDropHandler={this.backDropHandler} />
-                        <Toolbar
-                            rightDrawer={this.rightDrawerHandler}
-                            leftDrawer={this.leftDrawerHandler} />
-                            <MainContainer>                        
-                                <App />
-                            </MainContainer>
-                    </BrowserRouter>
-                </AuthContext.Provider>
-            </urlContext.Provider>
+            <LoaderContext.Provider value={{toggleLoader: this.toggleLoader}}>
+                <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
+                    <AuthContext.Provider value={{
+                        authenticated: this.state.authenticated,
+                        user: this.state.user,
+                        company: this.state.company,
+                        login: this.loginHandler,
+                        logout: this.logoutHandler}}>
+                        <BrowserRouter>
+                            <LeftDrawer 
+                                backDropHandler={this.backDropHandler}
+                                open={this.state.showLeftDrawer} />
+                            <RightDrawer
+                                open={this.state.showRightDrawer}
+                                closed={this.rightDrawerHandler}
+                                init={this.state.initiateRightDrawer}
+                                backDropHandler={this.backDropHandler} />
+                            <Toolbar
+                                rightDrawer={this.rightDrawerHandler}
+                                leftDrawer={this.leftDrawerHandler} />
+                                <MainContainer>                        
+                                    <App />
+                                </MainContainer>
+                            <Loader show={this.state.showLoader} />
+                        </BrowserRouter>
+                    </AuthContext.Provider>
+                </urlContext.Provider>
+            </LoaderContext.Provider>
 
         )
     }
