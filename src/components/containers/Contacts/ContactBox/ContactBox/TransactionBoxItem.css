@@ -73,7 +73,7 @@
 }
 
 .date {
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .contactName {

@@ -1,8 +1,6 @@
 To do:
     Transactions:
         - In-page filters for the indices
-        - Payment method
-            - Check # if applicable
         - Pass bill_number from project
     Users:
         - Invite function
@@ -28,6 +26,8 @@ To do:
 
 Done:
     Transactions:
+        - Payment method
+            - Check # if applicable
         - Eliminate (use swl for alerts)
     Contacts:
         - Eliminate
