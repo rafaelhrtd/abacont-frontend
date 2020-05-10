@@ -1,13 +1,9 @@
 To do:
     Transactions:
         - In-page filters for the indices
-        - Eliminate (use swl for alerts)
         - Payment method
             - Check # if applicable
-    Contacts:
-        - Eliminate
-    Projects:
-        - Eliminate
+        - Pass bill_number from project
     Users:
         - Invite function
         - E-mail verification
@@ -31,5 +27,11 @@ To do:
         - Currency formatting
 
 Done:
+    Transactions:
+        - Eliminate (use swl for alerts)
+    Contacts:
+        - Eliminate
+    Projects:
+        - Eliminate
     Aesthetics:
         - Remove leading spaces from everything 
