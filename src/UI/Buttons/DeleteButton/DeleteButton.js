@@ -61,7 +61,7 @@ class DeleteButton extends Component {
     }
     
     submitDeleteRequest = () => {
-        this.context.toggleLoader();
+        this.context.toggleLoader("Eliminando");
         const data = {
             password: this.state.password,
             destroy_children: this.state.destroy_children
