@@ -13,8 +13,6 @@ class Getter extends Component {
                     }
                 }
             }, error => {
-                console.log(url)
-                console.log("fuck")
                 console.log(error)
                 setTimeout(()=>{
                     window.location.href = "/"

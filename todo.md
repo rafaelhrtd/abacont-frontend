@@ -5,6 +5,8 @@ To do:
     Users:
         - Invite function
         - E-mail verification
+        - Edit
+        
     Company:
         - Company management
             - Edits

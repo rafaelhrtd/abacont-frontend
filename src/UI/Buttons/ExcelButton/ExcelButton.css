@@ -1,0 +1,17 @@
+.ExcelButton {
+    height: 3rem;
+    width: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ExcelButton img {
+    height: 3rem;
+    cursor: pointer;
+    width: 3rem;
+}
+
+.Hidden {
+    display:none;
+}

@@ -10,6 +10,7 @@ import UrlContext from '../../../context/url-context'
 import TransactionBox from '../../TransactionBox/TransactionBox'
 import Summary from './Summary/Summary'
 import TransactionIndex from './TransactionIndex/TransactionIndex'
+import ExcelButton from '../../../UI/Buttons/ExcelButton/ExcelButton'
 
 class Transactions extends Getter {
     state = {
@@ -33,6 +34,18 @@ class Transactions extends Getter {
             pathname: "/transacciones",
             search: query
         })
+    }
+
+    getQuery = () => {
+        let query = ""
+        if (this.state.query !== undefined){
+            Object.keys(this.state.query).map(key => {
+                if (![undefined, null].includes(this.state.query[key])){
+                    query += ("?"+key+"="+this.state.query[key])
+                }
+            })
+        }
+        return query
     }
 
     changedTimeHandler = (month, year) => {
@@ -91,7 +104,6 @@ class Transactions extends Getter {
             this.updateQuery();
         }
     }
-    
     static contextType = UrlContext;
     render(){
         const transactions = this.state.transactions
@@ -139,6 +151,12 @@ class Transactions extends Getter {
                             summary={summary} />
                     </div>
                 ) : null}
+
+                <ExcelButton   
+                    month={this.state.month}
+                    year={this.state.year}
+                    yearly={this.state.yearly}
+                    kind="transactions" />
                 {tranBoxes}
                 
             </div>
