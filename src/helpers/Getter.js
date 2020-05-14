@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import LoaderContext from '../context/loader-context'
+import AuthContext from '../context/auth-context'
 
 class Getter extends Component {
-    static contextType = LoaderContext;
+    static contextType = AuthContext;
     getServerInfo = (url, data, errorHandler, successHandler) => {
         axios.get(url, {params: {...data}})
             .then(response => {

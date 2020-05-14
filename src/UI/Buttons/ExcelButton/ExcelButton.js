@@ -15,6 +15,7 @@ class ExcelButton extends Getter {
             transactions: data.transactions
         });
         this.setState(prevState => {return {toggleClick: prevState.toggleClick+1}})
+        this.context.toggleLoader()
     }
 
     errorHandler = (data) => {
@@ -22,7 +23,7 @@ class ExcelButton extends Getter {
     }
 
     clickedLogo = () => {
-        this.context.toggleLoader()
+        this.context.toggleLoader("Generando archivo de Excel")
         let url = process.env.REACT_APP_API_ADDRESS + "transactions"
         let data = {
             month: this.props.month,
