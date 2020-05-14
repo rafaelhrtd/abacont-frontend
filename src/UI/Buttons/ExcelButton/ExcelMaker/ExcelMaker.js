@@ -92,11 +92,11 @@ class ExcelMaker extends React.Component {
             let columns = Object.keys(names[tranType]).map(key => {
                 return (names[tranType][key])
             })
-            let data = [processedTransactions[tranType].map(transaction => (
+            let data = processedTransactions[tranType].map(transaction => (
                 Object.keys(names[tranType]).map(key => {
                     return (transaction[key])
                 })
-            ))]
+            ))
 
             return([{title: this.getTitle(tranType), xSteps: 1, ySteps: 1, columns: columns, data: data}])
         })
