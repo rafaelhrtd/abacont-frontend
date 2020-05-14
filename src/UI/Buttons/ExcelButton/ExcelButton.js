@@ -9,6 +9,7 @@ class ExcelButton extends Getter {
         transactions: null,
         toggleClick: 0
     }
+
     successHandler = (data) => {
         this.setState({
             transactions: data.transactions
@@ -21,6 +22,7 @@ class ExcelButton extends Getter {
     }
 
     clickedLogo = () => {
+        this.context.toggleLoader()
         let url = process.env.REACT_APP_API_ADDRESS + "transactions"
         let data = {
             month: this.props.month,
