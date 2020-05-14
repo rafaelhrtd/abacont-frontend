@@ -84,6 +84,58 @@ class ExcelMaker extends React.Component {
         return {months: months, summary: summary}
     }
 
+    setUpMonthly = (transactions, empties, names) => {
+        let summary = this.monthlySummary(transactions)
+        let processedTransactions = {...this.setUpObjects(empties, transactions)}
+        const final = Object.keys(processedTransactions).map(tranType => {
+            console.log(processedTransactions)
+            let columns = Object.keys(names[tranType]).map(key => {
+                return (names[tranType][key])
+            })
+            let data = [processedTransactions[tranType].map(transaction => (
+                Object.keys(names[tranType]).map(key => {
+                    return (transaction[key])
+                })
+            ))]
+
+            return([{title: this.getTitle(tranType), xSteps: 1, ySteps: 1, columns: columns, data: data}])
+        })
+        return {data: final, summary: summary}
+    }
+
+    monthlySummary = (transactions) => {
+        const columns = [
+            "Ingresos",
+            "Egresos",
+            "Cuentas por cobrar",
+            "Cuentas por pagar",
+            "Utilidad bruta actual",
+            "Utilidad bruta esperada"
+        ]
+
+        let info = {}
+        info.revenue = this.getTotal(transactions.revenue).total
+        info.expense = this.getTotal(transactions.expense).total
+        info.receivable = this.getTotal(transactions.receivable)
+        info.payable = this.getTotal(transactions.payable)
+        info.currentTotal = info.revenue - info.expense 
+        info.expectedTotal = info.currentTotal + info.receivable.balance - info.payable.balance 
+        const data = [[
+            info.revenue,
+            info.expense,
+            info.receivable.balance,
+            info.payable.balance,
+            info.currentTotal,
+            info.expectedTotal
+        ]]
+        return[{
+            xSteps: 1,
+            ySteps: 1,
+            columns: columns,
+            data: data
+        }]
+    }
+
     yearlySummary = (months) => {
         let columns = [
             "Mes",
@@ -185,12 +237,14 @@ class ExcelMaker extends React.Component {
         receivableTotal.balance = totalReceivableBal
         receivables.push(empties.receivable)
         receivables.push(receivableTotal)
+
         let printables = {
             expense: expenses,
             revenue: revenues,
             payable: payables,
             receivable: receivables
         }
+
         return printables;
     }
 
@@ -298,59 +352,22 @@ class ExcelMaker extends React.Component {
         if (this.props.transactions === null || this.props.innerKey === 0) {
             return null
         } else if (this.props.transactions !== null && this.props.kind === "transactions" && this.props.yearly !== true){
-            const printables = this.setUpObjects(empties, this.props.transactions)
+            const data = this.setUpMonthly( this.props.transactions, empties, names)
+            console.log(data)
             return (
                 <ExcelFile hideElement={true}> 
-                    <ExcelSheet data={printables.revenue} name="Ingresos">
-                        {
-                            Object.keys(names.revenue).map(key => (
-                                <ExcelRow 
-                                    key={key} 
-                                    label={names.revenue[key]} 
-                                    value={key}/>
-                            ))
-                        }
-                    </ExcelSheet>
-
-                    <ExcelSheet data={printables.expense} name="Egresos">
-                    {
-                        Object.keys(names.expense).map(key => (
-                            <ExcelRow 
-                                key={key} 
-                                label={names.expense[key]} 
-                                value={key}/>
-                        ))
-                    }
-                    </ExcelSheet>
-
-                    <ExcelSheet data={printables.receivable} name="Cuentas por cobrar">
-                    {
-                        Object.keys(names.receivable).map(key => (
-                            <ExcelRow 
-                                key={key} 
-                                label={names.receivable[key]} 
-                                value={key}/>
-                        ))
-                    }
-                    </ExcelSheet>
-
-                    <ExcelSheet data={printables.payable} name="Cuentas por pagar">
-                    {
-                        Object.keys(names.payable).map(key => (
-                            <ExcelRow 
-                                key={key} 
-                                label={names.payable[key]} 
-                                value={key}/>
-                        ))
-                    }
-                    </ExcelSheet>
+                    <ExcelSheet dataSet={data.summary} name={"Resumen"} />
+                    {(data.data).map(dataSet => (
+                        <ExcelSheet dataSet={dataSet} name={dataSet[0].title} />
+                    ))}
                 </ExcelFile>
             );
         } else if (this.props.transactions !== null && this.props.kind === "transactions" && this.props.yearly === true){
             let data = this.setUpYearly(this.props.transactions, empties, names)
+            console.log(data)
             return (
                 <ExcelFile hideElement={true}> 
-                    <ExcelSheet dataSet={data.summary} name={"Resumen anual"} />
+                    <ExcelSheet dataSet={data.summary} name={"Resumen"} />
                     {Object.keys(data.months).map(month => (
                         <ExcelSheet key={month} dataSet={data.months[month]} name={month} />
                     ))}

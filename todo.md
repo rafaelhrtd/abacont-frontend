@@ -1,26 +1,24 @@
 To do:
-    Transactions:
-        - In-page filters for the indices
-        - Pass bill_number from project
-    Users:
-        - Invite function
-        - E-mail verification
-        - Edit
-        
     Company:
         - Company management
             - Edits
             - User list (and roles)
             - Invite function
             - Invite management
+    Users:
+        - Invite function
+        - E-mail verification
+        - Edit
+
+    Transactions:
+        - In-page filters for the indices
+        - Pass bill_number from project
+        
     Core functions:
-        - Excel outputs
         - Back buttons
 
     Security measures
         - Show warning before redirect
-    Projects
-        - Excel download
 
     Payment system
 
@@ -37,5 +35,6 @@ Done:
         - Eliminate
     Projects:
         - Eliminate
+        - Excel download
     Aesthetics:
         - Remove leading spaces from everything 
