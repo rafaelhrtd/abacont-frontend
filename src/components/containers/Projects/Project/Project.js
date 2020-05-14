@@ -6,7 +6,7 @@ import TransactionBox from '../../../TransactionBox/TransactionBox';
 import Button from '../../../../UI/Buttons/Button/Button';
 import NewProject from '../NewProject/NewProject';
 import DeleteButton from '../../../../UI/Buttons/DeleteButton/DeleteButton';
-
+import ExcelButton from '../../../../UI/Buttons/ExcelButton/ExcelButton';
 class Project extends Getter {
     state = {
         project: {},
@@ -173,6 +173,12 @@ class Project extends Getter {
                 <Route path={this.props.match.url + "/"} exact render={() => (
                     <div className={classes.Project}>
                         <h1>{title}</h1>
+                        <ExcelButton   
+                            month={this.state.month}
+                            year={this.state.year}
+                            yearly={this.state.yearly}
+                            kind="transactions"
+                            project_id={this.state.project.id} />
                         {projectInfo}
                         {projectPayments}
                         <div className={classes.Transactions}>

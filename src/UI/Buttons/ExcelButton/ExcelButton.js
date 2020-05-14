@@ -9,6 +9,11 @@ class ExcelButton extends Getter {
         transactions: null,
         toggleClick: 0
     }
+    componentDidMount = () => {
+        if (this.props.project_id){
+            this.setState({project_id: this.props.project_id})
+        }
+    }
 
     successHandler = (data) => {
         this.setState({
@@ -30,6 +35,9 @@ class ExcelButton extends Getter {
             year: this.props.year,
             yearly: this.props.yearly,
             xlsx: true
+        }
+        if (this.props.project_id){
+            data.project_id = this.props.project_id
         }
         this.getServerInfo(url, data, this.errorHandler, this.successHandler)
     }
