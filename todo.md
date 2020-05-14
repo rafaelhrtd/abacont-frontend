@@ -19,6 +19,8 @@ To do:
 
     Security measures
         - Show warning before redirect
+    Projects
+        - Excel download
 
     Payment system
 

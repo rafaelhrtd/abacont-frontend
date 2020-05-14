@@ -217,6 +217,7 @@ class ExcelMaker extends React.Component {
                 cheque_number: "",
                 description: "",
                 contact_name: "",
+                project_name: "",
                 amount: ""
                 },
             revenue: {
@@ -225,6 +226,7 @@ class ExcelMaker extends React.Component {
                 payment_type: "",
                 description: "",
                 contact_name: "",
+                project_name: "",
                 amount: ""
             },
             payable: {
@@ -233,6 +235,7 @@ class ExcelMaker extends React.Component {
                 payment_type: "",
                 description: "",
                 contact_name: "",
+                project_name: "",
                 amount: "",
                 balance: ""
             },
@@ -242,6 +245,7 @@ class ExcelMaker extends React.Component {
                 payment_type: "",
                 description: "",
                 contact_name: "",
+                project_name: "",
                 amount: "",
                 balance: ""
             }
@@ -255,6 +259,7 @@ class ExcelMaker extends React.Component {
                 cheque_number: "Número de cheque",
                 description: "Descripción",
                 contact_name: "Proveedor",
+                project_name: "Proyecto",
                 amount: "Monto"
             },
 
@@ -264,6 +269,7 @@ class ExcelMaker extends React.Component {
                 payment_type: "Método de pago",
                 description: "Descripción",
                 contact_name: "Proveedor",
+                project_name: "Proyecto",
                 amount: "Monto"
             },
 
@@ -273,6 +279,7 @@ class ExcelMaker extends React.Component {
                 payment_type: "Método de pago",
                 description: "Descripción",
                 contact_name: "Proveedor",
+                project_name: "Proyecto",
                 amount: "Monto",
                 balance: "Saldo"
             },
@@ -283,6 +290,7 @@ class ExcelMaker extends React.Component {
                 payment_type: "Método de pago",
                 description: "Descripción",
                 contact_name: "Proveedor",
+                project_name: "Proyecto",
                 amount: "Monto",
                 balance: "Saldo"
             },
