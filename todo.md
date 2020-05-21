@@ -4,8 +4,10 @@ Currently doing:
         - Link to edit (done)
         - Subscription info
         - Link to users 
-    - Remove payment method from payables
-    - Add query for project for "see more"
+    - Remove paid promises (done)
+    - Add payment method on transaction info (done)
+    - 401 unauthorized should not log you out
+
 To do:
     Company:
         - Company management
@@ -21,6 +23,7 @@ To do:
     Transactions:
         - In-page filters for the indices
         - Pass bill_number from project
+        - Be able to show completed promises
         
     Core functions:
         - Back buttons

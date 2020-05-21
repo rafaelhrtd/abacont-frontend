@@ -56,10 +56,16 @@ const transactionInfo = (props) => {
                         value={transaction.contact_name}
                         link={contactUrl}
                         />
+                        
 
                     <InfoPoint 
                         title={"Monto:"}
                         value={"$"+props.transaction.amount.toFixed(2)}
+                    />
+
+                    <InfoPoint 
+                        title={"Método de pago:"}
+                        value={props.transaction.payment_method}
                         />
 
                     <InfoPoint 
