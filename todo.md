@@ -2,11 +2,10 @@ Currently doing:
     Company:
         - Change company (done)
         - Link to edit (done)
-        
         - Subscription info
         - Link to users 
-
-
+    - Remove payment method from payables
+    - Add query for project for "see more"
 To do:
     Company:
         - Company management

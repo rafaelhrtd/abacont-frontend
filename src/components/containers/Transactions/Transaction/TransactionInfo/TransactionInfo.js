@@ -58,7 +58,7 @@ const transactionInfo = (props) => {
                         />
 
                     <InfoPoint 
-                        title={"Saldo inicial:"}
+                        title={"Monto:"}
                         value={"$"+props.transaction.amount.toFixed(2)}
                         />
 

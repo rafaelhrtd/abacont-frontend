@@ -71,7 +71,7 @@ class TransactionBoxItem extends Component {
             // get initial amount if the transaction is a debt
             initialAmount = properAmount === "balance" ? (
                 <div className={classes.initialAmount}>
-                    <strong>Saldo inicial:</strong>
+                    <strong>Monto:</strong>
                     ${transaction.amount.toFixed(2)}
                 </div>
             ) : null

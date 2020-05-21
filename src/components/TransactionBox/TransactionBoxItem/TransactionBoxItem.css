@@ -43,11 +43,6 @@
     margin: 0;
 }
 
-
-.itemInfo.show {
-    max-height: 250px;
-}
-
 .contact {
     padding-top: 1rem;
 }
