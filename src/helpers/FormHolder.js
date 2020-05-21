@@ -27,7 +27,7 @@ class FormHolder extends Component {
             }
         }
         // check if special select input should be deleted and do so
-        if (input !== null && input.input !== undefined && input.input !== null){
+        if (input !== null && input !== undefined && input.input !== undefined && input.input !== null){
             const innerName = event.target.name.split(".")[0] + "." + input.input.name
             if (input.options[input.input.onOption] !== event.target.value){
                 form_data[innerName] = ""
