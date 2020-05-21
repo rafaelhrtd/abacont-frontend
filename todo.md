@@ -1,3 +1,12 @@
+Currently doing:
+    Company:
+        - Change company (done)
+        - Link to edit (done)
+        
+        - Subscription info
+        - Link to users 
+
+
 To do:
     Company:
         - Company management

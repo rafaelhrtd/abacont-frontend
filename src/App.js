@@ -5,6 +5,7 @@ import Contacts from './components/containers/Contacts/Contacts';
 import Transactions from './components/containers/Transactions/Transactions'
 import classes from './App.css'
 import Projects from './components/containers/Projects/Projects'
+import Company from './components/containers/Company/Company'
 import Axios from 'axios'
 class App extends Component {
   state = {
@@ -60,6 +61,9 @@ class App extends Component {
         )} />
         <Route path="/proyectos" render={() => (
           <Projects />
+        )} />
+        <Route path="/compañía" render={() => (
+          <Company />
         )} />
       </div>
     );

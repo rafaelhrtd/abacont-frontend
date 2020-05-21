@@ -1,0 +1,23 @@
+.NameChanger h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+}
+.NameChanger form {
+    margin-top: 0;
+}
+
+.NameChanger form input {
+    margin-top: 1rem;
+}
+
+.disabled {
+    background-color: #74c29e !important;
+    cursor: default !important;
+}
+.disabled:hover,
+.disabled:active,
+.disabled:focus {
+    background-color: #74c29e !important;
+    cursor: default !important;
+}

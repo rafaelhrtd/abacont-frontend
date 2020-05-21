@@ -29,6 +29,10 @@ class Layout extends Component {
         showLoader: false
     }
 
+    changeCurrentCompany = (company) => {
+        this.setState({company: company})
+    }
+
     toggleLoader = (title) => {
         this.setState(prevState => {return {
             showLoader: !prevState.showLoader,
@@ -55,6 +59,13 @@ class Layout extends Component {
             company: response.data.company
         })
     }
+
+    shouldComponentUpdate = (prevProps, prevState) => {
+        return(
+            JSON.stringify(prevState) !== JSON.stringify(this.state)
+        )
+    }
+
     logoutHandler = () => {
         sessionStorage.removeItem('jwtToken');
         sessionStorage.removeItem('user');
@@ -65,6 +76,46 @@ class Layout extends Component {
         localStorage.removeItem('company');
         localStorage.removeItem('companies');
         this.setState({authenticated: false, user: null});
+    }
+
+    updateInfo = (data) => {
+        this.setState({
+            user: data.user,
+            companies: data.companies,
+            company: data.company
+        })
+        if (localStorage.getItem('jwtToken')){
+            localStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('companies', JSON.stringify(data.companies))
+            localStorage.setItem('company', JSON.stringify(data.company))
+        } else if (sessionStorage.getItem('jwtToken')){
+            sessionStorage.setItem('user', JSON.stringify(data.user))
+            sessionStorage.setItem('companies', JSON.stringify(data.companies))
+            sessionStorage.setItem('company', JSON.stringify(data.company))
+        }
+    }
+
+    errorHandler = (data) => {
+        console.log(data)
+    }
+
+    updateUserInfo = () => {
+        const url = process.env.REACT_APP_API_ADDRESS + "/userinfo"
+        Axios.get(url)
+            .then(response => {
+                if (response.status === 200) {
+                    if (response.data.errors === undefined){
+                        this.updateInfo(response.data)
+                    } else {
+                        this.errorHandler(response.data)
+                    }
+                }
+            }, error => {
+                console.log(error)
+                setTimeout(()=>{
+                    window.location.href = "/"
+                },0)
+            })
     }
     rightDrawerHandler = () => {
         this.setState((prevState) => {
@@ -113,8 +164,12 @@ class Layout extends Component {
                     authenticated: this.state.authenticated,
                     user: this.state.user,
                     company: this.state.company,
+                    companies: this.state.companies,
                     toggleLoader: this.toggleLoader,
                     login: this.loginHandler,
+                    changeCurrentCompany: this.changeCurrentCompany,
+                    currentCompany: this.state.company,
+                    updateUserInfo: this.updateUserInfo,
                     logout: this.logoutHandler}}>
                     <BrowserRouter>
                         <LeftDrawer 

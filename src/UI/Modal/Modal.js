@@ -25,9 +25,13 @@ class Modal extends Component {
         if (!this.state.show){
             backdropClasses.push(classes.hide)
         }
+        let modalClass = [classes.content]
+        if (this.props.className){
+            modalClass.push(this.props.className)
+        }
         return(
             <div className={backdropClasses.join(" ")} onClick={event => this.toggleDisplay(event)}>
-                <div className={classes.content}>
+                <div className={modalClass.join(" ")}>
                     {this.props.children}
                 </div>
             </div>

@@ -1,0 +1,32 @@
+.Company h1 {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Company button {
+    margin-bottom: 2rem;
+}
+
+.Company h1 svg {
+    margin-left: 1rem;
+    color: #0087ff;
+    cursor: pointer;
+}
+.Company h1 svg:hover,
+.Company h1 svg:active,
+.Company h1 svg:focus {
+    margin-left: 1rem;
+    color: #39a2ff;
+    cursor: pointer;
+}
+
+.Company h2 {
+    margin-bottom: 1rem;
+}
+
+.buttons button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}

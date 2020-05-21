@@ -1,0 +1,39 @@
+.switchCompany {
+    margin: 0;
+    max-height: 16rem;
+    overflow-y: scroll;
+    padding: 0;
+}
+
+.switchCompany ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.switchCompany li {
+    padding: 1rem;
+    margin: 0;
+    cursor: pointer;
+    background-color: white;
+}
+
+.switchCompany li:hover,
+.switchCompany li:active,
+.switchCompany li:focus {
+    background-color: #f4f9ff;
+}
+
+@media(max-width: 499px){
+    .switchCompany{
+        width: 90%;
+    }
+}
+
+
+@media(min-width: 500px){
+    .switchCompany{
+        width: 90%;
+    }
+}
