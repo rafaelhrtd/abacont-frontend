@@ -130,9 +130,9 @@ class NewTransaction extends FormHolder {
             }
 
         }
-        //if (["payable", "receivable"].includes(category)){
-            //delete(inputs.payment_type)
-        //}
+        if (["payable", "receivable"].includes(category)){
+            delete(inputs.payment_type)
+        }
         return inputs
     }
     
