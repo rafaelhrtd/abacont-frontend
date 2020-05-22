@@ -7,6 +7,7 @@ Currently doing:
     - Remove paid promises (done)
     - Add payment method on transaction info (done)
     - 401 unauthorized should not log you out
+    - index kicks you out when changing month on page
 
 To do:
     Company:

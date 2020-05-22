@@ -32,6 +32,20 @@ class Transaction extends Getter {
         }
     }
 
+
+    static createdMessage = (category) => {
+        switch(category){
+            case "receivable":
+                return "Cuenta por cobrar creada"
+            case "payable":
+                return "Cuenta por pagar creada"
+            case "expense":
+                return "Egreso creado"
+            case "revenue":
+                return "Ingreso creado"
+        }
+    }
+
     successHandler = (data) => {
         console.log(data)
         this.setState({

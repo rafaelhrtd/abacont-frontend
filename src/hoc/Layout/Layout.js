@@ -9,9 +9,9 @@ import MainContainer from './MainContainer/MainContainer'
 import urlContext from '../../context/url-context'
 import LeftDrawer from '../../components/Navigation/LeftDrawer/LeftDrawer';
 import Loader from '../../UI/Loader/Loader';
+import Alert from '../../UI/Alert/Alert';
 
 class Layout extends Component {
-
     state = {
         initiateRightDrawer: (localStorage.getItem('jwtToken') === null &&
                                 sessionStorage.getItem('jwtToken') === null),
@@ -26,7 +26,9 @@ class Layout extends Component {
                 JSON.parse(localStorage.getItem('user')) : JSON.parse(sessionStorage.getItem('company'))),
         showLeftDrawer: false,
         redirect: null,
-        showLoader: false
+        showLoader: false,
+        alerts: [],
+        alert: null
     }
 
     changeCurrentCompany = (company) => {
@@ -38,9 +40,19 @@ class Layout extends Component {
             showLoader: !prevState.showLoader,
             loaderTitle: title}})
     }
+
+    setAlerts = (alerts) => {
+        console.log(alerts);
+        this.setState({alerts: alerts});
+    }
+
+    componentDidUpdate = (prevState) => {
+        if (JSON.stringify(this.state.alerts) !== JSON.stringify(prevState.alerts)){
+            this.iterateThroughAlerts()
+        }
+    }
     
     loginHandler = (response, remember_me = false) => {
-        console.log(remember_me)
         if (remember_me) {
             localStorage.setItem('jwtToken', response.headers.authorization)
             localStorage.setItem('user', JSON.stringify(response.data.user))
@@ -99,6 +111,31 @@ class Layout extends Component {
         console.log(data)
     }
 
+    iterateThroughAlerts = () => {
+        let alerts = this.state.alerts
+        console.log(alerts);
+        alerts.push(null)
+        let count = 0
+        console.log(alerts);
+        if (alerts[0] === null){
+        } else {
+            alerts.map(alert => {
+                setTimeout(()=>{
+                    if (alert !== null) {
+                        console.log("alert:")
+                        console.log(alert)
+                        console.log(alert.classes)
+                        alert.classes.push("slideIn")
+                        this.setState({alert: alert})
+                    } else {
+                        this.setState({alerts: [], alert: null})
+                    }
+                }, 3000 * count);
+                count++;
+            })
+        }
+    }
+
     updateUserInfo = () => {
         const url = process.env.REACT_APP_API_ADDRESS + "/userinfo"
         Axios.get(url)
@@ -123,7 +160,6 @@ class Layout extends Component {
         })
     }
     leftDrawerHandler = () => {
-        console.log("fuck")
         this.setState((prevState) => {
             return {showLeftDrawer: !prevState.showLeftDrawer}
         })
@@ -133,13 +169,13 @@ class Layout extends Component {
             initiateRightDrawer: false,
             showLeftDrawer: false})
     }
+
     render (){
         Axios.interceptors.response.use(
             response => response,
             error => {
                 const {status} = error.response;
                 if (status === 401){
-                    console.log("KLOL")
                     this.logoutHandler();
                     this.setState({redirect: "/"})
                 } else if (status === 403) {
@@ -154,7 +190,6 @@ class Layout extends Component {
         )
 
         if (this.state.redirect != null){
-            console.log("woohoo")
             window.location.href = this.state.redirect
         }
         
@@ -166,6 +201,7 @@ class Layout extends Component {
                     company: this.state.company,
                     companies: this.state.companies,
                     toggleLoader: this.toggleLoader,
+                    setAlerts: this.setAlerts,
                     login: this.loginHandler,
                     changeCurrentCompany: this.changeCurrentCompany,
                     currentCompany: this.state.company,
@@ -186,6 +222,13 @@ class Layout extends Component {
                             <MainContainer>                        
                                 <App />
                             </MainContainer>
+                        {this.state.alert != null ? (
+                            <Alert 
+                                title={this.state.alert.title}
+                                message={this.state.alert.message}
+                                classes={this.state.alert.classes} />
+
+                        ): null}
                         <Loader 
                             show={this.state.showLoader}
                             title={this.state.loaderTitle} />

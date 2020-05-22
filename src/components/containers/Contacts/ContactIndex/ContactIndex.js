@@ -49,9 +49,6 @@ class ContactIndex extends Getter {
         const searchLink = this.props.category == "client" ? "/clientes/" : "/proveedores/"
         const title = this.props.category == "client" ? "Clientes" : "Proveedores"
         const contacts = this.state.contacts
-
-        console.log("ful")
-        console.log(contacts)
         
         const latestClients = contacts.length > 0 ? (
             <div className={classes.latestClients}>

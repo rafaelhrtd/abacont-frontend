@@ -22,6 +22,14 @@ class Contact extends Getter {
         }) //should also get transactions here once they are set up
     }
 
+    static getName = (category, caps = false) => {
+        if (caps){
+            return category === "client" ? "Cliente":"Proveedor"
+        } else {
+            return category === "client" ? "cliente":"proveedor"
+        }
+    }
+
     shouldComponentUpdate = (nextProps, nextState) =>{
         return JSON.stringify(this.state) !== JSON.stringify(nextState) || 
             JSON.stringify(this.props) !== JSON.stringify(nextProps)

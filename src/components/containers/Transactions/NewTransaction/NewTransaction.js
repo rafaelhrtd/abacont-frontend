@@ -20,6 +20,21 @@ class NewTransaction extends FormHolder {
     static contextType = AuthContext;
 
     successResponse = (data, url = null) => {
+        if (this.state.old_data === {}){
+            this.context.setAlerts([
+                {title: "Cambios guardados",
+                 classes: ["success"],
+                 message: null}
+            ])
+        } else {
+            this.context.setAlerts([
+                {
+                    title: Transaction.createdMessage(this.state.category),
+                    classes: ["success"],
+                    message: null
+                }
+            ])
+        }
         let passed_state = this.state.passed_state
         if (passed_state !== undefined && passed_state.path !== undefined) {
             this.setState({redirect: passed_state.path})

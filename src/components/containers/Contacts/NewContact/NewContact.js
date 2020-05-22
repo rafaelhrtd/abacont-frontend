@@ -3,6 +3,7 @@ import FormHolder from '../../../../helpers/FormHolder';
 import AuthContext from '../../../../context/auth-context';
 import classes from './NewContact.css';
 import Form from '../../../Form/Form';
+import Contact from '../Contact/Contact'
 import { withRouter, Redirect } from 'react-router-dom' ;
 
 class NewContact extends FormHolder {
@@ -32,6 +33,22 @@ class NewContact extends FormHolder {
 
     successResponse = (data, url = null) => {
         let redirect_url = this.props.redirect_url
+        if (this.state.old_data === {}){
+            this.context.setAlerts([
+                {title: "Cambios guardados",
+                 classes: ["success"],
+                 message: null}
+            ])
+        } else {
+            this.context.setAlerts([
+                {
+                    title: Contact.getName(this.state.category, true) + " creado.",
+                    classes: ["success"],
+                    message: null
+                }
+            ])
+        }
+
         if (redirect_url !== undefined) {
             this.setState({redirect: redirect_url})
         } else {

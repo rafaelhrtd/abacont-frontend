@@ -3,6 +3,7 @@ import FormHolder from '../../../../helpers/FormHolder';
 import classes from './NewProject.css'
 import NewContact from '../../Contacts/NewContact/NewContact'
 import Form from '../../../Form/Form'
+import AuthContext from '../../../../context/auth-context'
 import { Redirect, withRouter } from 'react-router-dom'
 
 class NewProject extends FormHolder {
@@ -14,6 +15,8 @@ class NewProject extends FormHolder {
         old_data: {},
         project: {}
     }
+
+    static contextType = AuthContext;
     
     createProjectHandler = (event, edit = false) => {
         event.preventDefault()
@@ -39,6 +42,21 @@ class NewProject extends FormHolder {
 
 
     successResponse = (data, url = null) => {
+        if (this.state.old_data === {}){
+            this.context.setAlerts([
+                {title: "Cambios guardados",
+                 classes: ["success"],
+                 message: null}
+            ])
+        } else {
+            this.context.setAlerts([
+                {
+                    title: "Proyecto creado",
+                    classes: ["success"],
+                    message: null
+                }
+            ])
+        }
         let passed_state = this.state.passed_state
         console.log(data)
         if (passed_state !== undefined && passed_state.redirect_path !== undefined) {

@@ -6,11 +6,15 @@ blue: #0087ff
 blue-hover: #39a2ff
 green: #00a458
 green-disabled: #74c29e
+green-bg: #e5fff3
 grey: #a6abbd
 danger: #f34672
+danger-text: #68323f;
 black: #424656
 off-white: f4f9ff
 warning: #ffb300
+warning-text: #805a00;
+warning-bg: #ffdc89;
 warning:hover: #ffbf2a
 */
 
