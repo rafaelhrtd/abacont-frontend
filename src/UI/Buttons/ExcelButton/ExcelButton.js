@@ -23,8 +23,8 @@ class ExcelButton extends Getter {
         this.context.toggleLoader()
     }
 
-    errorHandler = (data) => {
-        console.log(data)
+    errorHandler = () => {
+        this.setState({commError: true});
     }
 
     clickedLogo = () => {
@@ -39,7 +39,9 @@ class ExcelButton extends Getter {
         if (this.props.project_id){
             data.project_id = this.props.project_id
         }
-        this.getServerInfo(url, data, this.errorHandler, this.successHandler)
+        if (!this.state.commError){
+            this.getServerInfo(url, data, this.errorHandler, this.successHandler)
+        }
     }
 
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import Aux from './hoc/Aux/Aux'
 import Contacts from './components/containers/Contacts/Contacts';
 import Transactions from './components/containers/Transactions/Transactions'
 import classes from './App.css'
 import Projects from './components/containers/Projects/Projects'
+import AuthContext from './context/auth-context'
 import Company from './components/containers/Company/Company'
 import Axios from 'axios'
 class App extends Component {
@@ -13,26 +14,52 @@ class App extends Component {
     password: null,
     redirect: null
   }
-  render() {
 
+  static contextType = AuthContext;
+  
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.redirect !== this.props.redirect){
+      this.setState({redirect: this.props.redirect});
+      this.props.removeRedirect();
+    }
+  }
+
+  checkAuthenticated = () => {
+    if (!this.context.authenticated && this.props.location.pathname !== "/"){
+      this.context.setAlerts([{
+        title: "Favor de iniciar sesión para ingresar a esta página",
+        classes: ["danger"],
+        message: null
+      }])
+      return true;
+    }
+  }
+
+  componentDidMount = () => {
+    this.checkAuthenticated();
+  }
+
+  componentDidUpdate = () => {
+    this.checkAuthenticated();
+  }
+
+  render() {
+    
+    
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
+      console.log("what in the fuck")
+      const url = this.state.redirect
+      console.log(url)
+      this.setState({redirect: null})
+      return <Redirect to={url} />
+    }
+
+    if (this.checkAuthenticated()){
+
+      return <Redirect to="/" />
     }
 
 
-    Axios.interceptors.response.use(
-      response => response,
-      error => {
-          const {status} = error.response;
-          if (status === 403) {
-            // put what to do here
-            // should show a warning
-            this.setState({redirect: "/transacciones/"})
-          }
-          return Promise.reject(error);
-      }
-
-  )
     return (
       <div className={classes.App}>
         <Route path="/" exact render={() => (
@@ -70,4 +97,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

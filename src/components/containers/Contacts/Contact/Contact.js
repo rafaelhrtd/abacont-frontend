@@ -12,8 +12,8 @@ class Contact extends Getter {
         transactions: {},
         id: this.props.match.params.id
     }
-    errorHandler = (errors) => {
-        console.log(errors);
+    errorHandler = () => {
+        this.setState({commError: true});
     }
     successHandler = (data) => {
         this.setState({
@@ -40,12 +40,16 @@ class Contact extends Getter {
     }
 
     componentDidMount = () => {
-        const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
-        this.getServerInfo(url, null, this.errorHandler, this.successHandler)
+        if (!this.state.commError){
+            const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
+            this.getServerInfo(url, null, this.errorHandler, this.successHandler)
+        }
     }
     componentDidUpdate = () => {
-        const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
-        this.getServerInfo(url, null, this.errorHandler, this.successHandler)
+        if (!this.state.commError){
+            const url = process.env.REACT_APP_API_ADDRESS + "contacts/" + this.state.id
+            this.getServerInfo(url, null, this.errorHandler, this.successHandler)
+        }
     }
 
     render() {

@@ -15,8 +15,9 @@ class Transaction extends Getter {
         category: this.props.category
     }
 
-    errorHandler = (errors) => {
-        console.log(errors);
+
+    errorHandler = () => {
+        this.setState({commError: true});
     }
 
     static getUrl = (category) => {
@@ -46,6 +47,8 @@ class Transaction extends Getter {
         }
     }
 
+
+
     successHandler = (data) => {
         console.log(data)
         this.setState({
@@ -60,6 +63,9 @@ class Transaction extends Getter {
     }
     
     render() {
+        if (this.state.commError){
+            return null
+        }
         const url = process.env.REACT_APP_API_ADDRESS + "transactions/" + this.state.id
         this.getServerInfo(url, null, this.errorHandler, this.successHandler)
         const children = this.state.children

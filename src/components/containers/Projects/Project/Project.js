@@ -14,9 +14,11 @@ class Project extends Getter {
         summary: {}
     }
 
-    errorHandler = (errors) => {
-        console.log(errors);
+
+    errorHandler = () => {
+        this.setState({commError: true});
     }
+
     successHandler = (data) => {
         this.setState({
             project: data.project,
@@ -42,10 +44,14 @@ class Project extends Getter {
 
 
     componentDidMount = () => {
-        this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        if (!this.state.commError){
+            this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        }
     }
     componentDidUpdate = () => {
-        this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        if (!this.state.commError){
+            this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
+        }
     }
 
     render(){

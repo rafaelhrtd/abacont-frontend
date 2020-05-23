@@ -98,8 +98,8 @@ class TransactionIndex extends Getter {
         })
     }
 
-    errorHandler = (data) => {
-        console.log(data)
+    errorHandler = () => {
+        this.setState({commError: true});
     }
 
     render(){

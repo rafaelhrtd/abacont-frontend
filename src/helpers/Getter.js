@@ -15,10 +15,10 @@ class Getter extends Component {
                     }
                 }
             }, error => {
-                console.log(error)
-                setTimeout(()=>{
-                    window.location.href = "/"
-                },0)
+                const {status} = error.response
+                console.log("fuck")
+                errorHandler()
+                console.log(status)
             })
     }
 

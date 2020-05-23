@@ -9,8 +9,8 @@ class ContactIndex extends Getter {
         search_contacts: []
     }
 
-    errorHandler = (data) => {
-        console.log(data)
+    errorHandler = () => {
+        this.setState({commError: true});
     }
 
     successHandler = (data) => {
@@ -36,11 +36,15 @@ class ContactIndex extends Getter {
     }
 
     componentDidMount = () => {
-        this.getContacts();
+        if (!this.state.commError){
+            this.getContacts();
+        }
     }
 
     componentDidUpdate = () => {
-        this.getContacts();
+        if (!this.state.commError){
+            this.getContacts();
+        }
     }
 
     render(){

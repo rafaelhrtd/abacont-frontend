@@ -10,8 +10,9 @@ class ProjectIndex extends Getter {
         search_projects: []
     }
 
-    errorHandler = (data) => {
-        console.log(data)
+
+    errorHandler = () => {
+        this.setState({commError: true});
     }
 
     successHandler = (data) => {
@@ -35,11 +36,15 @@ class ProjectIndex extends Getter {
     }
 
     componentDidMount = () => {
-        this.getProjects();
+        if (!this.state.commError){
+            this.getProjects();
+        }
     }
 
     componentDidUpdate = () => {
-        this.getProjects();
+        if (!this.state.commError){
+            this.getProjects();
+        }
     }
 
     render(){

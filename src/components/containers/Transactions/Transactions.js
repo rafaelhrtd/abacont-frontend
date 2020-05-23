@@ -59,8 +59,9 @@ class Transactions extends Getter {
         })
     }
 
-    errorHandler = (data) => {
-        console.log(data)
+
+    errorHandler = () => {
+        this.setState({commError: true});
     }
     
     changedYearlyHandle = () => {
@@ -92,12 +93,12 @@ class Transactions extends Getter {
     }
 
     componentDidMount = () => {
-        if (this.state.category === undefined){            
+        if (this.state.category === undefined && !this.state.commError){            
             this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
         }
     }
     componentDidUpdate = (prevProps, prevState) => {
-        if (this.state.category === undefined){
+        if (this.state.category === undefined && !this.state.commError){
             this.getServerInfo(this.getUrl(), this.getData(), this.errorHandler, this.successHandler)
         }
         if(JSON.stringify(prevState) !== JSON.stringify(this.state)){

@@ -14,9 +14,11 @@ class Search extends Getter {
         id: 0,
         errors: {}
     }
-    errorHandler = (errors) => {
-        console.log(errors);
+
+    errorHandler = () => {
+        this.setState({commError: true});
     }
+
     successHandler = (data) => {
         let objects = Object.keys(data.objects).map(obKey => (
             data.objects[obKey]
@@ -89,7 +91,7 @@ class Search extends Getter {
 
     render(){
         const url = process.env.REACT_APP_API_ADDRESS + this.props.url   
-        if (this.state.objects.length === 0){
+        if (this.state.objects.length === 0 && !this.state.commError){
             this.getServerInfo(url, this.props.data, this.errorHandler, this.successHandler)
         }
         return(

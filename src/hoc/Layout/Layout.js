@@ -42,7 +42,6 @@ class Layout extends Component {
     }
 
     setAlerts = (alerts) => {
-        console.log(alerts);
         this.setState({alerts: alerts});
     }
 
@@ -113,18 +112,13 @@ class Layout extends Component {
 
     iterateThroughAlerts = () => {
         let alerts = this.state.alerts
-        console.log(alerts);
         alerts.push(null)
         let count = 0
-        console.log(alerts);
         if (alerts[0] === null){
         } else {
             alerts.map(alert => {
                 setTimeout(()=>{
                     if (alert !== null) {
-                        console.log("alert:")
-                        console.log(alert)
-                        console.log(alert.classes)
                         alert.classes.push("slideIn")
                         this.setState({alert: alert})
                     } else {
@@ -148,7 +142,6 @@ class Layout extends Component {
                     }
                 }
             }, error => {
-                console.log(error)
                 setTimeout(()=>{
                     window.location.href = "/"
                 },0)
@@ -169,6 +162,9 @@ class Layout extends Component {
             initiateRightDrawer: false,
             showLeftDrawer: false})
     }
+    removeRedirect = () => {
+        this.setState({redirect: null})
+    }
 
     render (){
         Axios.interceptors.response.use(
@@ -176,22 +172,30 @@ class Layout extends Component {
             error => {
                 const {status} = error.response;
                 if (status === 401){
-                    this.logoutHandler();
                     this.setState({redirect: "/"})
+                    this.logoutHandler();
+                    this.setAlerts([{
+                      title: "Favor de iniciar sesión",
+                      classes: ["danger"]
+                    }])
                 } else if (status === 403) {
-                    // put what to do here
-                    // should show a warning
-                    this.setState({redirect: "/transacciones/"})
-                    
+                  this.setState({redirect: "/transacciones/"})
+                  this.setAlerts([{
+                    title: "Acceso denegado",
+                    classes: ["danger"],
+                    message: null
+                  }])
+                } else if (status === 404) {
+                  this.setState({redirect: "/transacciones/"})
+                  this.setAlerts([{
+                    title: "La página no ha sido encontrada.",
+                    classes: ["warning"],
+                    message: null
+                  }])
                 }
                 return Promise.reject(error);
             }
-
         )
-
-        if (this.state.redirect != null){
-            window.location.href = this.state.redirect
-        }
         
         return (
             <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
@@ -220,7 +224,9 @@ class Layout extends Component {
                             rightDrawer={this.rightDrawerHandler}
                             leftDrawer={this.leftDrawerHandler} />
                             <MainContainer>                        
-                                <App />
+                                <App
+                                    removeRedirect={this.removeRedirect}
+                                    redirect={this.state.redirect} />
                             </MainContainer>
                         {this.state.alert != null ? (
                             <Alert 
