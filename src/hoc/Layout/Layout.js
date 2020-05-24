@@ -51,6 +51,10 @@ class Layout extends Component {
             this.iterateThroughAlerts()
         }
     }
+
+    componentDidMount = () => {
+        this.updateUserInfo();
+    }
     
     loginHandler = (response, remember_me = false) => {
         if (remember_me) {
