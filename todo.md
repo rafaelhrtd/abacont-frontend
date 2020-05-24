@@ -17,7 +17,7 @@ To do:
             - Invite function
             - Invite management
     Users:
-        - Invite function
+        - Invite function (done)
         - E-mail verification
         - Edit
 
