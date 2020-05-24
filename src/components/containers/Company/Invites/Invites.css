@@ -1,0 +1,6 @@
+.Invites {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-bottom: 1rem;
+}

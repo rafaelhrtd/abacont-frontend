@@ -8,31 +8,31 @@ class Login extends Component {
     state = {
         email: null,
         password: null,
-        rememberMe: false,
+        remember_me: false,
         error:  false,
         error_objects: {}
     }
 
     static contextType = AuthContext;
 
-    changeHandler = (event) => {
-        event.persist()
-        this.setState((prevState) => {
-            let errors = {...prevState.error_objects}
-            if (errors[event.target.name] !== undefined){
-                delete errors[event.target.name]
-            }
-            return({
-                error_objects: errors,
-                [event.target.name] : event.target.value
+    changeHandler = (event = null, object = null) => {
+        if (event !== null){
+            event.persist()
+            this.setState((prevState) => {
+                let errors = {...prevState.error_objects}
+                if (errors[event.target.name] !== undefined){
+                    delete errors[event.target.name]
+                }
+                return({
+                    error_objects: errors,
+                    [event.target.name] : event.target.value
+                })
             })
-        })
-    }
-
-    rememberMeHandler = (event) => {
-        this.setState((prevState, props) => ({
-            rememberMe: !prevState.rememberMe
-        }))
+        } else if (object !== null) {
+            this.setState({
+                [object.name] : object.value
+            })
+        }
     }
 
     loginHandler  = (event) => {
@@ -42,13 +42,13 @@ class Login extends Component {
           user: {
             email: this.state.email,
             password: this.state.password,
-            rememberMe: true
+            remember_me: true
           }
         }
         axios.post(process.env.REACT_APP_API_ADDRESS + "login", data)
           .then(response => {
             if (response.status === 200){
-                this.context.login(response, this.state.rememberMe)
+                this.context.login(response, this.state.remember_me)
             }
         }).catch(error => {
             this.loginErrorHandler(error);
@@ -89,7 +89,8 @@ class Login extends Component {
                     </div>
                 </div>
                 <LoginForm
-                    remember={this.rememberMeHandler}
+                    remember_meVal={this.state.remember_me}
+                    remember={this.remember_meHandler}
                     changed={this.changeHandler}
                     login={this.loginHandler}
                     errorObjects={this.state.error_objects} />

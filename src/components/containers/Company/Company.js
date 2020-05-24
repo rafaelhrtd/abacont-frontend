@@ -5,14 +5,33 @@ import Button from '../../../UI/Buttons/Button/Button';
 import Switcher from './Switcher/Switcher';
 import AuthContext from '../../../context/auth-context';
 import NameChanger from './NameChanger/NameChanger';
+import Inviter from './Inviter/Inviter';
+import Axios from 'axios'
+import Invites from './Invites/Invites';
 
 class Company extends Component {
     state = {
         company: this.context.company,
-        companies: this.context.companies
+        companies: this.context.companies,
+        invites: []
     }
 
     componentDidMount = () => {
+        this.getInvites();
+    }
+
+    commErrorHandler = (response) => {
+        console.log(response)
+    }
+
+    getInvites = () => {
+        const url = process.env.REACT_APP_API_ADDRESS + "/invites";
+        Axios.get(url)
+            .then(response => {
+                this.setState({invites: response.data.invites})
+            }, error => {
+                this.commErrorHandler(error.response)
+            })
     }
 
     getContext = (company=null) => {
@@ -25,7 +44,8 @@ class Company extends Component {
     }
 
     shouldComponentUpdate = (prevProps, prevState) => {
-        return prevState.company !== this.state.company
+        return (prevState.company !== this.state.company ||
+            JSON.stringify(prevState.invites) !== JSON.stringify(this.state.invites));
     }
 
     static contextType = AuthContext;
@@ -46,9 +66,11 @@ class Company extends Component {
                     {changeCompany}
                 </div>
                 <h2>Miembros</h2>
-                <p>To do</p>
+                <Inviter addInvite={this.getInvites}/>
                 <h3>Invitaciones pendientes</h3>
-                <p>To do</p>
+                <Invites 
+                    invites={this.state.invites}
+                    getInvites={this.getInvites} />
                 <h2>Subscripción</h2>
                 <p>To do</p>
                 <Button className="success">Registrar nueva compañía</Button>

@@ -16,7 +16,6 @@ class Getter extends Component {
                 }
             }, error => {
                 const {status} = error.response
-                console.log("fuck")
                 errorHandler()
                 console.log(status)
             })

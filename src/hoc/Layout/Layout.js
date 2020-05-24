@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthContext from '../../context/auth-context'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import RightDrawer from '../../components/Navigation/RightDrawer/RightDrawer'
-import { Route, BrowserRouter, Redirect } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import App from '../../App'
 import Axios from 'axios'
 import MainContainer from './MainContainer/MainContainer'
@@ -10,7 +10,8 @@ import urlContext from '../../context/url-context'
 import LeftDrawer from '../../components/Navigation/LeftDrawer/LeftDrawer';
 import Loader from '../../UI/Loader/Loader';
 import Alert from '../../UI/Alert/Alert';
-
+import Aux from '../../hoc/Aux/Aux';
+import Invite from '../../components/containers/Invite/Invite';
 class Layout extends Component {
     state = {
         initiateRightDrawer: (localStorage.getItem('jwtToken') === null &&
@@ -212,32 +213,41 @@ class Layout extends Component {
                     updateUserInfo: this.updateUserInfo,
                     logout: this.logoutHandler}}>
                     <BrowserRouter>
-                        <LeftDrawer 
-                            backDropHandler={this.backDropHandler}
-                            open={this.state.showLeftDrawer} />
-                        <RightDrawer
-                            open={this.state.showRightDrawer}
-                            closed={this.rightDrawerHandler}
-                            init={this.state.initiateRightDrawer}
-                            backDropHandler={this.backDropHandler} />
-                        <Toolbar
-                            rightDrawer={this.rightDrawerHandler}
-                            leftDrawer={this.leftDrawerHandler} />
-                            <MainContainer>                        
-                                <App
-                                    removeRedirect={this.removeRedirect}
-                                    redirect={this.state.redirect} />
-                            </MainContainer>
-                        {this.state.alert != null ? (
-                            <Alert 
-                                title={this.state.alert.title}
-                                message={this.state.alert.message}
-                                classes={this.state.alert.classes} />
+                        <Switch>
+                            <Route path="/invitado" render={() => (
+                                <Invite/>
+                            )} />
+                            <Route path="/" render={() => (
+                                <Aux>
+                                    <LeftDrawer 
+                                        backDropHandler={this.backDropHandler}
+                                        open={this.state.showLeftDrawer} />
+                                    <RightDrawer
+                                        open={this.state.showRightDrawer}
+                                        closed={this.rightDrawerHandler}
+                                        init={this.state.initiateRightDrawer}
+                                        backDropHandler={this.backDropHandler} />
+                                    <Toolbar
+                                        rightDrawer={this.rightDrawerHandler}
+                                        leftDrawer={this.leftDrawerHandler} />
+                                        <MainContainer>                        
+                                            <App
+                                                removeRedirect={this.removeRedirect}
+                                                redirect={this.state.redirect} />
+                                        </MainContainer>
+                                    {this.state.alert != null ? (
+                                        <Alert 
+                                            title={this.state.alert.title}
+                                            message={this.state.alert.message}
+                                            classes={this.state.alert.classes} />
 
-                        ): null}
-                        <Loader 
-                            show={this.state.showLoader}
-                            title={this.state.loaderTitle} />
+                                    ): null}
+                                    <Loader 
+                                        show={this.state.showLoader}
+                                        title={this.state.loaderTitle} />
+                                </Aux>
+                            )} />
+                        </Switch>
                     </BrowserRouter>
                 </AuthContext.Provider>
             </urlContext.Provider>

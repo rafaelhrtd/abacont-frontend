@@ -38,6 +38,9 @@ To do:
         - Phone formatting
         - Currency formatting
 
+    Other
+        - add scanning ability for premium
+
 Done:
     Transactions:
         - Payment method

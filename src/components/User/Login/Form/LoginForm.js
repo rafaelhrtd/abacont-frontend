@@ -46,7 +46,13 @@ const loginForm = (props) => {
                     placeholder="Contraseña"
                     className={classes[passwordClass]}
                     onChange={(event) => props.changed(event)}></input>
-                <CheckBox givenClass={classes.checkbox} name="remember_me" text="Recuérdame" clicked={props.remember} />
+                <CheckBox 
+                    givenClass={classes.checkbox} 
+                    name="remember_me" 
+                    text="Recuérdame"
+                    changed={props.changed}
+                    clicked={props.remember}
+                    initVal={props.rememberMeVal} />
                 <input type="submit" value="Iniciar sesión" className="btn-success" />
             </form>
         </div>

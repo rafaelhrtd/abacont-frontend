@@ -1,0 +1,37 @@
+.invite {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    width: 100%;
+}
+
+.invite button {
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.email {
+    width: auto;
+    text-align: left;
+    margin-right: 1rem;
+    flex-grow: 1;
+}
+
+.hide {
+    display: none !important;
+}
+
+.delete {
+    width: auto;
+    flex-grow: 0;
+    color: #f34672;
+    cursor: pointer;
+}
+.delete:hover,
+.delete:focus,
+.delete:active {
+    width: auto;
+    flex-grow: 0;
+    color: #ff779a;
+    cursor: pointer;
+}

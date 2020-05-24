@@ -69,3 +69,24 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     }
+
+    .Checkbox.disabled {
+      cursor: default;
+    }
+
+    .Checkbox.disabled  input:checked ~ .Checkmark{
+      background-color: #94cdff;
+    }
+
+    .Checkbox.disabled:hover  input:checked ~ .Checkmark{
+      background-color: #94cdff;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .disabled.Checkbox:hover input ~ .Checkmark {
+      background-color: #eee;
+    }
+
+    .Checkbox.disabled {
+      color: #969aaa;
+    }

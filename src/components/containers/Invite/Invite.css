@@ -1,0 +1,55 @@
+.Invite {
+    margin-top: -3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    flex-wrap: wrap;
+}
+
+.Invite p {
+    max-width: 500px;
+    text-align: center;
+}
+
+.Invite .Options {
+    max-width: 500px;
+}
+
+.Invite button {
+    margin: 0 0.5rem;
+}
+
+.Invite Form {
+    max-width: 600px;
+    text-align: center;
+}
+
+.error {
+    border-color: #f34672 !important;
+    color: #68323f;
+
+}
+
+.errors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding-bottom: .75rem;
+}
+
+.Invite input:disabled {
+    border: solid 1px #00a458;
+    color: #00a458;
+    background-color: #e5fff3;
+}
+
+p.error {
+    margin: 0.5rem 0;
+    text-align: left;
+    color: #f34672;
+    width: 100%;
+}

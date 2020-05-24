@@ -16,6 +16,7 @@ class UserInfo extends Component {
             return ({new_account: !prevState.new_account})
         })
     }
+    
     render() {
         const loggedIn = this.context.authenticated
         let content = null;
