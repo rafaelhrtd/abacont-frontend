@@ -48,6 +48,12 @@ class Company extends Component {
             JSON.stringify(prevState.invites) !== JSON.stringify(this.state.invites));
     }
 
+    componentDidUpdate = (prevProps, prevState) => {
+        if (JSON.stringify(prevState.company) !== JSON.stringify(this.state.company)){
+            this.getInvites();
+        }
+    }
+
     static contextType = AuthContext;
     render(){
         const changeCompany = (this.state.companies.length > 1) ? (
