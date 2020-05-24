@@ -77,6 +77,7 @@ class Invite extends Component {
         
         Axios.post(process.env.REACT_APP_API_ADDRESS + "signup", data)
           .then(response => {
+              this.context.toggleLoader(("Uniendo cuenta al equipo de " + this.state.company_name))
               if (response.status === 200){
                   if (response.data.errors === undefined){
                     this.context.login(response)
@@ -106,8 +107,10 @@ class Invite extends Component {
             token: this.state.invite.token,
             accepted: accepted
         }
+        this.context.toggleLoader("Creando nueva cuenta")
         Axios.post(url, data)
             .then(response => {
+                this.context.toggleLoader()
                 if (response.data.error === undefined){
                     console.log(response)
                     this.context.updateUserInfo();
