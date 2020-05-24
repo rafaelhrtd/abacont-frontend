@@ -11,7 +11,8 @@ class Invite extends Component {
         error: null,
         redirect: null,
         errors: {},
-        form_data: {}
+        form_data: {},
+        retrieval_attempted: false
     }
     
     static contextType = AuthContext;
@@ -43,7 +44,8 @@ class Invite extends Component {
                     this.setState({
                         invite: response.data.invite,
                         name: response.data.name,
-                        company_name: response.data.company_name})
+                        company_name: response.data.company_name,
+                        retrieval_attempted: true})
                 } else {
                     this.setState({error: true})
                 }
@@ -174,7 +176,7 @@ class Invite extends Component {
                     </div>
                 </div>
             )
-        } else {
+        } else if (this.state.retrieval_attempted) {
             setTimeout(()=> {
                 this.setState({redirect: '/'})
             }, 4000);
@@ -183,6 +185,10 @@ class Invite extends Component {
                     <h3>La invitación no ha sido encontrada</h3>
                     <p>Es posible que haya sido cancelada o que ya haya sido aceptada. Por favor, comunícate con el adminsitrador de la compañía a la que quieres unirte.</p>
                 </div>
+            )
+        } else {
+            return (
+                <div></div>
             )
         }
     }
