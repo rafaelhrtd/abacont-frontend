@@ -6,7 +6,7 @@ const RightItems = (props) => (
     <div className={classes.RightItems}>
         <ul>
         <RightItem
-            link="/">
+            link="/compañía">
             Compañías
         </RightItem>
         <RightItem
