@@ -187,13 +187,19 @@ class Layout extends Component {
                     message: null
                   }])
                 } else if (status === 404) {
-                  this.setState({redirect: "/transacciones/"})
-                  this.setAlerts([{
-                    title: "La página no ha sido encontrada.",
-                    classes: ["warning"],
-                    message: null
-                  }])
-                }
+                    this.setState({redirect: "/transacciones/"})
+                    this.setAlerts([{
+                      title: "La página no ha sido encontrada.",
+                      classes: ["warning"],
+                      message: null
+                    }])
+                } else if (status === 500) {
+                    this.setAlerts([{
+                      title: "Ha ocurrido un error en la comunicación con el servidor. Por favor intenta más tarde.",
+                      classes: ["danger"],
+                      message: null
+                    }])
+                  }
                 return Promise.reject(error);
             }
         )
