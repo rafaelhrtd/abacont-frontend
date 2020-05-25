@@ -63,22 +63,37 @@ class Company extends Component {
             <div className={classes.Company}>
                 <h1>
                     {this.state.company.name}
-                    <NameChanger 
-                        contextChange={this.getContext}
-                        company={this.state.company} />
+                    { this.context.user.role === 'owner' ? (
+                        <NameChanger 
+                            contextChange={this.getContext}
+                            company={this.state.company} />
+                    ) : null}
                 </h1>
                 
                 <div className={classes.buttons}>
                     {changeCompany}
                 </div>
                 <h2>Miembros</h2>
-                <Inviter addInvite={this.getInvites}/>
-                <h3>Invitaciones pendientes</h3>
-                <Invites 
-                    invites={this.state.invites}
-                    getInvites={this.getInvites} />
-                <h2>Subscripción</h2>
-                <p>To do</p>
+                { this.context.user.can_invite ? (
+                    <Aux>
+                        <Inviter addInvite={this.getInvites}/>
+                        { this.state.invites.length > 0 ? (
+                            <Aux>
+                                <h3>Invitaciones pendientes</h3>
+                                <Invites 
+                                    invites={this.state.invites}
+                                    getInvites={this.getInvites} />
+                            </Aux>
+
+                        ) : null}
+                    </Aux>
+                ) : null}
+                { this.context.user.role === "owner" ? (
+                    <Aux>
+                        <h2>Subscripción</h2>
+                        <p>To do</p>
+                    </Aux>
+                ) : null}
                 <Button className="success">Registrar nueva compañía</Button>
             </div>
         )

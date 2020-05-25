@@ -53,7 +53,9 @@ class Layout extends Component {
     }
 
     componentDidMount = () => {
-        this.updateUserInfo();
+        if (this.state.authenticated){
+            this.updateUserInfo();
+        }
     }
     
     loginHandler = (response, remember_me = false) => {
@@ -221,7 +223,8 @@ class Layout extends Component {
                     changeCurrentCompany: this.changeCurrentCompany,
                     currentCompany: this.state.company,
                     updateUserInfo: this.updateUserInfo,
-                    logout: this.logoutHandler}}>
+                    logout: this.logoutHandler,
+                    url: process.env.REACT_APP_API_ADDRESS}}>
                     <BrowserRouter>
                         <Switch>
                             <Route path="/invitado" render={() => (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './TransactionBoxItem.css';
 import Aux from '../../../hoc/Aux/Aux';
-import urlContext from '../../../context/url-context'
+import AuthContext from '../../../context/auth-context'
 import Button from '../../../UI/Buttons/Button/Button'
 import { Link } from 'react-router-dom'
 import transactionInfo from '../../containers/Transactions/Transaction/TransactionInfo/TransactionInfo';
@@ -13,7 +13,7 @@ class TransactionBoxItem extends Component {
         category: this.props.transaction.category,
         show: false
     }
-    static contextType = urlContext;
+    static contextType = AuthContext;
 
     clickedHead = () => {
         this.setState(prevState => {
@@ -136,26 +136,32 @@ class TransactionBoxItem extends Component {
                             <Link to={{
                                 pathname: paymentUrl,
                                 state: paymentState
-                            }}>   
-                                <Button className="success">
-                                    Nuevo pago
-                                </Button>
+                            }}> 
+                                {this.context.user.can_write ? (
+                                    <Button className="success">
+                                        Nuevo pago
+                                    </Button>
+                                ) : null}  
                             </Link>
                         </Aux>
                     ) : null }
-                    <Link to={{
-                        pathname: editURL,
-                        state: {
-                            path: this.state.redirect_url
-                        }
-                    }}>   
-                        <Button className="warning">
-                            Editar
-                        </Button>
-                    </Link>
-                    <DeleteButton 
-                        object={{transaction: transaction}}
-                        redirectPath={this.props.stateToPass.path} />
+                    { this.context.user.can_edit ? (
+                        <Aux>
+                            <Link to={{
+                                pathname: editURL,
+                                state: {
+                                    path: this.state.redirect_url
+                                }
+                            }}>   
+                                <Button className="warning">
+                                    Editar
+                                </Button>
+                            </Link>
+                            <DeleteButton 
+                                object={{transaction: transaction}}
+                                redirectPath={this.props.stateToPass.path} />
+                        </Aux>
+                    ) : null}
                 </div>
             )
 

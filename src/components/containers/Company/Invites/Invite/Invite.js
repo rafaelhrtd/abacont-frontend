@@ -3,7 +3,7 @@ import classes from './Invite.css'
 import {XSquare, Send} from 'react-feather';
 import Axios from 'axios';
 import AuthContext from '../../../../../context/auth-context';
-import Button from '../../../../../UI/Buttons/Button/Button'
+import Button from '../../../../../UI/Buttons/Button/Button';
 
 class Invite extends Component {
     state = {

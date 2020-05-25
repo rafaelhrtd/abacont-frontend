@@ -7,12 +7,16 @@ import Button from '../../../../UI/Buttons/Button/Button';
 import NewProject from '../NewProject/NewProject';
 import DeleteButton from '../../../../UI/Buttons/DeleteButton/DeleteButton';
 import ExcelButton from '../../../../UI/Buttons/ExcelButton/ExcelButton';
+import AuthContext from '../../../../context/auth-context';
+
 class Project extends Getter {
     state = {
         project: {},
         transactions: {},
         summary: {}
     }
+
+    static contextType = AuthContext;
 
 
     errorHandler = () => {
@@ -123,20 +127,23 @@ class Project extends Getter {
                         <div>{project.bill_number}</div>
                     </div>
                 ) : null}
-
-                <div className={classes.buttons}>
-                    <Link to={{
-                        pathname: editURL,
-                        state: {project: project}
-                    }}>
-                        <Button className="warning">
-                            Editar
-                        </Button>
-                    </Link>
-                    <DeleteButton 
-                        object={{project: project}}
-                        redirectPath="/proyectos/" />
-                </div>
+                {
+                    this.context.user.can_edit ? (
+                        <div className={classes.buttons}>
+                            <Link to={{
+                                pathname: editURL,
+                                state: {project: project}
+                            }}>
+                                <Button className="warning">
+                                    Editar
+                                </Button>
+                            </Link>
+                            <DeleteButton 
+                                object={{project: project}}
+                                redirectPath="/proyectos/" />
+                        </div>
+                    ) : null
+                }
             </div>
         ) : null
         

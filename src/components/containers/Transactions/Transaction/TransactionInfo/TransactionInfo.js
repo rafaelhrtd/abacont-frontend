@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './TransactionInfo.css'
 import { Link } from 'react-router-dom'
 import Button from '../../../../../UI/Buttons/Button/Button'
 import InfoPoint from '../../../../InfoPoint/InfoPoint'
-import DeleteButton from '../../../../../UI/Buttons/DeleteButton/DeleteButton'
+import DeleteButton from '../../../../../UI/Buttons/DeleteButton/DeleteButton';
+import AuthContext from '../../../../../context/auth-context';
 
 const transactionInfo = (props) => {
+    
+    const user = useContext(AuthContext).user;
+
     if (props.transaction === null) {
         return null
     } else {
@@ -19,7 +23,7 @@ const transactionInfo = (props) => {
 
         let editURL = transactionUrl + transaction.id + "/editar"
         
-        let buttons = (
+        let buttons = user.can_edit ? (
             <div className={classes.buttons}>
                 <Link to={{
                     pathname: editURL,
@@ -33,7 +37,7 @@ const transactionInfo = (props) => {
                     object={{transaction: props.transaction}}
                     redirectPath={transactionUrl} />
             </div>
-        )
+        ) : null
         
 
         return(

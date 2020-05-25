@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './ContactInfo.css'
 import InfoPoint from '../../../../InfoPoint/InfoPoint'
 import Aux from '../../../../../hoc/Aux/Aux'
 import { Link } from 'react-router-dom'
 import Button from '../../../../../UI/Buttons/Button/Button'
 import DeleteButton from '../../../../../UI/Buttons/DeleteButton/DeleteButton'
+import AuthContext from '../../../../../context/auth-context'
 
 const contactInfo = (props) => {
+    const user = useContext(AuthContext).user
     if (props.contact === null) {
         return null
     } else {
@@ -17,7 +19,7 @@ const contactInfo = (props) => {
             '/clientes/'
         ) : ( '/proveedores/')
         
-        let buttons = (
+        let buttons = user.can_edit ? (
             <div className={classes.buttons}>
                 <Link to={{
                     pathname: editURL,
@@ -31,7 +33,7 @@ const contactInfo = (props) => {
                     object={{contact: props.contact}}
                     redirectPath={redirectPath} />
             </div>
-        )
+        ) : null
         return(
             <Aux>
                 <div className={classes.ContactInfo}>

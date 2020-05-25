@@ -8,6 +8,7 @@ Currently doing:
     - Add payment method on transaction info (done)
     - 401 unauthorized should not log you out
     - index kicks you out when changing month on page
+    - disallow viewing of non-promises or at least remove balance
 
 To do:
     Company:

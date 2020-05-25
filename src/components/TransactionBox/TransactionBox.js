@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './TransactionBox.css'
 import TransactionBoxItem from './TransactionBoxItem/TransactionBoxItem';
 import Button from '../../UI/Buttons/Button/Button'
+import AuthContext from '../../context/auth-context'
 import { Link } from 'react-router-dom'
 
 // props
@@ -24,6 +25,7 @@ class TransactionBox extends Component {
         }
         return title
     }
+    static contextType = AuthContext;
 
     state = {
         transactions: {},
@@ -104,11 +106,13 @@ class TransactionBox extends Component {
                             stateToPass={this.props.stateToPass} />
                     ))}
                     {seeMoreButton}
-                    <Link to={{
-                        pathname: newTransactionURL,
-                        state: this.props.stateToPass}}>
-                        <Button className="success">Agregar</Button>
-                    </Link>
+                    {this.context.user.can_write ? (
+                        <Link to={{
+                            pathname: newTransactionURL,
+                            state: this.props.stateToPass}}>
+                            <Button className="success">Agregar</Button>
+                        </Link>
+                    ) : null }
                 </div>
             )
         }
