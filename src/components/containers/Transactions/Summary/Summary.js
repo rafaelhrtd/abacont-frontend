@@ -15,7 +15,7 @@ const summary = (props) => {
                 <div className={classes.Value}>${props.summary.revenue.toFixed(2)}</div>
             </div>
             <div className={classes.Element}>
-                <div className={[classes.Key, classes.greenbg].join(" ")}><strong>Total por cobrar:</strong></div>
+                <div className={[classes.Key, classes.greenbg].join(" ")}><strong>Cuentas por cobrar:</strong></div>
                 <div className={classes.Value}>${props.summary.receivable.toFixed(2)}</div>
             </div>
             <div className={classes.Element}>
@@ -23,7 +23,7 @@ const summary = (props) => {
                 <div className={classes.Value}>${props.summary.expense.toFixed(2)}</div>
             </div>
             <div className={classes.Element}>
-                <div className={[classes.Key, classes.redbg].join(" ")}><strong>Total por pagar:</strong></div>
+                <div className={[classes.Key, classes.redbg].join(" ")}><strong>Deudas:</strong></div>
                 <div className={classes.Value}>${props.summary.payable.toFixed(2)}</div>
             </div>
             <div className={classes.Element}>
