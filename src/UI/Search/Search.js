@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './Search.css';
 import { Link } from 'react-router-dom';
 import Button from '../Buttons/Button/Button';
-
+import AuthContext from '../../context/auth-context';
 
 // expected props:
 // placeholder: self explanatory
@@ -14,6 +14,7 @@ class Search extends Component {
         objects: [],
         matches: []
     }
+    static contextType = AuthContext;
     shouldComponentUpdate = (nextProps, nextState) => {
         return (
             JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
@@ -87,9 +88,11 @@ class Search extends Component {
                         </div>
                     </div>
                 </div>
-                <Link to={this.props.link + "agregar"} className={classes.AddButton}>
-                    <Button>+</Button>
-                </Link>
+                { this.context.user.can_write ? (
+                    <Link to={this.props.link + "agregar"} className={classes.AddButton}>
+                        <Button>+</Button>
+                    </Link>
+                ) : null}
             </div>
         )
     }
