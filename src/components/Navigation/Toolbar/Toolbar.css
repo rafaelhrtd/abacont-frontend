@@ -32,10 +32,10 @@
 
 .NavigationItems {
     display: flex;
-    flex-basis: 0;
+    justify-content: start;
     height: 100%;
     align-items: end;
-    flex-grow: 1;
+    flex-grow: 0;
     padding: 1rem;
     padding-bottom: 1.4rem;
     box-sizing: border-box;
@@ -65,9 +65,15 @@
     margin-right: 3rem;
 }
 
+.NavigationItems.LogoBig {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
 .Session {
     flex-basis: 0;
     flex-grow: 1;
+    flex-shrink: 0;
     display: flex;
     justify-content: end;
     padding: 0 1rem;

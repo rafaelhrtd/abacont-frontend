@@ -15,8 +15,10 @@ const toolbar = (props) => {
             <div className={[classes.centerLogo, classes.Menu].join(" ")}>
                 <img src={Logo} alt="React Logo" />
             </div>
-            <div className={classes.NavigationItems}>
+            <div className={[classes.NavigationItems, classes.LogoBig].join(" ")}>
                 <img src={LogoBig} alt="Abacont" />
+            </div>
+            <div className={classes.NavigationItems}>
                 <NavigationItems />
             </div>
             <div className={classes.Session}>
