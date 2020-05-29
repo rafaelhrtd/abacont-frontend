@@ -8,3 +8,16 @@
     align-items: flex-start;
     height: 100%;
 }
+
+@media(min-width:768px){
+    .MainContainer {
+        margin-left: 30%;
+    }
+}
+
+
+@media(min-width: 1024px){
+    .MainContainer {
+        margin-left: 25%;
+    }
+}

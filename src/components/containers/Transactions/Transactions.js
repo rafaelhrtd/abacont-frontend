@@ -158,7 +158,9 @@ class Transactions extends Getter {
                     year={this.state.year}
                     yearly={this.state.yearly}
                     kind="transactions" />
-                {tranBoxes}
+                <div className={classes.tranBoxes}>
+                    {tranBoxes}
+                </div>
                 
             </div>
         ) : (<TransactionIndex category={this.props.category} />)

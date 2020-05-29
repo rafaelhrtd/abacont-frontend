@@ -97,14 +97,16 @@ class TransactionBox extends Component {
                     {this.props.noTitle ? null : (
                         <h2 className={classes[dynamicClasses]}>{this.state.title}</h2>
                     )}
-                    {Object.keys(this.state.transactions).map(key => (
-                        <TransactionBoxItem 
-                            transaction={this.state.transactions[key]}
-                            key={this.state.transactions[key].id}
-                            inContact={this.props.inContact}
-                            redirect_path={this.props.redirect_path}
-                            stateToPass={this.props.stateToPass} />
-                    ))}
+                    <div className={classes.Transactions}>
+                        {Object.keys(this.state.transactions).map(key => (
+                            <TransactionBoxItem 
+                                transaction={this.state.transactions[key]}
+                                key={this.state.transactions[key].id}
+                                inContact={this.props.inContact}
+                                redirect_path={this.props.redirect_path}
+                                stateToPass={this.props.stateToPass} />
+                        ))}
+                    </div>
                     {seeMoreButton}
                     {this.context.user.can_write ? (
                         <Link to={{

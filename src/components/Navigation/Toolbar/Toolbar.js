@@ -18,9 +18,6 @@ const toolbar = (props) => {
             <div className={[classes.NavigationItems, classes.LogoBig].join(" ")}>
                 <img src={LogoBig} alt="Abacont" />
             </div>
-            <div className={classes.NavigationItems}>
-                <NavigationItems />
-            </div>
             <div className={classes.Session}>
                 <SessionItems
                     clicked={props.rightDrawer} />

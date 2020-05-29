@@ -10,19 +10,39 @@
     width: 30%;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
+    border-right: solid 1px #eaecf0;
 }
 
+.Logo {
+    height: 4.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid 1px #eaecf0;
+}
 
-@media (max-width: 499px){
+.Logo img {
+    height: 100%;
+}
+
+/* Remove logo for over 768 */
+@media(min-width: 1024px){
     .LeftDrawer {
-        min-width: 80%;
-        width: 80%;
+        min-width: 25%;
+        width: 25%;
     }
 }
-@media (min-width: 500px) and (max-width: 999px){
+
+@media (max-width: 768px){
     .LeftDrawer {
-        min-width: 50%;
-        width: 50%;
+        min-width: 75%;
+        width: 75%;
+    }
+    .Logo {
+        display: none;
     }
 }
 
@@ -32,6 +52,12 @@
 
 .Closed {
     transform: translateX(-100%);
+}
+
+@media (min-width: 768px){
+    .Closed {
+        transform: translateX(0%);
+    }
 }
 
 @keyframes Default {
@@ -45,7 +71,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 .LeftDrawer h2 {

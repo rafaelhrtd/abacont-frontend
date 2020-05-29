@@ -22,3 +22,19 @@
     width: 100%;
     flex-grow: 0;
 }
+@media (max-width: 767px){
+    .tranBoxes {
+        width: 100%;
+    }
+}
+@media (min-width: 768px){
+    .Transactions h1 {
+    }
+    .Transactions .MonthSelector {
+        text-align: left;;
+    }
+    .tranBoxes {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

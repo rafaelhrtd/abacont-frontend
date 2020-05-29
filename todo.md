@@ -10,6 +10,7 @@ Currently doing:
     - index kicks you out when changing month on page
     - disallow viewing of non-promises or at least remove balance
     - remove sidebars on redirect
+    - currency formatting (redux)
 
 To do:
     Company:

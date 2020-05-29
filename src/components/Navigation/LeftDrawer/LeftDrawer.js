@@ -3,7 +3,8 @@ import classes from './LeftDrawer.css'
 import Backdrop from '../../../UI/Backdrop/Backdrop'
 import Aux from '../../../hoc/Aux/Aux'
 import { NavLink } from 'react-router-dom'
-import HR from '../../../UI/HR/HR'
+import HR from '../../../UI/HR/HR';
+import Logo from '../../../assets/images/logo-big.svg';
 
 const leftDrawer = (props) => {
     let attachedClasses = [classes.LeftDrawer, classes.Closed]
@@ -14,6 +15,9 @@ const leftDrawer = (props) => {
         <Aux>
             <Backdrop show={props.open} clicked={props.backDropHandler} />
             <div className={attachedClasses.join(" ")}>
+                <div className={classes.Logo}>
+                    <img src={Logo} alt="React Logo" /> 
+                </div>
                 <h2>Finanzas</h2>
                 <HR />
                 <ul>

@@ -89,8 +89,8 @@ class Login extends Component {
                     </div>
                 </div>
                 <LoginForm
-                    remember_meVal={this.state.remember_me}
-                    remember={this.remember_meHandler}
+                    rememberMeVal={this.state.remember_me}
+                    remember={this.changeHandler}
                     changed={this.changeHandler}
                     login={this.loginHandler}
                     errorObjects={this.state.error_objects} />

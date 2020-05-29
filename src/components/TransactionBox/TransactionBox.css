@@ -3,10 +3,16 @@
     flex-grow: 0;
     border-bottom: none;
     flex-basis: 400px;
+    flex-grow: 1;
 }
 
 .TransactionBox button {
     margin: 0 0.5rem;
+}
+
+.Transactions {
+    border: solid 1px #eaecf0;
+    border-top: none;
 }
 
 .TransactionBox h2 {
