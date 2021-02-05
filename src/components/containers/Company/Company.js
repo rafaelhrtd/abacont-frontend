@@ -88,12 +88,6 @@ class Company extends Component {
                         ) : null}
                     </Aux>
                 ) : null}
-                { this.context.user.role === "owner" ? (
-                    <Aux>
-                        <h2>Subscripción</h2>
-                        <p>To do</p>
-                    </Aux>
-                ) : null}
                 <Button className="success">Registrar nueva compañía</Button>
             </div>
         )
