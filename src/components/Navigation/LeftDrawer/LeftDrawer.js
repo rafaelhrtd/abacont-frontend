@@ -22,7 +22,7 @@ const leftDrawer = (props) => {
                 <HR />
                 <ul>
                     <li>
-                        <NavLink to="/transacciones" onClick={props.backDropHandler}>
+                        <NavLink to="/" onClick={props.backDropHandler}>
                             Resumen
                         </NavLink> 
                     </li>

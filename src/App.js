@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
-import Aux from './hoc/Aux/Aux'
 import Contacts from './components/containers/Contacts/Contacts';
 import Transactions from './components/containers/Transactions/Transactions'
 import classes from './App.css'
@@ -45,11 +44,13 @@ class App extends Component {
 
   render() {
     
-    
+    let homepage = this.context.authenticated ? (
+      <Transactions />
+    ) : (
+      <Home />
+    )
     if (this.state.redirect) {
-      console.log("what in the fuck")
       const url = this.state.redirect
-      console.log(url)
       this.setState({redirect: null})
       return <Redirect to={url} />
     }
@@ -62,17 +63,12 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Route path="/" exact render={() => (
-          <Home />
-        )} />
+        <Route path="/" exact render={() => (homepage)} />
         <Route path="/clientes" render={() => (
           <Contacts clients={true} providers={false} />
         )} />
         <Route path="/proveedores" render={() => (
           <Contacts providers={true} clients={false} />
-        )} />
-        <Route path="/transacciones" exact render={() => (
-          <Transactions />
         )} />
         <Route path="/cuentas-por-cobrar" render={() => (
           <Transactions category="receivable" />

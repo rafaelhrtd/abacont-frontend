@@ -44,6 +44,7 @@
 .banner.topBanner {
     padding: 0;
     height: auto;
+    min-height: 0;
     overflow: hidden;
 }
 .banner.topBanner img {
@@ -100,6 +101,7 @@
     font-weight: 500;
     z-index: 5;
     font-size: 18px;
+    box-sizing: border-box;
     margin-bottom: 0;
 }
 
@@ -144,7 +146,11 @@
 
 @media(max-width: 799px){
     .banner .content .hasText{
-        margin-left: 50px;
+        margin: 0;
+        padding-left: 50px;
+    }
+    .banner{
+        padding: 0;
     }
 }
 
@@ -157,15 +163,9 @@
     .cardHolder .outerCard{
         flex-basis: 50%;
     }
-    .banner .content .hasText{
-        margin-left: 50px;
-    }
 }
 @media(min-width: 1140px){
     .cardHolder .outerCard{
         flex-basis: 25%;
-    }
-    .banner .content .hasText{
-        margin-left: 50px;
     }
 }

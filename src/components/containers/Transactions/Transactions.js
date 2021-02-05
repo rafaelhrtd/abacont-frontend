@@ -31,7 +31,7 @@ class Transactions extends Getter {
             }
         })
         this.props.history.push({
-            pathname: "/transacciones",
+            pathname: "/",
             search: query
         })
     }

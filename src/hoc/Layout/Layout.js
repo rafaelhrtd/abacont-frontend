@@ -186,14 +186,14 @@ class Layout extends Component {
                       classes: ["danger"]
                     }])
                 } else if (status === 403) {
-                  this.setState({redirect: "/transacciones/"})
+                  this.setState({redirect: "/"})
                   this.setAlerts([{
                     title: "Acceso denegado",
                     classes: ["danger"],
                     message: null
                   }])
                 } else if (status === 404) {
-                    this.setState({redirect: "/transacciones/"})
+                    this.setState({redirect: "/"})
                     this.setAlerts([{
                       title: "La página no ha sido encontrada.",
                       classes: ["warning"],
@@ -241,6 +241,7 @@ class Layout extends Component {
                                         init={this.state.initiateRightDrawer}
                                         backDropHandler={this.backDropHandler} />
                                     <Toolbar
+                                        loggedIn ={this.state.user !== null}
                                         rightDrawer={this.rightDrawerHandler}
                                         leftDrawer={this.leftDrawerHandler} />
                                         <MainContainer user={this.state.user}>                        

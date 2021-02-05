@@ -11,7 +11,7 @@ const NavigationItems = (props) => {
                 <NavigationItem link="/" text="Página Principal" /> 
             </li>
             <li>
-                <NavigationItem link="/transacciones" text="Transacciones" />
+                <NavigationItem link="/" text="Transacciones" />
             </li>
             <li>
                 <NavigationItem link="/proyectos" text="Proyectos" />
