@@ -7,7 +7,7 @@ import classes from './App.css'
 import Projects from './components/containers/Projects/Projects'
 import AuthContext from './context/auth-context'
 import Company from './components/containers/Company/Company'
-import Axios from 'axios'
+import Home from './components/containers/Home/Home'
 class App extends Component {
   state = {
     email: null,
@@ -63,7 +63,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Route path="/" exact render={() => (
-          <h1>Home</h1>
+          <Home />
         )} />
         <Route path="/clientes" render={() => (
           <Contacts clients={true} providers={false} />

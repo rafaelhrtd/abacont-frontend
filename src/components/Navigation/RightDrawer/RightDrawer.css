@@ -4,10 +4,9 @@
     position: fixed;
     height: 100%;
     right: 0;
-    max-width: 100%;;
+    max-width: 300px;
     top: 0;
-    min-width: 30%;
-    width: 30%;
+    min-width: 300px;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
 }
@@ -16,20 +15,6 @@
     animation-name: Default; 
     animation-duration: 2s;
 }
-
-@media (max-width: 499px){
-    .RightDrawer {
-        min-width: 80%;
-        width: 80%;
-    }
-}
-@media (min-width: 500px) and (max-width: 999px){
-    .RightDrawer {
-        min-width: 50%;
-        width: 50%;
-    }
-}
-
 .Open {
     transform: translateX(0%);
 }

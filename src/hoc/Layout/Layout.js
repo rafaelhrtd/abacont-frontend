@@ -232,9 +232,9 @@ class Layout extends Component {
                             )} />
                             <Route path="/" render={() => (
                                 <Aux>
-                                    <LeftDrawer 
+                                    {this.state.user ? <LeftDrawer 
                                         backDropHandler={this.backDropHandler}
-                                        open={this.state.showLeftDrawer} />
+                                        open={this.state.showLeftDrawer} /> : null}
                                     <RightDrawer
                                         open={this.state.showRightDrawer}
                                         closed={this.rightDrawerHandler}
@@ -243,7 +243,7 @@ class Layout extends Component {
                                     <Toolbar
                                         rightDrawer={this.rightDrawerHandler}
                                         leftDrawer={this.leftDrawerHandler} />
-                                        <MainContainer>                        
+                                        <MainContainer user={this.state.user}>                        
                                             <App
                                                 removeRedirect={this.removeRedirect}
                                                 redirect={this.state.redirect} />

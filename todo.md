@@ -2,14 +2,14 @@ Currently doing:
     Company:
         - Change company (done)
         - Link to edit (done)
-        - Subscription info
+        - Subscription info (remove for the sake of portfolio)
         - Link to users 
     - Remove paid promises (done)
     - Add payment method on transaction info (done)
     - 401 unauthorized should not log you out
     - index kicks you out when changing month on page
-    - disallow viewing of non-promises or at least remove balance
-    - remove sidebars on redirect
+    - disallow viewing of non-promises or at least remove balance (?)
+    - remove sidebars on redirect (why?)
     - currency formatting (redux)
 
 To do:

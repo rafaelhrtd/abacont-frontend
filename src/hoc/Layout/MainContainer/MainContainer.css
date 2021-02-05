@@ -9,6 +9,11 @@
     height: 100%;
 }
 
+.loggedOut{
+    margin: 0 !important;
+    padding: 0;
+}
+
 @media(min-width:768px){
     .MainContainer {
         margin-left: 30%;

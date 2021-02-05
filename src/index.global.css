@@ -33,7 +33,7 @@ body {
   padding: 0;
   padding-top: 4.5rem;
   background-color: #f4f9ff;
-  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #424656;
   height: 100%;
   box-sizing: border-box;
@@ -56,7 +56,7 @@ textarea, input[type="number"], input[type="date"] {
   margin-bottom: 1rem;
   width: 100%;
   padding: 0.5rem;
-  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
   resize: none;
   border-radius: 0;
@@ -64,7 +64,7 @@ textarea, input[type="number"], input[type="date"] {
 }
 
 textarea::placeholder {
-  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 input[type="submit"] {
