@@ -10,7 +10,6 @@
     width: 100%;
     max-width: 1440px;;
     box-sizing: border-box;
-
 }
 .introduction h4 {
     font-size: 30px;
@@ -40,6 +39,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.banner.topBanner {
+    padding: 0;
+    height: auto;
+    overflow: hidden;
+}
+.banner.topBanner img {
+    width: 100%;
+    height: auto;
 }
 .banner .content {
     max-width: 1440px;

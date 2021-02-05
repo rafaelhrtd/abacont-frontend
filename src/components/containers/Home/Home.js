@@ -3,13 +3,17 @@ import { withRouter } from 'react-router-dom';
 import Aux from '../../../hoc/Aux/Aux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faFileExcel, faUsers, faMoneyBill, faMoneyCheck } from '@fortawesome/free-solid-svg-icons';
-import classes from './Home.css'
+import classes from './Home.css';
+import bannerImage from '../../../assets/images/homeBanner.jpg';
 
 class Home extends Component {
     render(){
         return (
             <Aux>
                 <div className={classes.Container}>
+                    <div className={[classes.banner, classes.topBanner].join(" ")}>
+                        <img src={bannerImage} />
+                    </div>
                     <div className={classes.introduction}>
                         <h4>Abacont</h4>
                         <h1>Lo esencial para seguir el estado financiero de tu negocio.</h1>                    
