@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './LoginForm.css';
 import CheckBox from '../../../../UI/FormElements/CheckBox/CheckBox'
+import LocalizedStrings from 'react-localization';
 
 const loginForm = (props) => {
     let hasError = Object.keys(props.errorObjects).length > 0
@@ -43,17 +44,17 @@ const loginForm = (props) => {
                 <input 
                     type="password" 
                     name="password"
-                    placeholder="Contraseña"
+                    placeholder={props.strings.password}
                     className={classes[passwordClass]}
                     onChange={(event) => props.changed(event)}></input>
                 <CheckBox 
                     givenClass={classes.checkbox} 
                     name="remember_me" 
-                    text="Recuérdame"
+                    text={props.strings.rememberMe}
                     changed={props.changed}
                     clicked={props.remember}
                     initVal={props.rememberMeVal} />
-                <input type="submit" value="Iniciar sesión" className="btn-success" />
+                <input type="submit" value={props.strings.loginButtonText} className="btn-success" />
             </form>
         </div>
     )

@@ -1,22 +1,59 @@
 import React, { Component } from 'react';
 import classes from './MonthSelector.css'
+import LocalizedStrings from 'react-localization';
 
 
 class MonthSelector extends Component {
     static months = () => {
+        let strings = new LocalizedStrings({
+          en:{
+            jan: "January",
+            feb: "February",
+            mar: "March",
+            apr: "April",
+            may: "May",
+            jun: "June",
+            jul: "July",
+            aug: "August",
+            sep: "September",
+            oct: "October",
+            nov: "November",
+            dec: "December"
+          },
+          es: {
+            jan: "Enero",
+            feb: "Febrero",
+            mar: "Marzo",
+            apr: "Abril",
+            may: "Mayo",
+            jun: "Junio",
+            jul: "Julio",
+            aug: "Agosto",
+            sep: "Septiembre",
+            oct: "Octubre",
+            nov: "Noviembre",
+            dec: "Diciembre"
+          }
+         });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        } 
         return ([
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo",
-            "Junio",
-            "Julio",
-            "Agosto",
-            "Septiembre",
-            "Octubre",
-            "Noviembre",
-            "Diciembre"
+            strings.jan,
+            strings.feb,
+            strings.mar,
+            strings.apr,
+            strings.may,
+            strings.jun,
+            strings.jul,
+            strings.aug,
+            strings.sep,
+            strings.oct,
+            strings.nov,
+            strings.dec
         ])
     }
 
@@ -95,6 +132,23 @@ class MonthSelector extends Component {
     }
 
     render(){
+
+        let strings = new LocalizedStrings({
+            en:{
+                annual: "Annual",
+                monthly: "Monthly"
+            },
+            es: {
+                annual: "Anual",
+                monthly: "Mensual"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         return(
 
             <div className={classes.MonthSelector}>
@@ -110,7 +164,7 @@ class MonthSelector extends Component {
                     <div className={classes.changer} onClick={this.addMonthHandler}>{">>"}</div>
                 </div>
                 <div className={classes.MonthYear} onClick={this.switchYearlyHandler}>
-                    {this.state.yearly ? "Mensual" : "Anual"}
+                    {this.state.yearly ? strings.monthly : strings.annual}
                 </div>
             </div>
             

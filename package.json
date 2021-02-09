@@ -50,6 +50,7 @@
     "react-export-excel": "^0.5.3",
     "react-feather": "^2.0.8",
     "react-loading": "^2.0.3",
+    "react-localization": "^1.0.15",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-xlsx-workbook": "0.0.5",

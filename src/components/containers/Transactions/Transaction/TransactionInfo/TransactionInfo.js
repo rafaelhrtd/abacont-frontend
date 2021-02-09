@@ -5,8 +5,41 @@ import Button from '../../../../../UI/Buttons/Button/Button'
 import InfoPoint from '../../../../InfoPoint/InfoPoint'
 import DeleteButton from '../../../../../UI/Buttons/DeleteButton/DeleteButton';
 import AuthContext from '../../../../../context/auth-context';
+import LocalizedStrings from 'react-localization';
 
 const transactionInfo = (props) => {
+
+
+    let strings = new LocalizedStrings({
+        en:{
+            summary: "Summary",
+            edit: "Edit",
+            date: "Date:",
+            project: "Project:",
+            client: "Client:",
+            provider: "Provider:",
+            amount: "Amount:",
+            paymentMethod: "Payment method:",
+            currentBalance: "Current balance:"
+        },
+        es: {
+            summary: "Resumen",
+            edit: "Editar",
+            date: "Fecha:",
+            project: "Proyecto:",
+            client: "Cliente:",
+            provider: "Proveedor:",
+            amount: "Monto:",
+            paymentMethod: "Método de pago:",
+            currentBalance: "Saldo actual:"
+        }
+    });
+    let language = navigator.language;
+    if (localStorage.getItem('language') !== null){
+        language = localStorage.getItem('language');
+    } else if (sessionStorage.getItem('language') !== null){
+        language = sessionStorage.getItem('language');
+    }
     
     const user = useContext(AuthContext).user;
 
@@ -30,7 +63,7 @@ const transactionInfo = (props) => {
                     state: {transaction: props.transaction}
                 }}>
                     <Button className="warning">
-                        Editar
+                        {strings.edit}
                     </Button>
                 </Link>
                 <DeleteButton 
@@ -43,37 +76,37 @@ const transactionInfo = (props) => {
         return(
             <div className={classes.TransactionInfo}>
                 <div className={classes.InfoBox}>
-                    <h2>Resumen:</h2>
+                    <h2>{strings.summary}:</h2>
                     <InfoPoint 
-                        title={"Fecha:"}
+                        title={strings.date}
                         value={date}
                         />
 
                     <InfoPoint 
-                        title={"Proyecto:"}
+                        title={strings.project}
                         value={transaction.project_name}
                         link={projectURL}
                         />
 
                     <InfoPoint 
-                        title={"Cliente:"}
+                        title={props.transaction.category === "receivable" ? strings.client : strings.provider}
                         value={transaction.contact_name}
                         link={contactUrl}
                         />
                         
 
                     <InfoPoint 
-                        title={"Monto:"}
+                        title={strings.amount}
                         value={"$"+props.transaction.amount.toFixed(2)}
                     />
 
                     <InfoPoint 
-                        title={"Método de pago:"}
+                        title={strings.paymentMethod}
                         value={props.transaction.payment_method}
                         />
 
                     <InfoPoint 
-                        title={"Saldo restante:"}
+                        title={strings.currentBalance}
                         value={"$"+props.transaction.balance.toFixed(2)}
                         />
                 </div>

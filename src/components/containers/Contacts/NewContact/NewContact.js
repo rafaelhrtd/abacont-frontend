@@ -5,6 +5,7 @@ import classes from './NewContact.css';
 import Form from '../../../Form/Form';
 import Contact from '../Contact/Contact'
 import { withRouter, Redirect } from 'react-router-dom' ;
+import LocalizedStrings from 'react-localization';
 
 class NewContact extends FormHolder {
     state = {
@@ -17,6 +18,36 @@ class NewContact extends FormHolder {
 
     static contextType = AuthContext;
     
+    strings = () => {
+        let strings = new LocalizedStrings({
+            en:{
+                changedSaved: "Changes saved.",
+                save: "Save",
+                create: "Create",
+                new: "New ",
+                edit: "Edit ",
+                client: "Client",
+                provider: "Provider"
+            },
+            es: {
+                changedSaved: "Cambios guardados.",
+                save: "Guardar",
+                create: "Crear",
+                new: "Nuevo ",
+                edit: "Editar ",
+                client: "Cliente",
+                provider: "Proveedor"
+            }
+           });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+        return strings
+    }
+
     createContactHandler = (event, edit=false) => {
         event.preventDefault()
         let data = this.setUpData(this.state.form_data)
@@ -35,7 +66,7 @@ class NewContact extends FormHolder {
         let redirect_url = this.props.redirect_url
         if (this.state.old_data === {}){
             this.context.setAlerts([
-                {title: "Cambios guardados",
+                {title: this.strings().changedSaved,
                  classes: ["success"],
                  message: null}
             ])
@@ -62,22 +93,40 @@ class NewContact extends FormHolder {
         this.setState({errors: errors})
     }
     static formElements = (category) => {
+        let strings = new LocalizedStrings({
+            en:{
+                name: "Name",
+                email: "Email",
+                phone: "Phone"
+            },
+            es: {
+                name: "Name",
+                email: "Email",
+                phone: "Phone"
+            }
+            });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         let inputs = {
             name: {
                 inputType: "text",
                 name: "name",
-                placeholder: "Nombre",
+                placeholder: strings.name,
                 blank: false
             },
             email: {
                 inputType: "email",
                 name: "email",
-                placeholder: "Email"
+                placeholder: strings.email
             },
             phone: {
                 inputType: "text",
                 name: "phone",
-                placeholder: "Teléfono"
+                placeholder: strings.phone
             },
             category: {
                 name: "category",
@@ -102,11 +151,11 @@ class NewContact extends FormHolder {
             return <Redirect to={this.state.redirect} />
         }
         const url=process.env.REACT_APP_API_ADDRESS + "contacts"
-        const saveTitle = this.props.contact !== undefined ? "Guardar" : "Crear"
-        const titleStart = this.props.contact !== undefined ? "Editar " : "Nuevo "
+        const saveTitle = this.props.contact !== undefined ? this.strings().save : this.strings().create
+        const titleStart = this.props.contact !== undefined ? this.strings().edit : this.strings().new
         return(
             <div className={classes.NewContact}>
-                <h1>{titleStart} {this.state.category === "client" ? "cliente":"proveedor"}</h1>
+                <h1>{titleStart} {this.state.category === "client" ? this.strings().client : this.strings().provider}</h1>
                 <div className={classes.FormDiv}>
                     <Form
                         changed={this.changeHandler}

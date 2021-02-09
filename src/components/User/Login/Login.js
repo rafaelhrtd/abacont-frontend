@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import classes from './Login.css'
-import axios from 'axios'
-import AuthContext from '../../../context/auth-context'
-import LoginForm from './Form/LoginForm'
+import React, { Component } from 'react';
+import classes from './Login.css';
+import axios from 'axios';
+import AuthContext from '../../../context/auth-context';
+import LoginForm from './Form/LoginForm';
+import LocalizedStrings from 'react-localization';
 
 class Login extends Component {
     state = {
@@ -42,11 +43,12 @@ class Login extends Component {
           user: {
             email: this.state.email,
             password: this.state.password,
-            remember_me: true
+            remember_me: this.state.remember_me
           }
         }
         axios.post(process.env.REACT_APP_API_ADDRESS + "login", data)
           .then(response => {
+            console.log(response);
             if (response.status === 200){
                 this.context.login(response, this.state.remember_me)
             }
@@ -80,12 +82,38 @@ class Login extends Component {
     }
 
     render (){
+
+        let strings = new LocalizedStrings({
+          en:{
+            login: "Log in",
+            or: "or",
+            createAccount: "register",
+            rememberMe: "Remember me",
+            loginButtonText: "Log in",
+            password: "Password"
+          },
+          es: {
+            login: "Inicia sesión",
+            or: "o",
+            createAccount: "crea tu cuenta",
+            rememberMe: "Recuérdame",
+            loginButtonText: "Iniciar sesión",
+            password: "Contraseña"
+          }
+         });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        } 
+        strings.setLanguage(language);
         return (
             <div className={classes.Login}>
                 <div className={classes.titleHolder}>
-                    <h2>Inicia sesión</h2>
+                    <h2>{strings.login}</h2>
                     <div className={classes.CreateAccount}>
-                        o <span className={classes.AccountLink} onClick={this.props.new_account}>crea tu cuenta</span>
+                        {strings.or} <span className={classes.AccountLink} onClick={this.props.new_account}>{strings.createAccount}</span>
                     </div>
                 </div>
                 <LoginForm
@@ -93,6 +121,7 @@ class Login extends Component {
                     remember={this.changeHandler}
                     changed={this.changeHandler}
                     login={this.loginHandler}
+                    strings={strings}
                     errorObjects={this.state.error_objects} />
             </div>
         )

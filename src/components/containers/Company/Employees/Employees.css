@@ -1,0 +1,23 @@
+.employeeTable {
+    text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+.employeeTable thead tr th {
+    border: none;
+    margin: 0;
+    padding: 5px;
+}
+.employeeTable tbody tr td svg {
+    padding: 0 4px;
+    cursor: pointer;
+}
+.employeeTable tbody tr td {
+    padding: 5px;
+}
+.employeeTable tbody tr {
+    background-color: white;
+}
+.employeeTable tbody tr:hover {
+    background-color: #ebf6ff;
+}

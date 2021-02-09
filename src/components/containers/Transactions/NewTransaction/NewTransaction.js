@@ -6,7 +6,8 @@ import Form from '../../../Form/Form';
 import NewContact from '../../Contacts/NewContact/NewContact';
 import NewProject from '../../Projects/NewProject/NewProject';
 import AuthContext from '../../../../context/auth-context';
-import Transaction from '../Transaction/Transaction'
+import Transaction from '../Transaction/Transaction';
+import LocalizedStrings from 'react-localization';
 
 class NewTransaction extends FormHolder {
     state = {...this.state,
@@ -67,27 +68,70 @@ class NewTransaction extends FormHolder {
     
 
     static FormElements = (suffix=null, clientCategory, contactPlaceholder, category) => {
+        let strings = new LocalizedStrings({
+            en:{
+                amount: "Amount",
+                description: "Description",
+                paymentType: "Payment type",
+                chequeNumber: "Cheque number",
+                date: "Date",
+                new: "New ",
+                project: "Project",
+                billNumber: "Bill number",
+                paymentTypes: {
+                    cash: "Cash",
+                    credit: "Credit",
+                    debit: "Debit",
+                    cheque: "Cheque",
+                    wireTransfer: "Wire transfer"
+                }
+                
+            },
+            es: {
+                amount: "Monto",
+                description: "Descripción",
+                paymentType: "Tipo de pago",
+                chequeNumber: "Número de cheque",
+                date: "Fecha",
+                new: "Nuevo ",
+                project: "Proyecto",
+                billNumber: "Número de factura",
+                paymentTypes: {
+                    cash: "Efectivo",
+                    credit: "Crédito",
+                    debit: "Débito",
+                    cheque: "Cheque",
+                    wireTransfer: "Transferencia bancaria"
+                }
+            }
+           });
+          let language = navigator.language;
+          if (localStorage.getItem('language') !== null){
+              language = localStorage.getItem('language');
+          } else if (sessionStorage.getItem('language') !== null){
+              language = sessionStorage.getItem('language');
+          }
         let inputs = {
             amount: {
                 inputType: "text",
                 name: "amount",
-                placeholder: "Monto",
+                placeholder: strings.amount,
                 blank: false
             },
             description: {
                 inputType: "textarea",
                 name: "description",
-                placeholder: "Descripción"
+                placeholder: strings.description
             },
             payment_type: {
                 inputType: "select",
-                placeholder: "Método de pago",
+                placeholder: strings.paymentType,
                 options: [
-                    "Efectivo",
-                    "Crédito",
-                    "Débito",
-                    "Cheque",
-                    "Transferencia"
+                    strings.paymentTypes.cash,
+                    strings.paymentTypes.credit,
+                    strings.paymentTypes.debit,
+                    strings.paymentTypes.cheque,
+                    strings.paymentTypes.wireTransfer,
                 ],
                 name: "payment_type",
                 blank: true,
@@ -95,14 +139,14 @@ class NewTransaction extends FormHolder {
                     onOption: 3,
                     inputType: "text",
                     name: "cheque_number",
-                    placeholder: "Número de cheque",
+                    placeholder: strings.chequeNumber,
                     blank: true
                 }
             },
             date: {
                 inputType: "date",
                 name: "date",
-                placeholder: "Fecha",
+                placeholder: strings.date,
                 blank: false
             },
             category: {
@@ -122,7 +166,7 @@ class NewTransaction extends FormHolder {
                 placeholder: contactPlaceholder,
                 form_elements: NewContact.formElements(clientCategory),
                 suffix: "contact.",
-                placeholder_suffix: "Nuevo " + contactPlaceholder + ": ",
+                placeholder_suffix: strings.new + contactPlaceholder + ": ",
                 child: true,
                 blank: ["expense", "revenue"].includes(category)
             },
@@ -132,16 +176,16 @@ class NewTransaction extends FormHolder {
                 url: 'projects',
                 search: true,
                 data: {},
-                placeholder: "Proyecto",
+                placeholder: strings.project,
                 suffix: "project.",
                 form_elements: NewProject.formElements("project."),
                 child: true,
-                placeholder_suffix: "Nuevo proyecto: ",
+                placeholder_suffix: strings.NewProject,
             },
             bill_number: {
                 inputType: "text",
                 name: "bill_number",
-                placeholder: "Número de factura"
+                placeholder: strings.billNumber
             }
 
         }
@@ -183,12 +227,49 @@ class NewTransaction extends FormHolder {
     }
 
     render() {
+        let strings = new LocalizedStrings({
+            en:{
+                client: "Client",
+                provider: "Provider",
+                newM: "New ",
+                newF: "New ",
+                edit: "Edit ",
+                revenue: "Revenue",
+                accountPayable: "Account payable",
+                expense: "Expense",
+                accountReceivable: "Account receivable",
+                save: "Save",
+                create: "Create",
+                remainingBalance: "Current balance"
+
+            },
+            es: {
+                client: "Cliente",
+                provider: "Proveedor",
+                newM: "Nuevo ",
+                newF: "Nueva ",
+                edit: "Editar ",
+                revenue: "Ingreso",
+                accountsayable: "Cuenta por pagar",
+                expense: "Egreso",
+                accountReceivable: "Cuenta por cobrar",
+                save: "Guardar",
+                create: "Crear",
+                remainingBalance: "Saldo restante"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         // check for redirect
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
         const contactPlaceholder = (["receivable", "revenue"].includes(this.props.category)?
-            ("Cliente") : ("Proveedor"))
+            strings.client : strings.provider)
         const clientCategory = (["receivable", "revenue"].includes(this.props.category)?
         ("client") : ("provider"))
         let form_elements = NewTransaction.FormElements(null, clientCategory, contactPlaceholder, this.state.category)
@@ -198,7 +279,7 @@ class NewTransaction extends FormHolder {
         // get values for search inputs if info is passed
         if (passed_state !== undefined ||  passed_transaction !== undefined) {
             if (passed_state !== undefined && passed_state.balance !== undefined) {
-                balance = <h2>Saldo restante: ${passed_state.balance.toFixed(2)}</h2>
+                balance = <h2>{strings.remainingBalance}: ${passed_state.balance.toFixed(2)}</h2>
             }
 
             let contact_id = passed_transaction !== undefined ? (
@@ -225,23 +306,23 @@ class NewTransaction extends FormHolder {
         let title = ""
         let name = ""
         if (this.props.category === "payable"){
-            title = "cuenta por pagar"
-            name = "cuenta por pagar"
-            title = (this.props.transaction !== undefined ? "Editar " : "Nueva ") + title
+            title = strings.accountPayable
+            name = strings.accountPayable
+            title = (this.props.transaction !== undefined ? strings.edit : strings.newF) + title
         } else if (this.props.category === "receivable") {
-            title = "cuenta por cobrar"
-            name = "cuenta por cobrar"
-            title = (this.props.transaction !== undefined ? "Editar " : "Nueva ") + title
+            title = strings.accountReceivable
+            name = strings.accountReceivable
+            title = (this.props.transaction !== undefined ? strings.edit : strings.newF) + title
         } else if (this.props.category === "expense") {
-            title = "egreso"
-            name = "egreso"
-            title = (this.props.transaction !== undefined ? "Editar " : "Nuevo ") + title
+            title = strings.expense
+            name = strings.expense
+            title = (this.props.transaction !== undefined ? strings.edit : strings.newM) + title
         } else if (this.props.category === "revenue") {
-            title = "ingreso"
-            name = "ingreso"
-            title = (this.props.transaction !== undefined ? "Editar " : "Nuevo ") + title
+            title = strings.revenue
+            name = strings.revenue
+            title = (this.props.transaction !== undefined ? strings.edit : strings.newM) + title
         }
-        const saveTitle = this.props.transaction !== undefined ? "Guardar" : "Crear"
+        const saveTitle = this.props.transaction !== undefined ? strings.save : strings.create
         // check for remaining balance
 
 

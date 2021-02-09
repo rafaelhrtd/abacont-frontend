@@ -6,6 +6,7 @@ import Modal from '../../Modal/Modal';
 import Axios from 'axios';
 import AuthContext from '../../../context/auth-context'
 import { Redirect } from 'react-router-dom';
+import LocalizedStrings from 'react-localization';
 
 class DeleteButton extends Component {
     state = {
@@ -93,6 +94,44 @@ class DeleteButton extends Component {
     }
 
     render(){
+        let strings = new LocalizedStrings({
+            en:{
+                delete: "Delete",
+                password: "Password",
+                deleteMessage: "Do you also wish to delete the movements (revenues, expenses, and accounts payable and receivable) ",
+                deleteMessageOne: "and projects belonging to this contact?",
+                deleteMessageTwo: "belonging to this project?",
+                deleteMessageThree: "belonging to this account receivable?",
+                deleteMessageFour: "belonging to this account payable?",
+                allWillBeDeleted: "All dependent articles will be deleted. ",
+                enterYourPassword: "Please enter your password to confirm:",
+                yes: "Yes",
+                no: "No",
+                cancel: "Cancel",
+                confirm: "Confirm"
+            },
+            es: {
+                delete: "Eliminar",
+                password: "Contraseña",
+                deleteMessage: "¿También deseas eliminar los movimientos ",
+                deleteMessageOne: "y proyectos pertenecientes a este contacto?",
+                deleteMessageTwo: "pertenecientes a este proyecto?",
+                deleteMessageThree: "pertenecientes a esta cuenta por cobrar?",
+                deleteMessageFour: "pertenecientes a esta cuenta por pagar?",
+                allWillBeDeleted: "Todos los artículos dependientes serán eliminados. ",
+                enterYourPassword: "Introduce tu contraseña para confirmar la eliminación:",
+                yes: "Sí",
+                no: "No",
+                cancel: "Cancelar",
+                confirm: "Confirmar"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         const inputClass = this.state.error === null ? null : classes.danger
         if (this.state.redirectPath !== null){
             return <Redirect to={{
@@ -103,29 +142,29 @@ class DeleteButton extends Component {
         let password = (
             <input 
                 type="password"
-                placeholder="Contraseña"
+                placeholder={strings.password}
                 value={this.state.password}
                 className={inputClass}
                 onChange={event => this.passwordListener(event)}>
             </input>
         )
-        deleteMessage = "¿También deseas eliminar los movimientos "
+        deleteMessage = strings.deleteMessage
         if (this.state.has_children && !this.state.question_answered){
             if (this.state.objectType === "contact"){
-                deleteMessage += "y proyectos pertenecientes a este contacto?"
+                deleteMessage += strings.deleteMessageOne
             } else if (this.state.objectType === "project") {
-                deleteMessage += "pertenecientes a este proyecto?"                
+                deleteMessage += strings.deleteMessageTwo
             } else if (this.state.objectType === "receivable") {
-                deleteMessage += "pertenecientes a esta cuenta por cobrar?"      
+                deleteMessage += strings.deleteMessageThree
             } else if (this.state.objectType === "payable") {
-                deleteMessage += "pertenecientes a esta cuenta por pagar?"
+                deleteMessage += strings.deleteMessageFour
             }
         } else {
             deleteMessage = ""
             if (this.state.destroy_children){
-                deleteMessage = "Todos los artículos dependientes serán eliminados. "
+                deleteMessage = strings.allWillBeDeleted
             }
-            deleteMessage += "Introduce tu contraseña para confirmar la eliminación."
+            deleteMessage += strings.enterYourPassword
         }
         let content = null
         if (this.state.has_children && !this.state.question_answered){
@@ -134,13 +173,13 @@ class DeleteButton extends Component {
                     <p>{deleteMessage}</p>
                     <div className={classes.buttons}>
                         <Button className="danger" onClick={() => this.destroyChildrenHandler(true)}>
-                            Sí
+                            {strings.yes}
                         </Button>
                         <Button className="warning" onClick={() => this.destroyChildrenHandler(false)}>
-                            No
+                            {strings.no}
                         </Button>
                         <Button className="primary" onClick={this.showHandler}>
-                            Cancelar
+                            {strings.cancel}
                         </Button>
                     </div>
                 </div>
@@ -152,10 +191,10 @@ class DeleteButton extends Component {
                     {password}
                     <div className={classes.buttons}>
                         <Button className="danger" onClick={this.submitDeleteRequest}>
-                            Confirmar
+                            {strings.confirm}
                         </Button>
                         <Button className="primary" onClick={this.showHandler}>
-                            Cancelar
+                            {strings.cancel}
                         </Button>
                     </div>
                 </div>
@@ -169,12 +208,12 @@ class DeleteButton extends Component {
         return(
             <Aux>
                 <Button className="danger" onClick={this.showHandler}>
-                    Eliminar
+                    {strings.delete}
                 </Button>
                 <Modal 
                     show={this.state.show}
                     showHandler={this.showHandler}>
-                    <h3>Eliminar</h3>
+                    <h3>{strings.delete}</h3>
                     {error}
                     {content}
                 </Modal>

@@ -22,6 +22,28 @@ warning:hover: #ffbf2a
   -webkit-appearance: none;
 }
 
+:global(.bg-primary) {
+  background-color: #0087ff;
+  color: white;
+}
+:global(.bg-warning) {
+  background-color: #ffb300;
+  color: white;
+}
+:global(.bg-danger) {
+  background-color: #f34672;
+  color: white;
+}
+:global(.text-danger) {
+  color: #f34672;
+}
+:global(.text-primary) {
+  color: #0087ff;
+}
+:global(.text-warning) {
+  color: #ffb300;
+}
+
 html {
   height: 100%;
   min-height: 100%;

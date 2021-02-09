@@ -12,6 +12,7 @@ import Loader from '../../UI/Loader/Loader';
 import Alert from '../../UI/Alert/Alert';
 import Aux from '../../hoc/Aux/Aux';
 import Invite from '../../components/containers/Invite/Invite';
+import LocalizedStrings from 'react-localization';
 class Layout extends Component {
     state = {
         initiateRightDrawer: (localStorage.getItem('jwtToken') === null &&
@@ -63,10 +64,12 @@ class Layout extends Component {
             localStorage.setItem('jwtToken', response.headers.authorization)
             localStorage.setItem('user', JSON.stringify(response.data.user))
             localStorage.setItem('companies', JSON.stringify(response.data.companies))
+            localStorage.setItem('language', JSON.stringify(response.data.user.language))
             localStorage.setItem('company', JSON.stringify(response.data.company))
         } else {
             sessionStorage.setItem('jwtToken', response.headers.authorization)
             sessionStorage.setItem('user', JSON.stringify(response.data.user))
+            sessionStorage.setItem('language', JSON.stringify(response.data.user.language))
             sessionStorage.setItem('companies', JSON.stringify(response.data.companies))
             sessionStorage.setItem('company', JSON.stringify(response.data.company))
         }
@@ -104,10 +107,12 @@ class Layout extends Component {
         })
         if (localStorage.getItem('jwtToken')){
             localStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('language', JSON.stringify(data.user.language))
             localStorage.setItem('companies', JSON.stringify(data.companies))
             localStorage.setItem('company', JSON.stringify(data.company))
         } else if (sessionStorage.getItem('jwtToken')){
             sessionStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('language', JSON.stringify(data.user.language))
             sessionStorage.setItem('companies', JSON.stringify(data.companies))
             sessionStorage.setItem('company', JSON.stringify(data.company))
         }
@@ -173,16 +178,37 @@ class Layout extends Component {
         this.setState({redirect: null})
     }
 
+    isAdmin = () => {
+        return (this.state.user.role === "owner");
+    }
+
     render (){
+
+        let strings = new LocalizedStrings({
+          en:{
+            pleaseLogin: "Please log in to access this page."
+          },
+          es: {
+            pleaseLogin: "Favor de iniciar sesión para ingresar a esta página."
+          }
+         });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        } 
+        strings.setLanguage(language);
         Axios.interceptors.response.use(
             response => response,
             error => {
+                console.log(error)
                 const {status} = error.response;
                 if (status === 401){
                     this.setState({redirect: "/"})
                     this.logoutHandler();
                     this.setAlerts([{
-                      title: "Favor de iniciar sesión",
+                      title: strings.pleaseLogin,
                       classes: ["danger"]
                     }])
                 } else if (status === 403) {
@@ -209,6 +235,8 @@ class Layout extends Component {
                 return Promise.reject(error);
             }
         )
+
+
         
         return (
             <urlContext.Provider value={{url: process.env.REACT_APP_API_ADDRESS}}>
@@ -224,6 +252,7 @@ class Layout extends Component {
                     currentCompany: this.state.company,
                     updateUserInfo: this.updateUserInfo,
                     logout: this.logoutHandler,
+                    isAdmin: this.isAdmin,
                     url: process.env.REACT_APP_API_ADDRESS}}>
                     <BrowserRouter>
                         <Switch>

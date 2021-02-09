@@ -3,10 +3,39 @@ import Getter from '../../../../helpers/Getter'
 import classes from './ContactIndex.css'
 import Search from '../../../../UI/Search/Search'
 import { Link } from 'react-router-dom'
+import LocalizedStrings from 'react-localization';
 class ContactIndex extends Getter {
     state = {
         contacts: [],
         search_contacts: []
+    }
+
+    strings = () => {
+        let strings = new LocalizedStrings({
+            en:{
+                client: "client",
+                provider: "provider",
+                clients: "Clients",
+                providers: "Providers",
+                latest: "Latest ",
+                search: "Search for "
+            },
+            es: {
+                client: "cliente",
+                provider: "proveedor",
+                clients: "Clientes",
+                providers: "Proveedores",
+                latest: "Ultimos",
+                search: "Buscar "
+            }
+       });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+        return strings;
     }
 
     errorHandler = () => {
@@ -49,15 +78,15 @@ class ContactIndex extends Getter {
 
     render(){
 
-        const placeholder = this.props.category == "client" ? "cliente" : "proveedor"
+        const placeholder = this.props.category == "client" ? this.strings().client : this.strings().provider
         const searchLink = this.props.category == "client" ? "/clientes/" : "/proveedores/"
-        const title = this.props.category == "client" ? "Clientes" : "Proveedores"
+        const title = this.props.category == "client" ? this.strings().clients : this.strings().providers
         const contacts = this.state.contacts
         
         const latestClients = contacts.length > 0 ? (
             <div className={classes.latestClients}>
                 <div className={classes.title}>
-                    <h2>Últimos {title}</h2>
+                    <h2>{this.strings().latest}{title}</h2>
                 </div>
                 {
                     contacts.map(contact => (
@@ -83,7 +112,7 @@ class ContactIndex extends Getter {
                 <div className={classes.Search}>
                     <Search 
                         objects={this.state.search_contacts}
-                        placeholder={"Buscar " + placeholder}
+                        placeholder={this.strings().search + placeholder}
                         link={searchLink} />
                 </div>
 

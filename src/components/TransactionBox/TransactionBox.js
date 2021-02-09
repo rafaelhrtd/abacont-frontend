@@ -1,38 +1,65 @@
 import React, {Component} from 'react';
-import classes from './TransactionBox.css'
+import classes from './TransactionBox.css';
 import TransactionBoxItem from './TransactionBoxItem/TransactionBoxItem';
-import Button from '../../UI/Buttons/Button/Button'
-import AuthContext from '../../context/auth-context'
-import { Link } from 'react-router-dom'
+import Button from '../../UI/Buttons/Button/Button';
+import AuthContext from '../../context/auth-context';
+import { Link } from 'react-router-dom';
+import LocalizedStrings from 'react-localization';
 
 // props
 // stateToPass : passes a state to the addTransaction button
 class TransactionBox extends Component {
-    static getTitle = (category) => {
-
-        if (category === undefined) {
-            return null
-        }
-        let title = ""
-        if (category === "payable"){
-            title = "Cuentas por pagar"
-        } else if (category === "receivable") {
-            title = "Cuentas por cobrar"
-        } else if (category === "expense") {
-            title = "Egresos"
-        } else if (category === "revenue") {
-            title = "Ingresos"
-        }
-        return title
-    }
-    static contextType = AuthContext;
-
     state = {
         transactions: {},
         category: null,
         title: null,
         contactCategory: null
     }
+
+    static getTitle = (category) => {
+
+        let strings = new LocalizedStrings({
+            en:{
+              revenues: "Revenues",
+              accountsPayable: "Accounts payable",
+              expenses: "Expenses",
+              accountsReceivable: "Accounts receivable",
+              seeMore: "See more",
+              new: "New"
+            },
+            es: {
+              revenues: "Ingresos",
+              accountsPayable: "Cuentas por pagar",
+              expenses: "Egresos",
+              accountsReceivable: "Cuentas por cobrar",
+              providers: "Proveedores",
+              seeMore: "Ver más",
+              new: "Agregar"
+            }
+           });
+          let language = navigator.language;
+          if (localStorage.getItem('language') !== null){
+              language = localStorage.getItem('language');
+          } else if (sessionStorage.getItem('language') !== null){
+              language = sessionStorage.getItem('language');
+          }
+
+        if (category === undefined) {
+            return null
+        }
+        let title = ""
+        if (category === "payable"){
+            title = strings.accountsPayable
+        } else if (category === "receivable") {
+            title = strings.accountsReceivable
+        } else if (category === "expense") {
+            title = strings.expenses
+        } else if (category === "revenue") {
+            title = strings.revenues
+        }
+        return title
+    }
+    static contextType = AuthContext;
 
     componentDidMount = () => {
         this.setState({
@@ -60,6 +87,24 @@ class TransactionBox extends Component {
 
     
     render(){
+
+        let strings = new LocalizedStrings({
+            en:{
+              seeMore: "See more",
+              new: "New"
+            },
+            es: {
+              seeMore: "Ver más",
+              new: "Agregar"
+            }
+           });
+          let language = navigator.language;
+          if (localStorage.getItem('language') !== null){
+              language = localStorage.getItem('language');
+          } else if (sessionStorage.getItem('language') !== null){
+              language = sessionStorage.getItem('language');
+          }
+
         const contactCategory = this.state.contactCategory
         const dynamicClasses = ["payable", "receivable"].includes(this.state.category) ? "yellowbg" : "greenbg"
         if (this.state.transactions === null 
@@ -88,7 +133,7 @@ class TransactionBox extends Component {
                 <Link to={{
                         pathname: transactionsURL,
                         state: this.props.seeMoreState}}>
-                    <Button className="primary">Ver más</Button>
+                    <Button className="primary">{strings.seeMore}</Button>
                 </Link>
             ) : null
             
@@ -112,7 +157,7 @@ class TransactionBox extends Component {
                         <Link to={{
                             pathname: newTransactionURL,
                             state: this.props.stateToPass}}>
-                            <Button className="success">Agregar</Button>
+                            <Button className="success">{strings.new}</Button>
                         </Link>
                     ) : null }
                 </div>

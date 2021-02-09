@@ -11,6 +11,7 @@ import TransactionBox from '../../TransactionBox/TransactionBox'
 import Summary from './Summary/Summary'
 import TransactionIndex from './TransactionIndex/TransactionIndex'
 import ExcelButton from '../../../UI/Buttons/ExcelButton/ExcelButton'
+import LocalizedStrings from 'react-localization';
 
 class Transactions extends Getter {
     state = {
@@ -107,12 +108,28 @@ class Transactions extends Getter {
     }
     static contextType = UrlContext;
     render(){
+        let strings = new LocalizedStrings({
+            en:{
+              annual: "Annual Report",
+              monthly: "Monthly Report"
+            },
+            es: {
+                annual: "Reporte Anual",
+                monthly: "Reporte Mensual"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         const transactions = this.state.transactions
         const summary = this.state.summary
         const redirect_path = this.props.location.pathname
 
 
-        const title = ("Resumen" + (this.state.yearly ? " anual" : " mensual"));
+        const title = this.state.yearly ? strings.annual : strings.monthly;
         let tranBoxes = null
         if (transactions !== null){
             tranBoxes = (

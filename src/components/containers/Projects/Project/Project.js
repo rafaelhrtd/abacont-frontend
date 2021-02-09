@@ -8,6 +8,7 @@ import NewProject from '../NewProject/NewProject';
 import DeleteButton from '../../../../UI/Buttons/DeleteButton/DeleteButton';
 import ExcelButton from '../../../../UI/Buttons/ExcelButton/ExcelButton';
 import AuthContext from '../../../../context/auth-context';
+import LocalizedStrings from 'react-localization';
 
 class Project extends Getter {
     state = {
@@ -17,6 +18,48 @@ class Project extends Getter {
     }
 
     static contextType = AuthContext;
+
+    strings = () => {
+        let strings = new LocalizedStrings({
+            en:{
+                summary: "Summary",
+                client: "Client",
+                expectedValue: "Expected value",
+                billedTotal: "Billed total",
+                billNumber: "Número de factura",
+                edit: "Edit",
+                delete: "Delete",
+                expenses: "Expenses",
+                revenues: "Revenues",
+                state: "Current state",
+                expectedProfit: "Expected profit",
+                currentProfit: "Current profit",
+                totals: "Totals"
+            },
+            es: {
+                summary: "Resumen",
+                client: "Cliente",
+                expectedValue: "Valor nominal",
+                billedTotal: "Total facturado",
+                billNumber: "Número de factura",
+                edit: "Editar",
+                delete: "Eliminar",
+                expenses: "Egresos",
+                revenues: "Ingresos",
+                state: "Estado actual",
+                expectedProfit: "Utilidad bruta esperada",
+                currentProfit: "Utilidad bruta actual",
+                totals: "Totales"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+        return strings;        
+    }
 
 
     errorHandler = () => {
@@ -100,11 +143,11 @@ class Project extends Getter {
         let projectInfo = null
         projectInfo = summary.revenues !== undefined ? (
             <div className={classes.ProjectInfo}>
-                <h2>Resumen</h2>
+                <h2>{this.strings().summary}</h2>
                 {/* client info */}
                 {project.client_id !== null ? (
                         <div className={classes.infoItem}>
-                            <div>Cliente:</div>
+                            <div>{this.strings().client}:</div>
                             <Link to={"/clientes/" + project.client_id}>
                                 <div>{project.contact_name}</div>
                             </Link>
@@ -112,18 +155,18 @@ class Project extends Getter {
                 ) : null}
                 {project.description !== null ? (
                     <div className={classes.infoItem}>
-                        <div>Descripción:</div>
+                        <div>{this.strings().description}:</div>
                         <div>{project.description}</div>
                     </div>
                 ) : null}
 
                 <div className={classes.infoItem}>
-                    <div>Valor nominal:</div>
+                    <div>{this.strings().expectedValue}:</div>
                     <div>${project.value.toFixed(2)}</div>
                 </div>
                 {project.bill_number !== null ? (
                     <div className={classes.infoItem}>
-                        <div>Factura:</div>
+                        <div>{this.strings.billNumber}:</div>
                         <div>{project.bill_number}</div>
                     </div>
                 ) : null}
@@ -135,7 +178,7 @@ class Project extends Getter {
                                 state: {project: project}
                             }}>
                                 <Button className="warning">
-                                    Editar
+                                    {this.strings().edit}
                                 </Button>
                             </Link>
                             <DeleteButton 
@@ -150,32 +193,32 @@ class Project extends Getter {
         let projectPayments = null
         projectPayments = summary.revenues !== undefined ? (
             <div className={classes.ProjectInfo}>
-                <h2>Estado</h2>
-                <h3>Ingresos</h3>
+                <h2>{this.strings().state}</h2>
+                <h3>{this.strings().revenues}</h3>
                 <div className={classes.infoItem}>
-                    <div>Total facturado:</div>
+                    <div>{this.strings().billedTotal}:</div>
                     <div>${summary.revenues.billed.toFixed(2)}</div>
                 </div>
                 <div className={classes.infoItem}>
-                    <div>Ingresos:</div>
+                    <div>{this.strings().revenues}:</div>
                     <div>${summary.revenues.received.toFixed(2)}</div>
                 </div>
-                <h3>Egresos</h3>
+                <h3>{this.strings().expenses}</h3>
                 <div className={classes.infoItem}>
-                    <div>Total facturado:</div>
+                    <div>{this.strings().billedTotal}:</div>
                     <div>${summary.expenses.billed.toFixed(2)}</div>
                 </div>
                 <div className={classes.infoItem}>
-                    <div>Egresos:</div>
+                    <div>{this.strings().expenses}:</div>
                     <div>${summary.expenses.paid.toFixed(2)}</div>
                 </div>
-                <h3>Totales:</h3>
+                <h3>{this.strings().totals}:</h3>
                 <div className={classes.infoItem}>
-                    <div>Utilidad bruta esperada:</div>
+                    <div>{this.strings().expectedProfit}:</div>
                     <div>${(summary.revenues.billed - summary.expenses.billed).toFixed(2)}</div>
                 </div>
                 <div className={classes.infoItem}>
-                    <div>Utilidad bruta actual:</div>
+                    <div>{this.strings().currentProfit}:</div>
                     <div>${(summary.revenues.received - summary.expenses.paid).toFixed(2)}</div>
                 </div>
             </div>

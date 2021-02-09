@@ -2,12 +2,35 @@ import React from 'react';
 import Getter from '../../../../helpers/Getter'
 import classes from './ProjectIndex.css'
 import Search from '../../../../UI/Search/Search'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import LocalizedStrings from 'react-localization';
 
 class ProjectIndex extends Getter {
     state = {
         projects: [],
         search_projects: []
+    }
+
+    strings = () => {
+        let strings = new LocalizedStrings({
+            en:{
+                projects: "Projects",
+                search: "Search for a project",
+                latestProjects: "Latest Proyects"
+            },
+            es: {
+                projects: "Proyectos",
+                search: "Buscar proyecto",
+                latestProjects: "Proyectos recientes"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+        return strings;        
     }
 
 
@@ -48,16 +71,14 @@ class ProjectIndex extends Getter {
     }
 
     render(){
-
         const placeholder = "proyecto"
         const searchLink = "/proyectos/"
-        const title = "Proyectos"
         const projects = this.state.projects
         
         const latestProjects = projects.length > 0 ? (
             <div className={classes.latestProjects}>
                 <div className={classes.title}>
-                    <h2>Últimos {title}</h2>
+                    <h2>{this.strings().latestProjects}</h2>
                 </div>
                 {
                     projects.map(project => (
@@ -76,11 +97,11 @@ class ProjectIndex extends Getter {
 
         return(
             <div className={classes.ProjectIndex}>
-                <h1>{title}</h1>
+                <h1>{this.strings().projects}</h1>
                 <div className={classes.Search}>
                     <Search 
                         objects={this.state.search_projects}
-                        placeholder={"Buscar " + placeholder}
+                        placeholder={this.strings().search}
                         link={searchLink} />
                 </div>
 

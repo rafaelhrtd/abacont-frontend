@@ -12,7 +12,7 @@ const sessionItems = (props) => {
         </div>
     ) : (
         <Button className="primary" onClick={props.clicked}>
-            Iniciar sesión
+            {props.strings.login}
         </Button>
     );
     return (

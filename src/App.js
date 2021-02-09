@@ -6,7 +6,9 @@ import classes from './App.css'
 import Projects from './components/containers/Projects/Projects'
 import AuthContext from './context/auth-context'
 import Company from './components/containers/Company/Company'
-import Home from './components/containers/Home/Home'
+import Home from './components/containers/Home/Home';
+import LocalizedStrings from 'react-localization';
+import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 class App extends Component {
   state = {
     email: null,
@@ -24,9 +26,25 @@ class App extends Component {
   }
 
   checkAuthenticated = () => {
+
+    let strings = new LocalizedStrings({
+      en:{
+        pleaseLogin: "Please log in to access this page."
+      },
+      es: {
+        pleaseLogin: "Favor de iniciar sesión para ingresar a esta página."
+      }
+     });
+    let language = navigator.language;
+    if (localStorage.getItem('language') !== null){
+        language = localStorage.getItem('language');
+    } else if (sessionStorage.getItem('language') !== null){
+        language = sessionStorage.getItem('language');
+    } 
+    strings.setLanguage(language);
     if (!this.context.authenticated && this.props.location.pathname !== "/"){
       this.context.setAlerts([{
-        title: "Favor de iniciar sesión para ingresar a esta página",
+        title: strings.pleaseLogin,
         classes: ["danger"],
         message: null
       }])
@@ -43,7 +61,6 @@ class App extends Component {
   }
 
   render() {
-    
     let homepage = this.context.authenticated ? (
       <Transactions />
     ) : (

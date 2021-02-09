@@ -5,8 +5,41 @@ import Aux from '../../../hoc/Aux/Aux'
 import { NavLink } from 'react-router-dom'
 import HR from '../../../UI/HR/HR';
 import Logo from '../../../assets/images/logo-big.svg';
+import LocalizedStrings from 'react-localization';
 
 const leftDrawer = (props) => {
+    let strings = new LocalizedStrings({
+      en:{
+        finance: "Finance",
+        summary: "Summary",
+        revenues: "Revenues",
+        accountsPayable: "Accounts payable",
+        expenses: "Expenses",
+        accountsReceivable: "Accounts receivable",
+        projects: "Projects",
+        contacts: "Contacts",
+        clients: "Clients",
+        providers: "Providers"
+      },
+      es: {
+        finance: "Finanzas",
+        summary: "Resumen",
+        revenues: "Ingresos",
+        accountsPayable: "Cuentas por pagar",
+        expenses: "Egresos",
+        accountsReceivable: "Cuentas por cobrar",
+        projects: "Proyectos",
+        contacts: "Contactos",
+        clients: "Clientes",
+        providers: "Proveedores"
+      }
+     });
+    let language = navigator.language;
+    if (localStorage.getItem('language') !== null){
+        language = localStorage.getItem('language');
+    } else if (sessionStorage.getItem('language') !== null){
+        language = sessionStorage.getItem('language');
+    } 
     let attachedClasses = [classes.LeftDrawer, classes.Closed]
     if (props.open) {
         attachedClasses = [classes.LeftDrawer, classes.Open]
@@ -18,51 +51,51 @@ const leftDrawer = (props) => {
                 <div className={classes.Logo}>
                     <img src={Logo} alt="React Logo" /> 
                 </div>
-                <h2>Finanzas</h2>
+                <h2>{strings.finance}</h2>
                 <HR />
                 <ul>
                     <li>
                         <NavLink to="/" onClick={props.backDropHandler}>
-                            Resumen
+                            {strings.summary}
                         </NavLink> 
                     </li>
                     <li>
                         <NavLink to="/ingresos" onClick={props.backDropHandler}>
-                            Ingresos
+                            {strings.revenues}
                         </NavLink> 
                     </li>
                     <li>
                         <NavLink to="/cuentas-por-pagar" onClick={props.backDropHandler}>
-                            Cuentas por pagar
+                            {strings.accountsPayable}
                         </NavLink> 
                     </li>
                     <li>
                         <NavLink to="/egresos" onClick={props.backDropHandler}>
-                            Egresos
+                            {strings.expenses}
                         </NavLink> 
                     </li>
                     <li>
                         <NavLink to="/cuentas-por-cobrar" onClick={props.backDropHandler}>
-                            Cuentas por cobrar
+                            {strings.accountsReceivable}
                         </NavLink> 
                     </li>
                     <li>
                         <NavLink to="/proyectos" onClick={props.backDropHandler}>
-                            Proyectos
+                            {strings.projects}
                         </NavLink> 
                     </li>
                 </ul>
-                <h2>Contactos</h2>
+                <h2>{strings.contacts}</h2>
                 <HR />
                 <ul>
                 <li>
                         <NavLink to="/clientes" onClick={props.backDropHandler}>
-                            Clientes
+                            {strings.clients}
                         </NavLink> 
                     </li>
                     <li>
                         <NavLink to="/proveedores" onClick={props.backDropHandler}>
-                            Proveedores
+                            {strings.providers}
                         </NavLink> 
                     </li>
                 </ul>

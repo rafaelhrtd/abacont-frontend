@@ -3,9 +3,9 @@ import classes from './TransactionBoxItem.css';
 import Aux from '../../../hoc/Aux/Aux';
 import AuthContext from '../../../context/auth-context'
 import Button from '../../../UI/Buttons/Button/Button'
-import { Link } from 'react-router-dom'
-import transactionInfo from '../../containers/Transactions/Transaction/TransactionInfo/TransactionInfo';
+import { Link } from 'react-router-dom';
 import DeleteButton from '../../../UI/Buttons/DeleteButton/DeleteButton';
+import LocalizedStrings from 'react-localization';
 
 class TransactionBoxItem extends Component {
     state = {
@@ -56,11 +56,50 @@ class TransactionBoxItem extends Component {
         let paymentState = {};
 
 
+
+        let strings = new LocalizedStrings({
+            en:{
+                summary: "Summary",
+                edit: "Edit",
+                date: "Date:",
+                project: "Project:",
+                client: "Client:",
+                provider: "Provider:",
+                chequeNumber: "Cheque number:",
+                amount: "Amount:",
+                payments: "Payments",
+                newPayment: "New payment",
+                paymentMethod: "Payment method:",
+                currentBalance: "Current balance:"
+            },
+            es: {
+                summary: "Resumen",
+                edit: "Editar",
+                date: "Fecha:",
+                project: "Proyecto:",
+                client: "Cliente:",
+                provider: "Proveedor:",
+                amount: "Monto:",
+                chequeNumber: "Número de cheque:",
+                payments: "Pagos",
+                newPayment: "Nuevo pago",
+                paymentMethod: "Método de pago:",
+                currentBalance: "Saldo actual:"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+
+
         // build transaction info
         if (transaction !== null){        
             let transactionURLComponent = ""
             const contactUrlComponent = ["receivable", "revenue"].includes(this.state.category) ? "/clientes/" : "/proveedores/"
-            const contactWord = ["receivable", "revenue"].includes(this.state.category) ? "Cliente" : "Proveedor"
+            const contactWord = ["receivable", "revenue"].includes(this.state.category) ? strings.client : strings.provider
             if (category === "payable"){
                 transactionURLComponent = "/cuentas-por-pagar/"
             } else if (category === "receivable") {
@@ -92,7 +131,7 @@ class TransactionBoxItem extends Component {
                 const contactUrl = contactUrlComponent + transaction.contact_id
                 contact = (
                     <div className={classes.contact}>
-                        <strong>{contactWord}:</strong>
+                        <strong>{contactWord}</strong>
                         <Link to={contactUrl}>{transaction.contact_name}</Link>
                     </div>
                 )
@@ -130,7 +169,7 @@ class TransactionBoxItem extends Component {
                             <Link to={transactionURL}>   
                                 <Button className="primary"
                                     link={transactionURL}>
-                                    Pagos
+                                    {strings.payments}
                                 </Button>
                             </Link>
                             <Link to={{
@@ -139,7 +178,7 @@ class TransactionBoxItem extends Component {
                             }}> 
                                 {this.context.user.can_write ? (
                                     <Button className="success">
-                                        Nuevo pago
+                                        {strings.newPayment}
                                     </Button>
                                 ) : null}  
                             </Link>
@@ -154,7 +193,7 @@ class TransactionBoxItem extends Component {
                                 }
                             }}>   
                                 <Button className="warning">
-                                    Editar
+                                    {strings.edit}
                                 </Button>
                             </Link>
                             <DeleteButton 
@@ -170,7 +209,7 @@ class TransactionBoxItem extends Component {
                 const projectUrl = "/proyectos/" + transaction.project_id
                 project = (
                     <div className={classes.contact}>
-                        <strong>{"Proyecto"}:</strong>
+                        <strong>{strings.project}</strong>
                         <Link to={projectUrl}>{transaction.project_name}</Link>
                     </div>
                 )
@@ -182,7 +221,7 @@ class TransactionBoxItem extends Component {
             if (transaction.payment_type !== null) {
                 paymentMethod = (
                     <div className={classes.contact}>
-                        <strong>{"Método de pago"}:</strong>
+                        <strong>{strings.paymentMethod}</strong>
                         <p>{transaction.payment_type}</p>
                     </div>
                 )
@@ -190,7 +229,7 @@ class TransactionBoxItem extends Component {
             if (transaction.payment_type === "Cheque" && transaction.cheque_number !== null) {
                 chequeNumber = (
                     <div className={classes.contact}>
-                        <strong>{"Número de cheque"}:</strong>
+                        <strong>{strings.chequeNumber}</strong>
                         <p>{transaction.cheque_number}</p>
                     </div>
                 )

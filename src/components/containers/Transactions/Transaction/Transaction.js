@@ -5,6 +5,7 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import TransactionInfo from './TransactionInfo/TransactionInfo';
 import TransactionBox from '../../../TransactionBox/TransactionBox';
 import NewTransaction from '../NewTransaction/NewTransaction';
+import LocalizedStrings from 'react-localization';
 
 
 class Transaction extends Getter {
@@ -14,6 +15,7 @@ class Transaction extends Getter {
         id: this.props.match.params.id,
         category: this.props.category
     }
+
 
 
     errorHandler = () => {
@@ -35,22 +37,42 @@ class Transaction extends Getter {
 
 
     static createdMessage = (category) => {
+
+        let strings = new LocalizedStrings({
+            en:{
+                revenueCreated: "Revenue created.",
+                accountPayableCreated: "Account payable created.",
+                expenseCreated: "Expense created.",
+                accountReceivableCreated: "Account receivable created."
+            },
+            es: {
+                revenueCreated: "Ingreso creado.",
+                accountPayableCreated: "Cuenta por pagar creada.",
+                expenseCreated: "Egreso creado.",
+                accountReceivableCreated: "Cuenta por cobrar creada."
+            }
+           });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         switch(category){
             case "receivable":
-                return "Cuenta por cobrar creada"
+                return strings.accountReceivableCreated
             case "payable":
-                return "Cuenta por pagar creada"
+                return strings.accountPayableCreated
             case "expense":
-                return "Egreso creado"
+                return strings.expenseCreated
             case "revenue":
-                return "Ingreso creado"
+                return strings.revenueCreated
         }
     }
 
 
 
     successHandler = (data) => {
-        console.log(data)
         this.setState({
             transaction: data.transaction,
             children: data.children
@@ -63,6 +85,36 @@ class Transaction extends Getter {
     }
     
     render() {
+
+        let strings = new LocalizedStrings({
+            en:{
+                revenues: "Revenues",
+                accountsPayable: "Accounts payable",
+                expenses: "Expenses",
+                accountsReceivable: "Accounts receivable",
+                revenue: "Revenue",
+                accountPayable: "Account payable",
+                expense: "Expense",
+                accountReceivable: "Account receivable"
+            },
+            es: {
+                revenues: "Ingresos",
+                accountsPayable: "Cuentas por pagar",
+                expenses: "Egresos",
+                accountsReceivable: "Cuentas por cobrar",
+                revenue: "Ingreso",
+                accountsayable: "Cuenta por pagar",
+                expense: "Egreso",
+                accountReceivable: "Cuenta por cobrar"
+            }
+        });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+
         if (this.state.commError){
             return null
         }
@@ -74,17 +126,17 @@ class Transaction extends Getter {
         const category = this.state.category
         let childCategory = ""
         if (category === "receivable"){
-            title = "Cuenta por cobrar"
-            childrenTitle = "Ingresos"
+            title = strings.accountReceivable
+            childrenTitle = strings.revenues
             childCategory = "revenue"
         } else if (category === "payable"){
             childCategory = "expense"
-            title = "Cuenta por pagar"
-            childrenTitle = "Egresos"
+            title = strings.accountPayable
+            childrenTitle = strings.expenses
         } else if (category === "revenue"){
-            title = "Ingreso"
+            title = strings.revenue
         } else if (category === "expense"){
-            title = "Egreso"
+            title = strings.expense
         }
 
 

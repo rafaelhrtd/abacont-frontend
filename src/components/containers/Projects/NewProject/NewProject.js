@@ -5,6 +5,7 @@ import NewContact from '../../Contacts/NewContact/NewContact'
 import Form from '../../../Form/Form'
 import AuthContext from '../../../../context/auth-context'
 import { Redirect, withRouter } from 'react-router-dom'
+import LocalizedStrings from 'react-localization';
 
 class NewProject extends FormHolder {
     state = {
@@ -90,22 +91,48 @@ class NewProject extends FormHolder {
     }
 
     static formElements = (suffix = null) => {
+        let strings = new LocalizedStrings({
+            en:{
+                name: "Name",
+                description: "Description",
+                value: "Total value",
+                client: "Client",
+                newClient: "New client:",
+                billNumber: "Bill number",
+                title: "Project"
+            },
+            es: {
+                name: "Nombre",
+                description: "Descripción",
+                value: "Valor total",
+                client: "Cliente",
+                newClient: "Nuevo cliente:",
+                billNumber: "Número de factura",
+                title: "Proyecto"
+            }
+           });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
         let inputs = {
             name: {
                 inputType: "text",
                 name: "name",
-                placeholder: "Nombre",
+                placeholder: strings.name,
                 blank: false
             },
             description: {
                 inputType: "textarea",
                 name: "description",
-                placeholder: "Descripción"
+                placeholder: strings.description
             },
             value: {
                 inputType: "text",
                 name: "value",
-                placeholder: "Valor total",
+                placeholder: strings.value,
                 blank: false
             },
             contact_id: {
@@ -118,23 +145,39 @@ class NewProject extends FormHolder {
                 clicked_add: this.clickedAddHandler,
                 url: 'contacts',
                 search: true,
-                placeholder: "Cliente",
+                placeholder: strings.client,
                 form_elements: NewContact.formElements("client"),
                 input_suffix: "contact.",
-                placeholder_suffix: "Nuevo cliente:",
+                placeholder_suffix: strings.newClient,
                 child: true
             },
             bill_number: {
                 inputType: "text",
                 name: "bill_number",
-                placeholder: "Número de factura"
+                placeholder: strings.billNumber
             }
         }
         return inputs
     }
 
     render(){
-        let title = "Proyecto"
+        let strings = new LocalizedStrings({
+            en:{
+                title: "Project",
+                createProject: "Create project"
+            },
+            es: {
+                title: "Proyecto",
+                createProject: "Crear proyecto"
+            }
+           });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+        let title = strings.title
         const form_elements = NewProject.formElements()        
         
         // update search values
@@ -144,7 +187,7 @@ class NewProject extends FormHolder {
             form_elements.contact_id["givenName"] =  project.contact_name
         }
 
-        const saveTitle = "Crear proyecto"
+        const saveTitle = strings.createProject
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }

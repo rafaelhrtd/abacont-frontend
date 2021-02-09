@@ -7,15 +7,12 @@ const RightItems = (props) => (
         <ul>
         <RightItem
             link="/compañía">
-            Compañías
+            {props.strings.companies}
         </RightItem>
         <RightItem
-            link="/">
-            Subscripciones
-        </RightItem>
-        <RightItem
-            link="/">
-            Configuración
+            onClick={props.editAccountHandler}
+            link="#">
+            {props.strings.settings}
         </RightItem>
 
         </ul>

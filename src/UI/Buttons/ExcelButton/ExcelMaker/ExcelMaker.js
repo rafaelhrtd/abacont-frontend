@@ -1,6 +1,7 @@
 import React from "react";
 import ReactExport from "react-export-excel";
 import Aux from '../../../../hoc/Aux/Aux';
+import LocalizedStrings from 'react-localization';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -9,6 +10,87 @@ const ExcelRow = ReactExport.ExcelFile.ExcelRow;
 
 
 class ExcelMaker extends React.Component {
+
+
+    strings = () => {
+        let strings = new LocalizedStrings({
+          en:{
+            finance: "Finance",
+            summary: "Summary",
+            revenues: "Revenues",
+            accountsPayable: "Accounts payable",
+            expenses: "Expenses",
+            accountsReceivable: "Accounts receivable",
+            currentBalance: "Current balance",
+            expectedBalance: "Expected balance",
+            month: "Month",
+            jan: "January",
+            feb: "February",
+            mar: "March",
+            apr: "April",
+            may: "May",
+            jun: "June",
+            jul: "July",
+            aug: "August",
+            sep: "September",
+            oct: "October",
+            nov: "November",
+            dec: "December",
+            billNumber: "Bill number",
+            date: "Date",
+            bill_number: "Bill number",
+            payment_type: "Payment method",
+            cheque_number: "Cheque number",
+            description: "Description",
+            provider: "Provider",
+            client: "Client",
+            project_name: "Project",
+            amount: "Amount",
+            balance: "Balance"
+          },
+          es: {
+            finance: "Finanzas",
+            summary: "Resumen",
+            revenues: "Ingresos",
+            accountsPayable: "Cuentas por pagar",
+            expenses: "Egresos",
+            accountsReceivable: "Cuentas por cobrar",
+            currentBalance: "Utilidad bruta actual",
+            expectedBalance: "Utilidad bruta esperada",
+            month: "Mes",
+            jan: "Enero",
+            feb: "Febrero",
+            mar: "Marzo",
+            apr: "Abril",
+            may: "Mayo",
+            jun: "Junio",
+            jul: "Julio",
+            aug: "Agosto",
+            sep: "Septiembre",
+            oct: "Octubre",
+            nov: "Noviembre",
+            dec: "Diciembre",
+            date: "Fecha",
+            bill_number: "Factura",
+            payment_type: "Método de pago",
+            cheque_number: "Número de cheque",
+            description: "Descripción",
+            provider: "Proveedor",
+            client: "Cliente",
+            project_name: "Proyecto",
+            amount: "Monto",
+            balance: "Saldo"
+          }
+         });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        } 
+        console.log(strings)
+        return strings        
+    }
 
     separateByMonth = (array) => {
         let months = [[],[],[],[],[],[],[],[],[],[],[],[]]
@@ -25,20 +107,19 @@ class ExcelMaker extends React.Component {
         let payableByMonth = this.separateByMonth(transactions.payable)
         let receivableByMonth = this.separateByMonth(transactions.receivable)
 
-        let months = {
-            Enero: {},
-            Febrero: {},
-            Marzo: {},
-            Abril: {},
-            Mayo: {},
-            Junio: {},
-            Julio: {},
-            Agosto: {},
-            Septiembre: {},
-            Octubre: {},
-            Noviembre: {},
-            Diciembre: {}
-        }
+        let months = {}
+        months[this.strings().jan] = {};
+        months[this.strings().feb] = {};
+        months[this.strings().mar] = {};
+        months[this.strings().apr] = {};
+        months[this.strings().may] = {};
+        months[this.strings().jun] = {};
+        months[this.strings().jul] = {};
+        months[this.strings().aug] = {};
+        months[this.strings().sep] = {};
+        months[this.strings().oct] = {};
+        months[this.strings().nov] = {};
+        months[this.strings().dec] = {};
 
         Object.keys(Object.keys(months)).map(index => {
             months[Object.keys(months)[index]]['expense'] = expenseByMonth[index]
@@ -105,12 +186,12 @@ class ExcelMaker extends React.Component {
 
     monthlySummary = (transactions) => {
         const columns = [
-            "Ingresos",
-            "Egresos",
-            "Cuentas por cobrar",
-            "Cuentas por pagar",
-            "Utilidad bruta actual",
-            "Utilidad bruta esperada"
+            this.strings().revenues,
+            this.strings().expenses,
+            this.strings().accountsReceivable,
+            this.strings().accountsPayable,
+            this.strings().currentBalance,
+            this.strings().expectedBalance
         ]
 
         let info = {}
@@ -138,13 +219,12 @@ class ExcelMaker extends React.Component {
 
     yearlySummary = (months) => {
         let columns = [
-            "Mes",
-            "Ingresos",
-            "Egresos",
-            "Cuentas por cobrar",
-            "Cuentas por pagar",
-            "Utilidad bruta actual",
-            "Utilidad bruta esperada"
+            this.strings().month,
+            this.strings().expenses,
+            this.strings().accountsReceivable,
+            this.strings().accountsPayable,
+            this.strings().currentBalance,
+            this.strings().expectedBalance
         ]
         let data = []
         Object.keys(months).map(month => {
@@ -250,13 +330,13 @@ class ExcelMaker extends React.Component {
 
     getTitle = (input) => {
         if (input == "receivable") {
-            return "Cuentas por cobrar"
+            return this.strings().accountsReceivable
         } else if (input == "payable") {
-            return "Cuentas por pagar"
+            return this.strings().accountsPayable
         } else if (input == "expense") {
-            return "Egresos"
+            return this.strings().expenses
         } else if (input == "revenue") {
-            return "Ingresos"
+            return this.strings().revenues
         } 
     }
 
@@ -307,46 +387,46 @@ class ExcelMaker extends React.Component {
 
         const names = {
             expense: {
-                date: "Fecha",
-                bill_number: "Factura",
-                payment_type: "Método de pago",
-                cheque_number: "Número de cheque",
-                description: "Descripción",
-                contact_name: "Proveedor",
-                project_name: "Proyecto",
-                amount: "Monto"
+                date: this.strings().date,
+                bill_number: this.strings().bill_number,
+                payment_type: this.strings().payment_type,
+                cheque_number: this.strings().cheque_number,
+                description: this.strings().description,
+                contact_name: this.strings().provider,
+                project_name: this.strings().project_name,
+                amount: this.strings().amount
             },
 
             revenue: {
-                date: "Fecha",
-                bill_number: "Factura",
-                payment_type: "Método de pago",
-                description: "Descripción",
-                contact_name: "Proveedor",
-                project_name: "Proyecto",
-                amount: "Monto"
+                date: this.strings().date,
+                bill_number: this.strings().bill_number,
+                payment_type: this.strings().payment_type,
+                description: this.strings().description,
+                contact_name: this.strings().client,
+                project_name: this.strings().project_name,
+                amount: this.strings().amount
             },
 
             payable: {
-                date: "Fecha",
-                bill_number: "Factura",
-                payment_type: "Método de pago",
-                description: "Descripción",
-                contact_name: "Proveedor",
-                project_name: "Proyecto",
-                amount: "Monto",
-                balance: "Saldo"
+                date: this.strings().date,
+                bill_number: this.strings().bill_number,
+                payment_type: this.strings().payment_type,
+                description: this.strings().description,
+                contact_name: this.strings().provider,
+                project_name: this.strings().project_name,
+                amount: this.strings().amount,
+                balance: this.strings().balance
             },
 
             receivable: {
-                date: "Fecha",
-                bill_number: "Factura",
-                payment_type: "Método de pago",
-                description: "Descripción",
-                contact_name: "Proveedor",
-                project_name: "Proyecto",
-                amount: "Monto",
-                balance: "Saldo"
+                date: this.strings().date,
+                bill_number: this.strings().bill_number,
+                payment_type: this.strings().payment_type,
+                description: this.strings().description,
+                contact_name: this.strings().client,
+                project_name: this.strings().project_name,
+                amount: this.strings().amount,
+                balance: this.strings().balance
             },
         }
         if (this.props.transactions === null || this.props.innerKey === 0) {
@@ -356,7 +436,7 @@ class ExcelMaker extends React.Component {
             console.log(data)
             return (
                 <ExcelFile hideElement={true}> 
-                    <ExcelSheet dataSet={data.summary} name={"Resumen"} />
+                    <ExcelSheet dataSet={data.summary} name={this.strings().summary} />
                     {(data.data).map(dataSet => (
                         <ExcelSheet dataSet={dataSet} name={dataSet[0].title} />
                     ))}
@@ -367,7 +447,7 @@ class ExcelMaker extends React.Component {
             console.log(data)
             return (
                 <ExcelFile hideElement={true}> 
-                    <ExcelSheet dataSet={data.summary} name={"Resumen"} />
+                    <ExcelSheet dataSet={data.summary} name={this.strings().summary} />
                     {Object.keys(data.months).map(month => (
                         <ExcelSheet key={month} dataSet={data.months[month]} name={month} />
                     ))}
