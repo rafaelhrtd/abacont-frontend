@@ -44,8 +44,6 @@ class Company extends Component {
     }
 
     componentDidMount = () => {
-        console.log("fuck")
-        console.log(this.context.company)
         this.getInvites();
         this.getEmployees();
     }
@@ -135,7 +133,8 @@ class Company extends Component {
                         ) : null}
                     </Aux>
                 ) : null}
-                <Button className="success">{this.strings().newCompany}</Button>
+                
+                {true ? null : <Button className="success">{this.strings().newCompany}</Button>}
             </div>
         )
     }

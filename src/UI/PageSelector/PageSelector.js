@@ -23,7 +23,6 @@ class PageSelector extends Component {
     }
 
     addPageHandler = () => {
-        console.log("fuck")
         this.setState(prevState => {
             if (prevState.page != prevState.totalPages){
                 return {page: parseInt(prevState.page) + 1}

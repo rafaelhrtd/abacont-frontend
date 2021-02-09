@@ -4,8 +4,8 @@ import classes from './Switcher.css';
 import Axios from 'axios';
 import Aux from '../../../../hoc/Aux/Aux';
 import Button from '../../../../UI/Buttons/Button/Button'
-
 import AuthContext from '../../../../context/auth-context';
+import LocalizedStrings from 'react-localization';
 
 class Switcher extends Component {
     state = {
@@ -96,6 +96,22 @@ class Switcher extends Component {
                 </li>
             ))
         ) : null
+
+        let strings = new LocalizedStrings({
+            en:{
+                changeCompany: "Switch company."
+            },
+            es: {
+                changeCompany: "Cambiar compañía."
+            }
+           });
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = localStorage.getItem('language');
+        } else if (sessionStorage.getItem('language') !== null){
+            language = sessionStorage.getItem('language');
+        }
+
         return (
             <Aux>
                 <Button className="primary" onClick={this.showHandler}>Cambiar compañía</Button>
