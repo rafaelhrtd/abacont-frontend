@@ -40,7 +40,8 @@ const transactionInfo = (props) => {
     } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
         language = JSON.parse(sessionStorage.getItem('language'));
     }
-    strings.setLanguage(language);
+            language = language ? language : "en"
+        strings.setLanguage(language);
         
     const user = useContext(AuthContext).user;
 

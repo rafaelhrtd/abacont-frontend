@@ -130,6 +130,7 @@ class DeleteButton extends Component {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+                language = language ? language : "en"
         strings.setLanguage(language);
         const inputClass = this.state.error === null ? null : classes.danger
         if (this.state.redirectPath !== null){

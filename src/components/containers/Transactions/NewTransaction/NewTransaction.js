@@ -265,6 +265,7 @@ class NewTransaction extends FormHolder {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+                language = language ? language : "en"
         strings.setLanguage(language);
         // check for redirect
         if (this.state.redirect) {

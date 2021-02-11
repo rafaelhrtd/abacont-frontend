@@ -115,6 +115,7 @@ class NewProject extends FormHolder {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+                language = language ? language : "en"
         strings.setLanguage(language);
         let inputs = {
             name: {
@@ -176,6 +177,7 @@ class NewProject extends FormHolder {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+                language = language ? language : "en"
         strings.setLanguage(language);
         let title = strings.title
         const form_elements = NewProject.formElements()        

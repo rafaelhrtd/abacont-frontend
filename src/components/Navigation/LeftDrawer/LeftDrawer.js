@@ -40,7 +40,8 @@ const leftDrawer = (props) => {
     } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
         language = JSON.parse(sessionStorage.getItem('language'));
     } 
-    strings.setLanguage(language);
+            language = language ? language : "en"
+        strings.setLanguage(language);
 
     let attachedClasses = [classes.LeftDrawer, classes.Closed]
     if (props.open) {

@@ -41,7 +41,8 @@ class App extends Component {
     } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
         language = JSON.parse(sessionStorage.getItem('language'));
     } 
-    strings.setLanguage(language);
+            language = language ? language : "en"
+        strings.setLanguage(language);
     if (!this.context.authenticated && this.props.location.pathname !== "/"){
       this.context.setAlerts([{
         title: strings.pleaseLogin,
