@@ -124,7 +124,7 @@ class Transactions extends Getter {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
-                language = language ? language : "en"
+        language = language ? language : "en"
         strings.setLanguage(language);
         const transactions = this.state.transactions
         const summary = this.state.summary

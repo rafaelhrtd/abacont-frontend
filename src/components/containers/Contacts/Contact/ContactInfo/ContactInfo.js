@@ -33,6 +33,7 @@ const contactInfo = (props) => {
     } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
         language = JSON.parse(sessionStorage.getItem('language'));
     }
+    language = language ? language : "en"
     strings.setLanguage(language)
     const user = useContext(AuthContext).user
     if (props.contact === null) {

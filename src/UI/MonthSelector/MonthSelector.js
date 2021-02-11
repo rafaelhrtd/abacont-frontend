@@ -41,7 +41,7 @@ class MonthSelector extends Component {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
-                language = language ? language : "en"
+        language = language ? language : "en"
         strings.setLanguage(language);
         return ([
             strings.jan,
@@ -151,7 +151,7 @@ class MonthSelector extends Component {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
-                language = language ? language : "en"
+        language = language ? language : "en"
         strings.setLanguage(language);
         return(
 

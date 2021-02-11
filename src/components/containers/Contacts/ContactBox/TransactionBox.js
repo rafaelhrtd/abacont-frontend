@@ -34,6 +34,7 @@ class TransactionBox extends Component {
            } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
                language = JSON.parse(sessionStorage.getItem('language'));
            }
+           language = language ? language : "en"
            strings.setLanguage(language)
 
         if (category === undefined) {
@@ -100,6 +101,7 @@ class TransactionBox extends Component {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+        language = language ? language : "en"
         strings.setLanguage(language)
         
         const contactCategory = this.state.contactCategory

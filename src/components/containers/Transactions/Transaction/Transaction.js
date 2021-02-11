@@ -58,6 +58,7 @@ class Transaction extends Getter {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+        language = language ? language : "en"
         strings.setLanguage(language)
         switch(category){
             case "receivable":
@@ -115,6 +116,7 @@ class Transaction extends Getter {
         } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
             language = JSON.parse(sessionStorage.getItem('language'));
         }
+        language = language ? language : "en"
         strings.setLanguage(language)
 
         if (this.state.commError){
