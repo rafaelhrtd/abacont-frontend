@@ -21,14 +21,14 @@ React front end for a simple accounting software.
 ## Screenshots
 Here are some examples of the different components of this application:
 ### Monthly Summary
-A frame can be observed with a force acting on member (3).
+A monthly summary of all monetary movements is shown. Can be switched to an annual report using the "annual" button.
 
-![Example Frame](screenshots/truss.png)
-### External Solution
-Once the "Solve" button is clicked, the reaction forces at the supports are displayed, and internal reactions are calculated.
+![Monthly report](screenshots/monthly-report.png)
+### Project Summary
+Relevant information to a created project is shown, including all monetary movements pertaining to it, as well as information on the expected value of the project given the current state.
 
-![External solution](screenshots/external-solution.png)
-### Internal Reactions
-Clicking on a member leads to the internal reactions.
+![Monthly report](screenshots/project.png)
+### Provider / Client
+Information relevant to a provider or client is given, including accounts payable (to the provider) and previous expenses relating to them. Similar information is available for clients.
 
-![Internal reactions](screenshots/internal-reactions.png)
+![Monthly report](screenshots/provider.png)
