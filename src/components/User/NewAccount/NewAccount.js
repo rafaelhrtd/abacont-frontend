@@ -32,6 +32,16 @@ class NewAccount extends Component {
         })
         delete this.state.errors[event.target.name]
     }
+
+    componentDidMount = () => {
+        let language = navigator.language;
+        if (localStorage.getItem('language') !== null){
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
+        }
+        this.setState({language: language});
+    }
     createAccountHandler  = (event) => {
         event.preventDefault();
         let data = {
@@ -139,12 +149,7 @@ class NewAccount extends Component {
             back: "Volver"
           }
          });
-        let language = navigator.language;
-        if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
-        } 
+        strings.setLanguage(this.state.language);
         return (
             <div className={classes.NewAccount}>
                 <div className={classes.titleHolder}>
@@ -165,6 +170,7 @@ class NewAccount extends Component {
                         errors={this.state.errors}
                         email={this.state.email}
                         edit={this.props.edit}
+                        language={this.state.language}
                         strings={strings}
                         backHandler={this.props.backHandler} />
             </div>

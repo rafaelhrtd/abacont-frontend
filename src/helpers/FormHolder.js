@@ -148,11 +148,9 @@ class FormHolder extends Component {
                             successResponse(response.data, successUrl)
                         } else {
                             errorResponse(this.setUpErrors(response.data))
-                            console.log(response.data)
                         }
                     }
                 }, error => {
-                    console.log(error)
             })
         } else {
             this.context.toggleLoader("Guardando cambios");
@@ -164,11 +162,9 @@ class FormHolder extends Component {
                             successResponse(response.data, successUrl)
                         } else {
                             errorResponse(this.setUpErrors(response.data))
-                            console.log(response.data)
                         }
                     }
                 }, error => {
-                    console.log(error)
             })
         }
 

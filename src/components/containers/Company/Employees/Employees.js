@@ -48,10 +48,11 @@ class Employees extends Component {
            });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language)
         return strings 
     }
 
@@ -77,7 +78,6 @@ class Employees extends Component {
     static contextType = AuthContext;
 
     commErrorHandler = (response) => {
-        console.log(response)
     }
 
     successHandler = (data, message) => {

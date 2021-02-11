@@ -10,6 +10,7 @@ import Axios from 'axios'
 import Invites from './Invites/Invites';
 import Employees from './Employees/Employees';
 import LocalizedStrings from 'react-localization';
+import NewCompany from './NewCompany/NewCompany';
 
 class Company extends Component {
     static contextType = AuthContext;
@@ -36,9 +37,9 @@ class Company extends Component {
            });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(JSON.parse(sessionStorage.getItem('language')));
         }
         return strings
     }
@@ -49,7 +50,6 @@ class Company extends Component {
     }
 
     commErrorHandler = (response) => {
-        console.log(response)
     }
 
     getInvites = () => {
@@ -66,7 +66,6 @@ class Company extends Component {
         const url = process.env.REACT_APP_API_ADDRESS + "/employees";
         Axios.get(url)
             .then(response => {
-                console.log(response)
                 this.setState({employees: response.data.employees})
             }, error => {
                 this.commErrorHandler(error.response)
@@ -133,6 +132,7 @@ class Company extends Component {
                         ) : null}
                     </Aux>
                 ) : null}
+                <NewCompany getContext={this.getContext} />
                 
                 {true ? null : <Button className="success">{this.strings().newCompany}</Button>}
             </div>

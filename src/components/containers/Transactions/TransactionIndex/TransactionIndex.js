@@ -25,7 +25,6 @@ class TransactionIndex extends Getter {
         const passedMonth = passedState === undefined || passedState === null  ? undefined : passedState.month
         const passedYear = passedState === undefined || passedState === null ? undefined : passedState.year
         const passedYearly = passedState === undefined || passedState === null ? undefined : passedState.yearly
-        console.log(query)
         this.setState({
             passedState: passedState,
             category: this.props.category,

@@ -29,7 +29,6 @@ class NameChanger extends Component {
 
     errorHandler = (data) => {
         this.context.toggleLoader()
-        console.log(data);
     }
 
     changeHandler = (event) => {
@@ -63,7 +62,6 @@ class NameChanger extends Component {
                     }
                 }
             }, error => {
-                console.log(error)
                 setTimeout(()=>{
                     window.location.href = "/"
                 },40000)

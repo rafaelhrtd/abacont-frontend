@@ -61,7 +61,10 @@ const Form = (props) => {
                             className={classes[dynamicClasses["company.name"]]}
                             onChange={(event) => props.changed(event)}></input>
                     ) : null}
-                    <select onChange={(event) => props.changed(event)} name="language">
+                    <select 
+                        onChange={(event) => props.changed(event)} 
+                        name="language"
+                        value={props.language}>
                         <option value="en">{props.strings.english}</option>
                         <option value="es">{props.strings.spanish}</option>
                     </select>

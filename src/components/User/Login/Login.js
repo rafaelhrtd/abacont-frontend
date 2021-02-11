@@ -48,7 +48,6 @@ class Login extends Component {
         }
         axios.post(process.env.REACT_APP_API_ADDRESS + "login", data)
           .then(response => {
-            console.log(response);
             if (response.status === 200){
                 this.context.login(response, this.state.remember_me)
             }
@@ -103,10 +102,10 @@ class Login extends Component {
          });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
-        } 
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
+        }
         strings.setLanguage(language);
         return (
             <div className={classes.Login}>

@@ -2,41 +2,31 @@ import React, {Component} from 'react';
 import Button from '../../../../UI/Buttons/Button/Button';
 import Modal from '../../../../UI/Modal/Modal';
 import Axios from 'axios';
-import classes from './Inviter.css';
 import AuthContext from '../../../../context/auth-context';
-import Permissions from '../Permissions/Permissions';
 import LocalizedStrings from 'react-localization';
+import classes from './NewCompany.css'
 
-class Invite extends Component {
+class NewCompany extends Component {
     state = {
-        email: null,
-        role: null,
-        can_read: true,
-        can_edit: false,
-        can_write: false,
-        can_invite: false,
-        inviteDisabled: true,
-        showModal: false,
+        name: null,
         errors: {}
     }
 
     strings = () => {
         let strings = new LocalizedStrings({
             en:{
-                creatingInvite: "Creating invitation.",
-                inviteSent: "Invitation sent.",
-                inviteMember: "Invite member",
-                privileges: "Privileges",
-                invite: "Invite",
-                explanation: "Enter the email of the person you want to invite. They will receive an email with instructions to create their account, or, if they are already registered, an invitation to join this company."
+                name: "Name",
+                newCompany: "New company",
+                createCompany: "Create company",
+                creatingCompany: "Creating new company.",
+                companyCreated: "Company created."
             },
             es: {
-                creatingInvite: "Creando invitación.",
-                inviteSent: "Invitación enviada.",
-                inviteMember: "Invitar miembro",
-                privileges: "Permisos",
-                invite: "Invitar",
-                explanation: "Ingresa el e-mail de la persona que quieres invitar. Se le enviará un correo con las instrucciones para crear su cuenta o, si ya están registrados, una invitación para formar parte de esta compañía."
+                name: "Nombre",
+                newCompany: "Nueva compañía",
+                createCompany: "Crear compañía",
+                creatingCompany: "Creando compañía.",
+                companyCreated: "Compañía creada."
             }
            });
         let language = navigator.language;
@@ -52,6 +42,7 @@ class Invite extends Component {
     static contextType = AuthContext;
 
     showHandler = () => {
+        console.log("handler");
         this.setState(prevState => {return {showModal: !prevState.showModal}})
     }
 
@@ -71,42 +62,41 @@ class Invite extends Component {
     }
 
     successHandler = (data) => {
-        this.props.addInvite();
-        this.context.toggleLoader(this.strings().creatingInvite);
+        console.log("handler");
+        this.context.toggleLoader(this.strings().creatingCompany);
         this.showHandler()
         this.context.setAlerts([
-            {title: this.strings().inviteSent,
+            {title: this.strings().companyCreated,
              classes: ["success"],
              message: null}
-        ])
+        ]);
+        this.context.updateUserInfo();
+        this.context.changeCurrentCompany(data.company);
+        this.props.getContext();
     }
 
     errorHandler = (data) => {
         this.setState({errors: data.errors})
-        this.context.toggleLoader(this.strings().creatingInvite);
+        this.context.toggleLoader(this.strings().creatingCompany);
     }
 
     commErrorHandler = (response) => {
-        this.context.toggleLoader(this.strings().creatingInvite);
+        this.context.toggleLoader(this.strings().creatingCompany);
     }
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.context.toggleLoader(this.strings().creatingInvite);
+        this.context.toggleLoader(this.strings().creatingCompany);
         const data = {
-            invite: {
-                email: this.state.email,
-                can_read: this.state.can_read,
-                can_write: this.state.can_write,
-                can_edit: this.state.can_edit,
-                can_invite: this.state.can_invite
+            company: {
+                name: this.state.name
             }
         }
-        const url = process.env.REACT_APP_API_ADDRESS + "/send_invite";
+        const url = process.env.REACT_APP_API_ADDRESS + "/companies/create";
         Axios.post(url, {...data})
             .then(response => {
                 if (response.status === 200) {
-                    if (response.data.errors === undefined){
+                    if (Object.keys(response.data.errors).length === 0){
                         this.successHandler(response.data)
                     } else {
                         this.errorHandler(response.data)
@@ -119,27 +109,26 @@ class Invite extends Component {
 
 
     render() {
-        const emailClass = Object.keys(this.state.errors).length === 0 ? null : classes.error
+        const nameClass = Object.keys(this.state.errors).length === 0 ? null : classes.error
         return (
             <div>
                 <Button 
                     className="success"
                     onClick={this.showHandler}>
-                    {this.strings().inviteMember}
+                    {this.strings().newCompany}
                 </Button>
                 <Modal
                     show={this.state.showModal}
                     showHandler={this.showHandler}
                     className={classes.Modal}
                     >
-                    <h2>{this.strings().inviteMember}</h2>
-                        <p>{this.strings().explanation}</p>
+                    <h2>{this.strings().newCompany}</h2>
                         <form onSubmit={event => {this.submitHandler(event)}}>
                             <input 
-                                name="email" 
-                                type="email" 
-                                placeholder="E-mail"
-                                className={emailClass}
+                                name="name" 
+                                type="text" 
+                                placeholder={this.strings().name}
+                                className={nameClass}
                                 onChange={event => this.changeHandler(event)} />
                                 {Object.keys(this.state.errors).map(key => (
                                     this.state.errors[key].map(error => (
@@ -148,17 +137,7 @@ class Invite extends Component {
                                         </p>
                                     ))
                                 ))}
-                            <h3>{this.strings().privileges}:</h3>
-                            <Permissions
-                                changeHandler = {this.changeHandler}
-                                can_read = {this.state.can_read}
-                                can_write = {this.state.can_write}
-                                can_edit = {this.state.can_edit}
-                                can_invite = {this.state.can_invite}
-                                inviteDisabled={this.state.inviteDisabled}
-                            />
-
-                            <input type="submit" value={this.strings().invite} className="btn-success" />
+                            <input type="submit" value={this.strings().createCompany} className="btn-success" />
                         </form>
                 </Modal>
             </div>
@@ -166,4 +145,4 @@ class Invite extends Component {
     }
 }
 
-export default Invite;
+export default NewCompany;

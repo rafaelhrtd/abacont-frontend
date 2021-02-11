@@ -22,10 +22,11 @@ const LoggedIn = (props) => {
      });
     let language = navigator.language;
     if (localStorage.getItem('language') !== null){
-        language = localStorage.getItem('language');
-    } else if (sessionStorage.getItem('language') !== null){
-        language = sessionStorage.getItem('language');
+        language = JSON.parse(localStorage.getItem('language'));
+    } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+        language = JSON.parse(sessionStorage.getItem('language'));
     } 
+    strings.setLanguage(language)
     const logout = useContext(AuthContext).logout;
     const context = useContext(AuthContext);
     return (

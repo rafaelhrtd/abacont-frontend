@@ -28,7 +28,6 @@ class Invite extends Component {
     }
 
     commError = (error) => {
-        console.log(error);
     }
     
     getInvite = (token) => {
@@ -40,7 +39,6 @@ class Invite extends Component {
                     if (response.data.user !== null){
                         this.context.login(response, this.state.remember_me)
                     }
-                    console.log(response)
                     this.setState({
                         invite: response.data.invite,
                         name: response.data.name,
@@ -114,7 +112,6 @@ class Invite extends Component {
                 this.context.toggleLoader()
                 this.context.toggleLoader()
                 if (response.data.error === undefined){
-                    console.log(response)
                     this.context.updateUserInfo();
                     this.context.setAlerts([{
                         title: "Ahora eres parte del equipo de " + this.state.company_name,

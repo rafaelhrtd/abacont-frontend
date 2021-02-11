@@ -11,7 +11,6 @@ class Invite extends Component {
     }
     static contextType = AuthContext;
     commErrorHandler = (response) => {
-        console.log(response);
     }
 
     resendInvite = (invite) => {
@@ -19,7 +18,6 @@ class Invite extends Component {
         const url = process.env.REACT_APP_API_ADDRESS + "resend_invite?id=" + invite.company_id + "&user_invite_id="+invite.id;
         Axios.get(url)
             .then(() => {
-                console.log(this.props)
                 this.props.getInvites();
                 this.context.setAlerts([
 
@@ -37,7 +35,6 @@ class Invite extends Component {
         const url = process.env.REACT_APP_API_ADDRESS + "delete_invite?id=" + invite.company_id + "&user_invite_id="+invite.id;
         Axios.get(url)
             .then(() => {
-                console.log(this.props)
                 this.props.getInvites();
                 this.context.setAlerts([
 

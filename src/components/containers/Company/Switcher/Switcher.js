@@ -26,7 +26,6 @@ class Switcher extends Component {
     }
 
     errorHandler = (data) => {
-        console.log(data)
     }
 
     componentDidMount = () => {
@@ -57,7 +56,6 @@ class Switcher extends Component {
                     }
                 }
             }, error => {
-                console.log(error)
                 setTimeout(()=>{
                     window.location.href = "/"
                 },0)
@@ -80,7 +78,6 @@ class Switcher extends Component {
                     }
                 }
             }, error => {
-                console.log(error)
                 setTimeout(()=>{
                     window.location.href = "/"
                 },0)
@@ -99,22 +96,23 @@ class Switcher extends Component {
 
         let strings = new LocalizedStrings({
             en:{
-                changeCompany: "Switch company."
+                changeCompany: "Switch company"
             },
             es: {
-                changeCompany: "Cambiar compañía."
+                changeCompany: "Cambiar compañía"
             }
            });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language)
 
         return (
             <Aux>
-                <Button className="primary" onClick={this.showHandler}>Cambiar compañía</Button>
+                <Button className="primary" onClick={this.showHandler}>{strings.changeCompany}</Button>
                 <Modal 
                     show={this.state.showModal}
                     className={classes.switchCompany}

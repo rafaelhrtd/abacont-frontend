@@ -30,10 +30,11 @@ class TransactionBox extends Component {
            });
            let language = navigator.language;
            if (localStorage.getItem('language') !== null){
-               language = localStorage.getItem('language');
-           } else if (sessionStorage.getItem('language') !== null){
-               language = sessionStorage.getItem('language');
+               language = JSON.parse(localStorage.getItem('language'));
+           } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+               language = JSON.parse(sessionStorage.getItem('language'));
            }
+           strings.setLanguage(language)
 
         if (category === undefined) {
             return null
@@ -95,10 +96,11 @@ class TransactionBox extends Component {
            });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language)
         
         const contactCategory = this.state.contactCategory
         const dynamicClasses = ["payable", "receivable"].includes(this.state.category) ? "yellowbg" : "greenbg"

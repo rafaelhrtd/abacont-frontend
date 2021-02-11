@@ -56,7 +56,6 @@ class DeleteButton extends Component {
     }
 
     errorHandler = (data) => {
-        console.log(data)
         this.context.toggleLoader();
         this.setState({error: data.error})
     }
@@ -78,7 +77,6 @@ class DeleteButton extends Component {
                 }
             }
         }, error => {
-            console.log(error)
         })
     }
 
@@ -128,10 +126,11 @@ class DeleteButton extends Component {
         });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language);
         const inputClass = this.state.error === null ? null : classes.danger
         if (this.state.redirectPath !== null){
             return <Redirect to={{

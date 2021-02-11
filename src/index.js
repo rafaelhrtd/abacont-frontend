@@ -7,7 +7,10 @@ import Axios from 'axios';
 
 Axios.interceptors.request.use(function(config) {
     let token = ""
-    let language = sessionStorage.getItem('language') !== null ? sessionStorage.getItem('language') : "en";
+    let language = ""
+    if (sessionStorage.getItem('language') == null && localStorage.getItem('language')) {
+        localStorage.setItem('language', JSON.stringify('en'));
+    }
     if (sessionStorage.getItem('jwtToken') !== null){
         token = sessionStorage.getItem('jwtToken')
     } else if (localStorage.getItem('jwtToken') !== null) {

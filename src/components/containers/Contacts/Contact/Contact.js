@@ -36,7 +36,6 @@ class Contact extends Getter {
     }
 
     componentWillUnmount = () => {
-        console.log("Unmounting")
     }
 
     componentDidMount = () => {

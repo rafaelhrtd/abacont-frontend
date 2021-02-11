@@ -34,10 +34,11 @@ const summary = (props) => {
      
     let language = navigator.language;
     if (localStorage.getItem('language') !== null){
-        language = localStorage.getItem('language');
-    } else if (sessionStorage.getItem('language') !== null){
-        language = sessionStorage.getItem('language');
+        language = JSON.parse(localStorage.getItem('language'));
+    } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+        language = JSON.parse(sessionStorage.getItem('language'));
     } 
+    strings.setLanguage(language)
     let attachedClasses = [classes.LeftDrawer, classes.Closed]
     if (props.open) {
         attachedClasses = [classes.LeftDrawer, classes.Open]

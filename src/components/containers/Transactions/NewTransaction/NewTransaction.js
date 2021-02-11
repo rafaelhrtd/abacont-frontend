@@ -107,10 +107,11 @@ class NewTransaction extends FormHolder {
            });
           let language = navigator.language;
           if (localStorage.getItem('language') !== null){
-              language = localStorage.getItem('language');
-          } else if (sessionStorage.getItem('language') !== null){
-              language = sessionStorage.getItem('language');
+              language = JSON.parse(localStorage.getItem('language'));
+          } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+              language = JSON.parse(sessionStorage.getItem('language'));
           }
+          strings.setLanguage(language)
         let inputs = {
             amount: {
                 inputType: "text",
@@ -260,10 +261,11 @@ class NewTransaction extends FormHolder {
         });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language);
         // check for redirect
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />

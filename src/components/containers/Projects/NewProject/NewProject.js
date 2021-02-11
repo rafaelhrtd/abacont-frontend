@@ -59,11 +59,9 @@ class NewProject extends FormHolder {
             ])
         }
         let passed_state = this.state.passed_state
-        console.log(data)
         if (passed_state !== undefined && passed_state.redirect_path !== undefined) {
             this.setState({redirect: passed_state.redirect_path})
         } else {
-            console.log(process.env.REACT_APP_API_ADDRESS)
             const redirectUrl = url !== null ? url : "/proyectos/" + data.project.id
             this.setState({redirect: redirectUrl})
         }
@@ -113,10 +111,11 @@ class NewProject extends FormHolder {
            });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language);
         let inputs = {
             name: {
                 inputType: "text",
@@ -173,10 +172,11 @@ class NewProject extends FormHolder {
            });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
         }
+        strings.setLanguage(language);
         let title = strings.title
         const form_elements = NewProject.formElements()        
         

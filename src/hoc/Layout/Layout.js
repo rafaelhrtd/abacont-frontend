@@ -119,7 +119,6 @@ class Layout extends Component {
     }
 
     errorHandler = (data) => {
-        console.log(data)
     }
 
     iterateThroughAlerts = () => {
@@ -194,15 +193,14 @@ class Layout extends Component {
          });
         let language = navigator.language;
         if (localStorage.getItem('language') !== null){
-            language = localStorage.getItem('language');
-        } else if (sessionStorage.getItem('language') !== null){
-            language = sessionStorage.getItem('language');
-        } 
+            language = JSON.parse(localStorage.getItem('language'));
+        } else if (JSON.parse(sessionStorage.getItem('language')) !== null){
+            language = JSON.parse(sessionStorage.getItem('language'));
+        }
         strings.setLanguage(language);
         Axios.interceptors.response.use(
             response => response,
             error => {
-                console.log(error)
                 const {status} = error.response;
                 if (status === 401){
                     this.setState({redirect: "/"})
